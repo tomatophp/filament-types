@@ -4,6 +4,12 @@
 
 Manage any type on your app in Database with easy to use Resource for FilamentPHP
 
+## Screenshots
+
+![Types](./arts/types.png)
+![Filters](./arts/filters.png)
+![Form](./arts/form.png)
+
 ## Installation
 
 ```bash

@@ -2,6 +2,10 @@
 
 namespace TomatoPHP\FilamentTypes\Resources;
 
+use Filament\Resources\Concerns\Translatable;
+use Guava\FilamentIconPicker\Forms\IconPicker;
+use Guava\FilamentIconPicker\Tables\IconColumn;
+use Illuminate\Database\Eloquent\Builder;
 use TomatoPHP\FilamentTypes\Resources\TypeResource\Pages;
 use TomatoPHP\FilamentTypes\Models\Type;
 use Filament\Forms;
@@ -12,39 +16,69 @@ use Filament\Tables\Table;
 
 class TypeResource extends Resource
 {
+    use Translatable;
+
     protected static ?string $model = Type::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-tag';
+
+    public static function getNavigationGroup(): ?string
+    {
+        return "Settings";
+    }
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('parent_id')
-                    ->numeric(),
-                Forms\Components\TextInput::make('model_type')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('model_id')
-                    ->numeric(),
-                Forms\Components\TextInput::make('for')
-                    ->maxLength(255)
-                    ->default('posts'),
-                Forms\Components\TextInput::make('type')
-                    ->maxLength(255)
-                    ->default('category'),
+                Forms\Components\SpatieMediaLibraryFileUpload::make('image')
+                    ->label(trans('filament-types::messages.form.image'))
+                    ->columnSpan(2)
+                    ->collection('image')
+                    ->image()
+                    ->maxFiles(1),
+                Forms\Components\Select::make('for')
+                    ->label(trans('filament-types::messages.form.for'))
+                    ->options(config('filament-types.for'))
+                    ->searchable()
+                    ->afterStateUpdated(function (Forms\Set $set){
+                        $set('type', null);
+                        $set('parent_id', null);
+                    })
+                    ->live()
+                    ->required(),
+                Forms\Components\Select::make('type')
+                    ->label(trans('filament-types::messages.form.type'))
+                    ->options(fn(Forms\Get $get) => collect(config('filament-types.types'))->filter(fn($type, $key) => $key === $get('for'))->toArray())
+                    ->searchable()
+                    ->required(),
+                Forms\Components\Select::make('parent_id')
+                    ->label(trans('filament-types::messages.form.parent_id'))
+                    ->columnSpan(2)
+                    ->options(fn(Forms\Get $get) => Type::whereNull('parent_id')
+                        ->where('for', $get('for'))
+                        ->where('type', $get('type'))
+                        ->get()
+                        ->pluck('name', 'id')
+                        ->toArray()
+                    )
+                    ->searchable()
+                    ->live(),
                 Forms\Components\TextInput::make('name')
+                    ->label(trans('filament-types::messages.form.name'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('key')
+                    ->label(trans('filament-types::messages.form.key'))
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Textarea::make('description')
+                    ->label(trans('filament-types::messages.form.description'))
                     ->columnSpanFull(),
-                Forms\Components\TextInput::make('color')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('icon')
-                    ->maxLength(255),
-                Forms\Components\Toggle::make('is_activated'),
+                Forms\Components\ColorPicker::make('color')->columnSpan(2)->label(trans('filament-types::messages.form.color')),
+                IconPicker::make('icon')->columnSpan(2)->label(trans('filament-types::messages.form.icon')),
+                Forms\Components\Toggle::make('is_activated')->label(trans('filament-types::messages.form.is_activated')),
             ]);
     }
 
@@ -52,39 +86,75 @@ class TypeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('parent_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('model_type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('model_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('for')
+                    ->label(trans('filament-types::messages.form.for'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('type')
+                    ->label(trans('filament-types::messages.form.type'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label(trans('filament-types::messages.form.name'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('key')
+                    ->label(trans('filament-types::messages.form.key'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('color')
+                Tables\Columns\ColorColumn::make('color')
+                    ->label(trans('filament-types::messages.form.color'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('icon')
+                IconColumn::make('icon')->label(trans('filament-types::messages.form.icon'))
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_activated')
+                    ->label(trans('filament-types::messages.form.is_activated'))
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label(trans('filament-types::messages.form.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label(trans('filament-types::messages.form.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\Filter::make('created_at')
+                    ->form([
+                        Forms\Components\Select::make('for')
+                            ->label(trans('filament-types::messages.form.for'))
+                            ->options(config('filament-types.for'))
+                            ->searchable()
+                            ->afterStateUpdated(function (Forms\Set $set){
+                                $set('type', null);
+                                $set('parent_id', null);
+                            })
+                            ->live(),
+                        Forms\Components\Select::make('type')
+                            ->label(trans('filament-types::messages.form.type'))
+                            ->options(fn(Forms\Get $get) => collect(config('filament-types.types'))->filter(fn($type, $key) => $key === $get('for'))->toArray())
+                            ->searchable(),
+                        Forms\Components\Select::make('parent_id')
+                            ->label(trans('filament-types::messages.form.parent_id'))
+                            ->options(fn(Forms\Get $get) => Type::whereNull('parent_id')
+                                ->where('for', $get('for'))
+                                ->where('type', $get('type'))
+                                ->get()
+                                ->pluck('name', 'id')
+                                ->toArray()
+                            )
+                            ->searchable()
+                            ->live()
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        if(isset($data['for']) && !empty($data['for']))
+                            $query->where('for', $data['for']);
+                        if(isset($data['type']) && !empty($data['type']))
+                            $query->where('type', $data['type']);
+                        if(isset($data['parent_id']) && !empty($data['parent_id']))
+                            $query->where('parent_id', $data['parent_id']);
+
+                        return $query;
+                    })
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentTypes;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use TomatoPHP\FilamentTypes\Resources\TypeResource;
 
 
 class FilamentTypesPlugin implements Plugin
@@ -15,8 +16,8 @@ class FilamentTypesPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->pages([
-
+        $panel->resources([
+            TypeResource::class
         ]);
 
     }
