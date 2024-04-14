@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentTypes;
 
 use Illuminate\Support\ServiceProvider;
 
+require_once __DIR__.'/helpers.php';
 
 class FilamentTypesServiceProvider extends ServiceProvider
 {
