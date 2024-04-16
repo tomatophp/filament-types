@@ -1,14 +1,19 @@
-![Screenshot](./arts/screenshot.png)
+![Screenshot](https://github.com/tomatophp/filament-types/blob/master/arts/3x1io-tomato-types.jpg)
 
 # Filament types
+
+[![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-types/version.svg)](https://packagist.org/packages/tomatophp/filament-types)
+[![PHP Version Require](http://poser.pugx.org/tomatophp/filament-types/require/php)](https://packagist.org/packages/tomatophp/filament-types)
+[![License](https://poser.pugx.org/tomatophp/filament-types/license.svg)](https://packagist.org/packages/tomatophp/filament-types)
+[![Downloads](https://poser.pugx.org/tomatophp/filament-types/d/total.svg)](https://packagist.org/packages/tomatophp/filament-types)
 
 Manage any type on your app in Database with easy to use Resource for FilamentPHP
 
 ## Screenshots
 
-![Types](./arts/types.png)
-![Filters](./arts/filters.png)
-![Form](./arts/form.png)
+![Types](https://github.com/tomatophp/filament-types/blob/master/arts/types.png)
+![Filters](https://github.com/tomatophp/filament-types/blob/master/arts/filters.png)
+![Form](https://github.com/tomatophp/filament-types/blob/master/arts/form.png)
 
 ## Installation
 
