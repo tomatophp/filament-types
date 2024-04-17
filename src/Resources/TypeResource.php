@@ -164,7 +164,7 @@ class TypeResource extends Resource
                     ->form([
                         Forms\Components\Select::make('for')
                             ->label(trans('filament-types::messages.form.for'))
-                            ->options(config('filament-types.for'))
+                            ->options(static::getTypes())
                             ->searchable()
                             ->afterStateUpdated(function (Forms\Set $set){
                                 $set('type', null);
@@ -173,7 +173,7 @@ class TypeResource extends Resource
                             ->live(),
                         Forms\Components\Select::make('type')
                             ->label(trans('filament-types::messages.form.type'))
-                            ->options(fn(Forms\Get $get) => collect(config('filament-types.types'))->filter(fn($type, $key) => $key === $get('for'))->toArray())
+                            ->options(fn(Forms\Get $get) => $get('for') ? static::getTypes($get('for')) : [])
                             ->searchable(),
                         Forms\Components\Select::make('parent_id')
                             ->label(trans('filament-types::messages.form.parent_id'))
