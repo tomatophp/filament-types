@@ -28,8 +28,7 @@ class TypeResource extends Resource
         return "Settings";
     }
 
-
-    public static function form(Form $form): Form
+    private static function getTypes(?string $getFor=null): array
     {
         $mergeTypes = [];
         $mergeFor = [];
@@ -65,6 +64,12 @@ class TypeResource extends Resource
             }
         }
 
+        return !empty($getFor) ? collect($mergeTypes)->filter(fn($types, $key) => $key === $getFor)->toArray() : $mergeFor;
+    }
+
+
+    public static function form(Form $form): Form
+    {
         return $form
             ->schema([
                 Forms\Components\SpatieMediaLibraryFileUpload::make('image')
@@ -75,7 +80,7 @@ class TypeResource extends Resource
                     ->maxFiles(1),
                 Forms\Components\Select::make('for')
                     ->label(trans('filament-types::messages.form.for'))
-                    ->options($mergeFor)
+                    ->options(static::getTypes())
                     ->searchable()
                     ->afterStateUpdated(function (Forms\Set $set){
                         $set('type', null);
@@ -85,8 +90,8 @@ class TypeResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('type')
                     ->label(trans('filament-types::messages.form.type'))
-                    ->options(function(Forms\Get $get) use ($mergeTypes){
-                        return $get('for') ? collect($mergeTypes)->filter(fn($types, $key) => $key === $get('for'))->toArray() : [];
+                    ->options(function(Forms\Get $get){
+                        return $get('for') ? static::getTypes($get('for')) : [];
                     })
                     ->searchable()
                     ->required(),
