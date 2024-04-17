@@ -46,6 +46,26 @@ FilamentTypes::register([
 ], 'accounts');
 ```
 
+## Use Type Helper
+
+you can access types from anywhere by using type helper function
+
+```php
+type_of($key);
+```
+
+i will return type object
+
+## Use Type Column
+
+you can use type column in your table like this
+
+```php
+use TomatoPHP\FilamentTypes\Components\TypeColumn;
+
+TypeColumn::make('type')->searchable(),
+```
+
 ## Publish Assets
 
 you can publish config file by use this command
