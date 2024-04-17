@@ -36,12 +36,12 @@ class TypeResource extends Resource
             $mergeFor[$key] = $key;
             $mergeTypes[$key] = [];
         }
+
         foreach (FilamentTypes::getFor() as $for){
-            if(!in_array($for, $mergeFor)){
-                $mergeFor[$key] = $key;
-            }
+            $mergeFor[$for] = $for;
+
             $providerTypes = FilamentTypes::getTypes($for);
-            foreach ($providerTypes as $key => $type){
+            foreach ($providerTypes as $key=>$type){
                 $mergeTypes[$key] = [];
             }
         }
