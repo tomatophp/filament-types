@@ -49,6 +49,9 @@ class FilamentTypesServiceProvider extends ServiceProvider
         //Register Routes
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
 
+        $this->app->bind('filament-types', function(){
+            return new Services\FilamentTypesRegister();
+        });
     }
 
     public function boot(): void
