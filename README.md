@@ -33,6 +33,19 @@ finally reigster the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
 ->plugin(\TomatoPHP\FilamentTypes\FilamentTypesPlugin::make())
 ```
 
+## Register New Type
+
+you can add new type using config file `config/filament-types.php` or you can register a type from your provider using our Facade
+
+```php
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+
+FilamentTypes::register([
+    'types',
+    'groups'
+], 'accounts');
+```
+
 ## Publish Assets
 
 you can publish config file by use this command
@@ -77,7 +90,7 @@ Please see [SECURITY](SECURITY.md) for more information about security.
 
 ## Credits
 
-- [Tomatophp](mailto:info@3x1.io)
+- [Fady Mondy](mailto:info@3x1.io)
 
 ## License
 

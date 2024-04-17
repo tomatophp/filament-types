@@ -6,6 +6,7 @@ use Filament\Resources\Concerns\Translatable;
 use Guava\FilamentIconPicker\Forms\IconPicker;
 use Guava\FilamentIconPicker\Tables\IconColumn;
 use Illuminate\Database\Eloquent\Builder;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\Resources\TypeResource\Pages;
 use TomatoPHP\FilamentTypes\Models\Type;
 use Filament\Forms;
@@ -27,6 +28,45 @@ class TypeResource extends Resource
         return "Settings";
     }
 
+    private static function getTypes(?string $getFor=null): array
+    {
+        $mergeTypes = [];
+        $mergeFor = [];
+        foreach (config('filament-types.types') as $key => $type){
+            $mergeFor[$key] = $key;
+            $mergeTypes[$key] = [];
+        }
+        foreach (FilamentTypes::getFor() as $for){
+            if(!in_array($for, $mergeFor)){
+                $mergeFor[$key] = $key;
+            }
+            $providerTypes = FilamentTypes::getTypes($for);
+            foreach ($providerTypes as $key => $type){
+                $mergeTypes[$key] = [];
+            }
+        }
+        foreach (config('filament-types.types') as $key => $type){
+            foreach ($type as $item){
+                if(!in_array($item, $mergeTypes[$key])) {
+                    array_push($mergeTypes[$key], $item);
+                }
+            }
+
+        }
+        foreach (FilamentTypes::getFor() as $for){
+            $providerTypes = FilamentTypes::getTypes($for);
+            foreach ($providerTypes as $key => $type){
+                foreach ($type as $item){
+                    if(!in_array($item, $mergeTypes[$key])){
+                        array_push($mergeTypes[$key], $item);
+                    }
+                }
+            }
+        }
+
+        return !empty($getFor) ? collect($mergeTypes)->filter(fn($types, $key) => $key === $getFor)->toArray() : $mergeFor;
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -40,7 +80,7 @@ class TypeResource extends Resource
                     ->maxFiles(1),
                 Forms\Components\Select::make('for')
                     ->label(trans('filament-types::messages.form.for'))
-                    ->options(config('filament-types.for'))
+                    ->options(static::getTypes())
                     ->searchable()
                     ->afterStateUpdated(function (Forms\Set $set){
                         $set('type', null);
@@ -50,7 +90,9 @@ class TypeResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('type')
                     ->label(trans('filament-types::messages.form.type'))
-                    ->options(fn(Forms\Get $get) => collect(config('filament-types.types'))->filter(fn($type, $key) => $key === $get('for'))->toArray())
+                    ->options(function(Forms\Get $get){
+                        return $get('for') ? static::getTypes($get('for')) : [];
+                    })
                     ->searchable()
                     ->required(),
                 Forms\Components\Select::make('parent_id')
