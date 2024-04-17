@@ -48,7 +48,7 @@ class TypeResource extends Resource
         foreach (config('filament-types.types') as $key => $type){
             foreach ($type as $item){
                 if(!in_array($item, $mergeTypes[$key])) {
-                    array_push($mergeTypes[$key], $item);
+                    $mergeTypes[$key][$item] = $item;
                 }
             }
 
@@ -58,7 +58,7 @@ class TypeResource extends Resource
             foreach ($providerTypes as $key => $type){
                 foreach ($type as $item){
                     if(!in_array($item, $mergeTypes[$key])){
-                        array_push($mergeTypes[$key], $item);
+                        $mergeTypes[$key][$item] = $item;
                     }
                 }
             }
