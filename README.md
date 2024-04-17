@@ -13,6 +13,7 @@ Manage any type on your app in Database with easy to use Resource for FilamentPH
 
 ![Types](https://github.com/tomatophp/filament-types/blob/master/arts/types.png)
 ![Filters](https://github.com/tomatophp/filament-types/blob/master/arts/filters.png)
+![Type Col](https://github.com/tomatophp/filament-types/blob/master/arts/type-col.png)
 ![Form](https://github.com/tomatophp/filament-types/blob/master/arts/form.png)
 
 ## Installation
@@ -44,6 +45,26 @@ FilamentTypes::register([
     'types',
     'groups'
 ], 'accounts');
+```
+
+## Use Type Helper
+
+you can access types from anywhere by using type helper function
+
+```php
+type_of($key);
+```
+
+i will return type object
+
+## Use Type Column
+
+you can use type column in your table like this
+
+```php
+use TomatoPHP\FilamentTypes\Components\TypeColumn;
+
+TypeColumn::make('type')->searchable(),
 ```
 
 ## Publish Assets
