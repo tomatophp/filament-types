@@ -53,6 +53,10 @@
     $arrayState = \Illuminate\Support\Arr::wrap($arrayState);
     $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $arrayState[0])->first();
     $arrayState[0] = $type->name;
+
+    $hex = $type->color;
+    list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+    $colorRGB= array($r, $g, $b);
 @endphp
 
 <div
@@ -182,7 +186,10 @@
         >
         @if ($isBadge)
             <x-filament::badge
-                style="background-color: {{ $color }};"
+                style="
+                    background-color: rgba({{$colorRGB[0]}}, {{$colorRGB[1]}}, {{$colorRGB[2]}}, 0.2);
+                    color: rgba({{$colorRGB[0]}}, {{$colorRGB[1]}}, {{$colorRGB[2]}}, 1);
+                "
                 :color="$color"
                 :icon="$icon"
                 :icon-position="$iconPosition"
