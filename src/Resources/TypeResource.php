@@ -2,9 +2,9 @@
 
 namespace TomatoPHP\FilamentTypes\Resources;
 
+use TomatoPHP\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentIcons\Components\IconColumn;
 use Filament\Resources\Concerns\Translatable;
-use Guava\FilamentIconPicker\Forms\IconPicker;
-use Guava\FilamentIconPicker\Tables\IconColumn;
 use Illuminate\Database\Eloquent\Builder;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\Resources\TypeResource\Pages;
@@ -143,7 +143,8 @@ class TypeResource extends Resource
                 Tables\Columns\ColorColumn::make('color')
                     ->label(trans('filament-types::messages.form.color'))
                     ->searchable(),
-                IconColumn::make('icon')->label(trans('filament-types::messages.form.icon'))
+                IconColumn::make('icon')
+                    ->label(trans('filament-types::messages.form.icon'))
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_activated')
                     ->label(trans('filament-types::messages.form.is_activated'))
@@ -159,6 +160,7 @@ class TypeResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->defaultGroup('for')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([
