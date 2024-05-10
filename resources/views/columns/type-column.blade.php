@@ -52,11 +52,18 @@
 
     $arrayState = \Illuminate\Support\Arr::wrap($arrayState);
     $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $arrayState[0])->first();
-    $arrayState[0] = $type->name;
+    if($type){
+        $arrayState[0] = $type->name;
 
-    $hex = $type->color;
-    list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
-    $colorRGB= array($r, $g, $b);
+        $hex = $type->color;
+        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+        $colorRGB= array($r, $g, $b);
+    }
+    else {
+        $arrayState[0] = $arrayState[0];
+        $colorRGB = [0,0,0];
+    }
+
 @endphp
 
 <div
@@ -121,12 +128,12 @@
         @if (filled($formattedState = $formatState($state)) &&
              (! ($isListWithLineBreaks && (! $isLimitedListExpandable) && ($loop->iteration > $listLimit))))
             @php
-                $color = $type->color;
+                $color = $type->color ?? null;
                 $copyableState = $getCopyableState($state) ?? $state;
                 $copyMessage = $getCopyMessage($state);
                 $copyMessageDuration = $getCopyMessageDuration($state);
                 $fontFamily = $getFontFamily($state);
-                $icon = $type->icon;
+                $icon = $type->icon ?? null;
                 $iconColor = $getIconColor($state) ?? $color;
                 $itemIsCopyable = $isCopyable($state);
                 $lineClamp = $getLineClamp($state);
