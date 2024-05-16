@@ -51,18 +51,25 @@
     }
 
     $arrayState = \Illuminate\Support\Arr::wrap($arrayState);
-    $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $arrayState[0])->first();
-    if($type){
-        $arrayState[0] = $type->name;
+    if(count($arrayState)){
+        $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $arrayState[0])->first();
+        if($type){
+            $arrayState[0] = $type->name;
 
-        $hex = $type->color;
-        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
-        $colorRGB= array($r, $g, $b);
+            $hex = $type->color;
+            list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+            $colorRGB= array($r, $g, $b);
+        }
+        else {
+            $arrayState[0] = $arrayState[0];
+            $colorRGB = [0,0,0];
+        }
     }
     else {
-        $arrayState[0] = $arrayState[0];
+        $arrayState[0] = trans('filament-types::messages.empty');
         $colorRGB = [0,0,0];
     }
+
 
 @endphp
 

@@ -3,6 +3,7 @@
 return [
     'title' => 'Types',
     'create' => 'Create Type',
+    'empty' => 'Not Selected',
     'form' => [
         'image' => 'Image',
         'parent_id' => 'Parent',
