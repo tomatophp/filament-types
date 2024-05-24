@@ -5,6 +5,7 @@ namespace TomatoPHP\FilamentTypes;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 use TomatoPHP\FilamentTypes\Resources\TypeResource;
+use Filament\SpatieLaravelTranslatablePlugin;
 
 
 class FilamentTypesPlugin implements Plugin
@@ -16,7 +17,12 @@ class FilamentTypesPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->resources([
+        $panel
+            ->plugin(
+                SpatieLaravelTranslatablePlugin::make()
+                    ->defaultLocales(['en', 'ar']),
+            )
+            ->resources([
             TypeResource::class
         ]);
 
