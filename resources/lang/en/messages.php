@@ -2,6 +2,8 @@
 
 return [
     'title' => 'Types',
+    'single' => 'Type',
+    'group' => 'Settings',
     'create' => 'Create Type',
     'empty' => 'Not Selected',
     'form' => [

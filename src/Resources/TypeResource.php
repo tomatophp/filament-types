@@ -23,9 +23,24 @@ class TypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+    public static function getNavigationLabel(): string
+    {
+        return trans('filament-types::messages.title');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return  trans('filament-types::messages.single');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return trans('filament-types::messages.title');
+    }
+
     public static function getNavigationGroup(): ?string
     {
-        return "Settings";
+        returntrans('filament-types::messages.group');
     }
 
     private static function getTypes(?string $getFor=null): array

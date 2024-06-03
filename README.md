@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/tomatophp/filament-types/blob/master/arts/3x1io-tomato-types.jpg)
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/3x1io-tomato-types.jpg)
 
 # Filament types
 
@@ -11,10 +11,10 @@ Manage any type on your app in Database with easy to use Resource for FilamentPH
 
 ## Screenshots
 
-![Types](https://github.com/tomatophp/filament-types/blob/master/arts/types.png)
-![Filters](https://github.com/tomatophp/filament-types/blob/master/arts/filters.png)
-![Type Col](https://github.com/tomatophp/filament-types/blob/master/arts/type-col.png)
-![Form](https://github.com/tomatophp/filament-types/blob/master/arts/form.png)
+![Types](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types.png)
+![Filters](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/filters.png)
+![Type Col](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/type-col.png)
+![Form](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/form.png)
 
 ## Installation
 
