@@ -40,7 +40,7 @@ class TypeResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        returntrans('filament-types::messages.group');
+        return trans('filament-types::messages.group');
     }
 
     private static function getTypes(?string $getFor=null): array
