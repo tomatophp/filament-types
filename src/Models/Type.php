@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentTypes\Models;
 
+use GeneaLabs\LaravelModelCaching\CachedModel;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -22,12 +24,18 @@ use Spatie\Translatable\HasTranslations;
  * @property string $updated_at
  * @property Type[] $typables
  */
-class Type extends Model implements HasMedia
+class Type extends CachedModel implements HasMedia
 {
     use InteractsWithMedia;
     use HasTranslations;
+    use Cachable;
 
-    public $translatable = ['name','description'];
+    protected $cachePrefix = "tomato_types_";
+
+    public $translatable = [
+        'name',
+        'description'
+    ];
 
     /**
      * @var array

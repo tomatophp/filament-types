@@ -67,6 +67,24 @@ use TomatoPHP\FilamentTypes\Components\TypeColumn;
 TypeColumn::make('type')->searchable(),
 ```
 
+## Auto Caching 
+
+on your `.env` add this
+
+```.env
+CACHE_STORE=array
+MODEL_CACHE_STORE=array
+```
+
+supported cache stores are
+
+```php
++ Redis
++ MemCached
++ APC
++ Array
+```
+
 ## Publish Assets
 
 you can publish config file by use this command

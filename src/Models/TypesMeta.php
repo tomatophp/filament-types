@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentTypes\Models;
 
+use GeneaLabs\LaravelModelCaching\CachedModel;
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,8 +17,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $updated_at
  * @property Type $type
  */
-class TypesMeta extends Model
+class TypesMeta extends CachedModel
 {
+    use Cachable;
+
+    protected $cachePrefix = "tomato_types_meta_";
     /**
      * @var array
      */
