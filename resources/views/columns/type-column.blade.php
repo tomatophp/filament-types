@@ -21,7 +21,7 @@
 
     @if($icon)
         <div>
-            <x-filament-icon :icon="$icon" size="h-4 w-4" />
+            <x-icon :name="$icon" class="h-4 w-4" />
         </div>
     @endif
 
