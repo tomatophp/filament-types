@@ -48,4 +48,11 @@ return [
      * If you need to show the navigation menu for the types
      */
     "show_navigation" => true,
+
+    /**
+     * Empty State
+     *
+     * If type Column is Empty Put This Message
+     */
+    "empty_state" => null,
 ];

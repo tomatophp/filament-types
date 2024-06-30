@@ -3,6 +3,8 @@
 return [
     'title' => 'Types',
     'single' => 'Type',
+    "exists" => "Sorry This Type is already exists",
+    "success" => "Type Created Successfully",
     'group' => 'Settings',
     'create' => 'Create Type',
     'empty' => 'Not Selected',

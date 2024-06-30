@@ -13,6 +13,7 @@
         $icon = null;
     }
 @endphp
+@if($value || config('filament-types.empty_state'))
 <span style="{{ implode([
         "background-color: rgba(".$colorRGB[0].", ".$colorRGB[1].", ".$colorRGB[2].", 0.2);",
         "color: rgba(".$colorRGB[0].", ".$colorRGB[1].", ".$colorRGB[2].", 1);"
@@ -25,6 +26,7 @@
     @endif
 
     <div>
-        {{ $value }}
+        {{ $value ?? config('filament-types.empty_state') }}
     </div>
 </span>
+@endif
