@@ -12,6 +12,13 @@
         $colorRGB = [0,0,0];
         $icon = null;
     }
+
+
+    $iconExists = false;
+    try {
+        app(\BladeUI\Icons\Factory::class)->svg($icon);
+         $iconExists = true;
+    }catch (\Exception $e){}
 @endphp
 @if($value || config('filament-types.empty_state'))
 <span style="{{ implode([
@@ -19,7 +26,7 @@
         "color: rgba(".$colorRGB[0].", ".$colorRGB[1].", ".$colorRGB[2].", 1);"
     ]) }}" class="fi-badge flex items-center justify-center gap-x-1 rounded-md text-xs font-medium ring-1 ring-inset px-2 min-w-[theme(spacing.6)] py-1 fi-color-custom bg-custom-50 text-custom-600 ring-custom-600/10 dark:bg-custom-400/10 dark:text-custom-400 dark:ring-custom-400/30 fi-color-primary">
 
-    @if($icon)
+    @if($icon && $iconExists)
         <div>
             <x-icon :name="$icon" class="h-4 w-4" />
         </div>
