@@ -13,12 +13,14 @@
         $icon = null;
     }
 
-
     $iconExists = false;
-    try {
-        app(\BladeUI\Icons\Factory::class)->svg($icon);
-         $iconExists = true;
-    }catch (\Exception $e){}
+    if($icon){
+        try {
+            app(\BladeUI\Icons\Factory::class)->svg($icon);
+             $iconExists = true;
+        }catch (\Exception $e){}
+    }
+
 @endphp
 @if($value || config('filament-types.empty_state'))
 <span style="{{ implode([
