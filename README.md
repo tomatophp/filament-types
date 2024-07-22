@@ -3,7 +3,6 @@
 # Filament Types
 
 [![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-types/version.svg)](https://packagist.org/packages/tomatophp/filament-types)
-[![PHP Version Require](http://poser.pugx.org/tomatophp/filament-types/require/php)](https://packagist.org/packages/tomatophp/filament-types)
 [![License](https://poser.pugx.org/tomatophp/filament-types/license.svg)](https://packagist.org/packages/tomatophp/filament-types)
 [![Downloads](https://poser.pugx.org/tomatophp/filament-types/d/total.svg)](https://packagist.org/packages/tomatophp/filament-types)
 
