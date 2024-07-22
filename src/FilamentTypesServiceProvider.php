@@ -52,6 +52,10 @@ class FilamentTypesServiceProvider extends ServiceProvider
         $this->app->bind('filament-types', function(){
             return new Services\FilamentTypesRegister();
         });
+
+        $this->loadViewComponentsAs('tomato', [
+            Components\Type::class,
+        ]);
     }
 
     public function boot(): void

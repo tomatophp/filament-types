@@ -1,9 +1,12 @@
 <?php
 
 if(!function_exists('type_of')) {
-    function type_of(string $key) : \TomatoPHP\FilamentTypes\Models\Type|null
+    function type_of(string $key, string $for, string $type) : \TomatoPHP\FilamentTypes\Models\Type|null
     {
-        $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $key)->first();
-        return $type ?? null;
+        return \TomatoPHP\FilamentTypes\Models\Type::query()
+            ->where('key', $key)
+            ->where('for', $for)
+            ->where('type', $type)
+            ->first();
     }
 }

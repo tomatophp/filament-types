@@ -20,7 +20,6 @@
              $iconExists = true;
         }catch (\Exception $e){}
     }
-
 @endphp
 @if($value || config('filament-types.empty_state'))
 <span style="{{ implode([

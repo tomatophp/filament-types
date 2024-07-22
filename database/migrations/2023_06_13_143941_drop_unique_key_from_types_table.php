@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('types', function (Blueprint $table) {
-            $table->dropUnique('types_key_unique');
-        });
+        if(Schema::hasIndex('types','types_key_unique')){
+            Schema::table('types', function (Blueprint $table) {
+                $table->dropUnique('types_key_unique');
+            });
+        }
     }
 
     /**
@@ -26,7 +28,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('types', function (Blueprint $table) {
-            $table->unique('key');
+            $table->unique('key', 'types_key_unique');
         });
     }
 };
