@@ -41,17 +41,23 @@ class BaseTypePage extends Page implements HasTable, HasForms
     {
         return [
             Action::make('create')
+                ->label(trans('filament-types::messages.create'))
                 ->form([
                     KeyValue::make('name')
                         ->schema($this->getLocalInputs())
-                        ->keyLabel(trans('filament-ecommerce::messages.settings.status.columns.language'))
+                        ->keyLabel(trans('filament-types::messages.language'))
                         ->editableKeys(false)
                         ->addable(false)
                         ->deletable(false)
-                        ->label(trans('filament-ecommerce::messages.settings.status.columns.value')),
-                    TextInput::make('key'),
-                    IconPicker::make('icon')->label(trans('filament-ecommerce::messages.settings.status.columns.icon')),
-                    ColorPicker::make('color')->label(trans('filament-ecommerce::messages.settings.status.columns.color')),
+                        ->required()
+                        ->label(trans('filament-types::messages.form.name')),
+                    TextInput::make('key')
+                        ->required()
+                        ->label(trans('filament-types::messages.form.key')),
+                    IconPicker::make('icon')
+                        ->label(trans('filament-types::messages.form.icon')),
+                    ColorPicker::make('color')
+                        ->label(trans('filament-types::messages.form.color')),
                 ])
                 ->action(function (array $data){
                     $data['for'] = $this->getFor();
@@ -59,16 +65,16 @@ class BaseTypePage extends Page implements HasTable, HasForms
                     Type::create($data);
 
                     Notification::make()
-                        ->title('Type Created')
-                        ->body('The type has been created successfully.')
+                        ->title(trans('filament-types::messages.notification.create.title'))
+                        ->body(trans('filament-types::messages.notification.create.title'))
                         ->success()
                         ->send();
                 }),
             Action::make('back')
+                ->label(trans('filament-types::messages.back'))
                 ->url(fn() => $this->getBackUrl())
                 ->color('warning')
                 ->icon('heroicon-s-arrow-left')
-                ->label('Back')
         ];
     }
 
@@ -115,7 +121,7 @@ class BaseTypePage extends Page implements HasTable, HasForms
     private function getLocalInputs()
     {
         $localsTitle = [];
-        foreach (config('filament-menus.locals') as $key=>$local){
+        foreach (config('filament-types.locals') as $key=>$local){
             $localsTitle[] = TextInput::make($key)
                 ->label($local[app()->getLocale()])
                 ->required();
@@ -140,35 +146,35 @@ class BaseTypePage extends Page implements HasTable, HasForms
             ->paginated(false)
             ->columns([
                 TypeColumn::make('key')
-                    ->label(trans('filament-ecommerce::messages.settings.status.columns.status'))
+                    ->label(trans('filament-types::messages.form.key'))
             ])
             ->actions([
                 \Filament\Tables\Actions\Action::make('edit')
-                    ->label(trans('filament-ecommerce::messages.settings.status.action.edit'))
-                    ->tooltip(trans('filament-ecommerce::messages.settings.status.action.edit'))
+                    ->label(trans('filament-types::messages.edit'))
+                    ->tooltip(trans('filament-types::messages.edit'))
                     ->form([
                         KeyValue::make('name')
                             ->schema($this->getLocalInputs())
-                            ->keyLabel(trans('filament-ecommerce::messages.settings.status.columns.language'))
+                            ->keyLabel(trans('filament-types::messages.language'))
                             ->editableKeys(false)
                             ->addable(false)
                             ->deletable(false)
-                            ->label(trans('filament-ecommerce::messages.settings.status.columns.value')),
-                        IconPicker::make('icon')->label(trans('filament-ecommerce::messages.settings.status.columns.icon')),
-                        ColorPicker::make('color')->label(trans('filament-ecommerce::messages.settings.status.columns.color')),
+                            ->label(trans('filament-types::messages.form.name')),
+                        IconPicker::make('icon')->label(trans('filament-types::messages.form.icon')),
+                        ColorPicker::make('color')->label(trans('filament-types::messages.form.color')),
                     ])
                     ->extraModalFooterActions([
                         \Filament\Tables\Actions\Action::make('deleteType')
                             ->requiresConfirmation()
                             ->color('danger')
-                            ->label('Delete')
+                            ->label(trans('filament-types::messages.delete'))
                             ->cancelParentActions()
                             ->action(function (array $data, $record) {
                                 foreach ($this->getTypes() as $getType){
                                     if($getType->key == $record->key){
                                         Notification::make()
-                                            ->title('Type Deleted')
-                                            ->body('The type is in use and cannot be deleted.')
+                                            ->title(trans('filament-types::messages.notification.error.title'))
+                                            ->body(trans('filament-types::messages.notification.error.body'))
                                             ->danger()
                                             ->send();
 
@@ -178,8 +184,8 @@ class BaseTypePage extends Page implements HasTable, HasForms
 
                                 $record->delete();
                                 Notification::make()
-                                    ->title('Type Deleted')
-                                    ->body('The type has been deleted successfully.')
+                                    ->title(trans('filament-types::messages.notification.delete.title'))
+                                    ->body(trans('filament-types::messages.notification.delete.body'))
                                     ->success()
                                     ->send();
                             })
@@ -190,7 +196,8 @@ class BaseTypePage extends Page implements HasTable, HasForms
                     ->action(function (array $data, Type $type){
                         $type->update($data);
                         Notification::make()
-                            ->title(trans('filament-ecommerce::messages.settings.status.action.notification'))
+                            ->title(trans('filament-types::messages.notification.edit.title'))
+                            ->body(trans('filament-types::messages.notification.edit.body'))
                             ->success()
                             ->send();
                     })

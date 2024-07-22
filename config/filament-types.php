@@ -55,4 +55,21 @@ return [
      * If type Column is Empty Put This Message
      */
     "empty_state" => null,
+
+
+    /**
+     * Locals
+     *
+     * If you need to use locals for the types you can set it here
+     */
+    "locals" => [
+        "ar" => [
+            "ar" => "العربية",
+            "en" => "Arabic",
+        ],
+        "en" => [
+            "ar" => "الإنجليزية",
+            "en" => "English",
+        ],
+    ]
 ];
