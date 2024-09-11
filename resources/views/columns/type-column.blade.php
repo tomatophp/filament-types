@@ -1,5 +1,15 @@
 @php
-    $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $getState())->first();
+    if($getType() && $getFor()){
+        $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $getState())
+            ->where('for', $getFor())
+            ->where('type', $getType())
+            ->first();
+    }
+    else {
+      $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $getState())->first();
+    }
+
+
     if($type){
         $value = $type->name;
         $hex = $type->color;

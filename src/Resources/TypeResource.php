@@ -132,11 +132,9 @@ class TypeResource extends Resource
                     ->columnSpanFull(),
                 Forms\Components\ColorPicker::make('color')
                     ->required()
-                    ->columnSpan(2)
                     ->label(trans('filament-types::messages.form.color')),
                 IconPicker::make('icon')
                     ->required()
-                    ->columnSpan(2)
                     ->label(trans('filament-types::messages.form.icon')),
                 Forms\Components\Toggle::make('is_activated')
                     ->label(trans('filament-types::messages.form.is_activated')),

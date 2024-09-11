@@ -3,6 +3,7 @@
 namespace TomatoPHP\FilamentTypes\Pages;
 
 use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
@@ -15,6 +16,7 @@ use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use TomatoPHP\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 use TomatoPHP\FilamentTypes\Components\TypeColumn;
 use TomatoPHP\FilamentTypes\Models\Type;
 
@@ -43,21 +45,22 @@ class BaseTypePage extends Page implements HasTable, HasForms
             Action::make('create')
                 ->label(trans('filament-types::messages.create'))
                 ->form([
-                    KeyValue::make('name')
-                        ->schema($this->getLocalInputs())
-                        ->keyLabel(trans('filament-types::messages.language'))
-                        ->editableKeys(false)
-                        ->addable(false)
-                        ->deletable(false)
-                        ->required()
-                        ->label(trans('filament-types::messages.form.name')),
-                    TextInput::make('key')
-                        ->required()
-                        ->label(trans('filament-types::messages.form.key')),
-                    IconPicker::make('icon')
-                        ->label(trans('filament-types::messages.form.icon')),
-                    ColorPicker::make('color')
-                        ->label(trans('filament-types::messages.form.color')),
+                    Grid::make([
+                        'md' => 2,
+                        'sm' => 1
+                    ])->schema([
+                        Translation::make('name')
+                            ->columnSpanFull()
+                            ->label(trans('filament-types::messages.form.name')),
+                        TextInput::make('key')
+                            ->columnSpanFull()
+                            ->required()
+                            ->label(trans('filament-types::messages.form.key')),
+                        IconPicker::make('icon')
+                            ->label(trans('filament-types::messages.form.icon')),
+                        ColorPicker::make('color')
+                            ->label(trans('filament-types::messages.form.color')),
+                    ])
                 ])
                 ->action(function (array $data){
                     $data['for'] = $this->getFor();
@@ -115,20 +118,9 @@ class BaseTypePage extends Page implements HasTable, HasForms
 
     public function getTitle(): string
     {
-        return trans('filament-ecommerce::messages.settings.status.title');
+        return trans('filament-types::messages.base.title');
     }
 
-    private function getLocalInputs()
-    {
-        $localsTitle = [];
-        foreach (config('filament-types.locals') as $key=>$local){
-            $localsTitle[] = TextInput::make($key)
-                ->label($local[app()->getLocale()])
-                ->required();
-        }
-
-        return $localsTitle;
-    }
 
     public function getCreateAction(): bool
     {
@@ -146,6 +138,8 @@ class BaseTypePage extends Page implements HasTable, HasForms
             ->paginated(false)
             ->columns([
                 TypeColumn::make('key')
+                    ->for($this->getFor())
+                    ->type($this->getType())
                     ->label(trans('filament-types::messages.form.key'))
             ])
             ->actions([
@@ -153,15 +147,18 @@ class BaseTypePage extends Page implements HasTable, HasForms
                     ->label(trans('filament-types::messages.edit'))
                     ->tooltip(trans('filament-types::messages.edit'))
                     ->form([
-                        KeyValue::make('name')
-                            ->schema($this->getLocalInputs())
-                            ->keyLabel(trans('filament-types::messages.language'))
-                            ->editableKeys(false)
-                            ->addable(false)
-                            ->deletable(false)
-                            ->label(trans('filament-types::messages.form.name')),
-                        IconPicker::make('icon')->label(trans('filament-types::messages.form.icon')),
-                        ColorPicker::make('color')->label(trans('filament-types::messages.form.color')),
+                        Grid::make([
+                            'md' => 2,
+                            'sm' => 1
+                        ])->schema([
+                            Translation::make('name')
+                                ->columnSpanFull()
+                                ->label(trans('filament-types::messages.form.name')),
+                            IconPicker::make('icon')
+                                ->label(trans('filament-types::messages.form.icon')),
+                            ColorPicker::make('color')
+                                ->label(trans('filament-types::messages.form.color')),
+                        ])
                     ])
                     ->extraModalFooterActions([
                         \Filament\Tables\Actions\Action::make('deleteType')

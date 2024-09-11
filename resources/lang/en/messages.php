@@ -42,5 +42,8 @@ return [
         'color' => 'Color',
         'icon' => 'Icon',
         'is_activated' => 'Activated?',
+    ],
+    'base' => [
+        'title' => 'Types',
     ]
 ];
