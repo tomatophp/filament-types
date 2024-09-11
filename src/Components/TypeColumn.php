@@ -39,7 +39,7 @@ class TypeColumn extends TextColumn
         return $this;
     }
 
-    public function allowDescription(bool|\Closure $allowDescription): static
+    public function allowDescription(bool|\Closure $allowDescription=true): static
     {
         $this->allowDescription = $allowDescription;
         return $this;

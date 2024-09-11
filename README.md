@@ -66,6 +66,7 @@ use TomatoPHP\FilamentTypes\Components\TypeColumn;
 TypeColumn::make('type')
 ->for('users')
 ->type('status')
+->allowDescription()
 ->searchable(),
 ```
 
