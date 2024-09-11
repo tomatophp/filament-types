@@ -6,6 +6,7 @@ use TomatoPHP\FilamentIcons\Components\IconPicker;
 use TomatoPHP\FilamentIcons\Components\IconColumn;
 use Filament\Resources\Concerns\Translatable;
 use Illuminate\Database\Eloquent\Builder;
+use TomatoPHP\FilamentTypes\Components\TypeColumn;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\Resources\TypeResource\Pages;
 use TomatoPHP\FilamentTypes\Models\Type;
@@ -151,21 +152,13 @@ class TypeResource extends Resource
                 Tables\Columns\TextColumn::make('type')
                     ->label(trans('filament-types::messages.form.type'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->label(trans('filament-types::messages.form.name'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('key')
+                TypeColumn::make('key')
+                    ->for(fn($record) => $record->for)
+                    ->type(fn($record) => $record->type)
                     ->label(trans('filament-types::messages.form.key'))
                     ->searchable(),
-                Tables\Columns\ColorColumn::make('color')
-                    ->label(trans('filament-types::messages.form.color'))
-                    ->searchable(),
-                IconColumn::make('icon')
-                    ->label(trans('filament-types::messages.form.icon'))
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('is_activated')
-                    ->label(trans('filament-types::messages.form.is_activated'))
-                    ->boolean(),
+                Tables\Columns\ToggleColumn::make('is_activated')
+                    ->label(trans('filament-types::messages.form.is_activated')),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label(trans('filament-types::messages.form.created_at'))
                     ->dateTime()
@@ -177,7 +170,13 @@ class TypeResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->groups([
+                Tables\Grouping\Group::make('for'),
+                Tables\Grouping\Group::make('type'),
+            ])
             ->defaultGroup('for')
+            ->defaultSort('order')
+            ->reorderable('order')
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([
@@ -192,6 +191,7 @@ class TypeResource extends Resource
                             ->live(),
                         Forms\Components\Select::make('type')
                             ->label(trans('filament-types::messages.form.type'))
+                            ->disabled(fn(Forms\Get $get) => empty($get('for')))
                             ->options(fn(Forms\Get $get) => $get('for') ? static::getTypes($get('for')) : [])
                             ->searchable(),
                         Forms\Components\Select::make('parent_id')
@@ -218,7 +218,15 @@ class TypeResource extends Resource
                     })
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->tooltip(__('filament-actions::edit.single.label'))
+                    ->iconButton(),
+                Tables\Actions\ReplicateAction::make()
+                    ->tooltip(__('filament-actions::replicate.single.label'))
+                    ->iconButton(),
+                Tables\Actions\DeleteAction::make()
+                    ->tooltip(__('filament-actions::delete.single.label'))
+                    ->iconButton(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

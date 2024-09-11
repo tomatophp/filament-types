@@ -40,7 +40,7 @@ class Type extends CachedModel implements HasMedia
     /**
      * @var array
      */
-    protected $fillable = ['for','name', 'key','type', 'description', 'color', 'icon', 'parent_id','model_type','model_id','is_activated','created_at', 'updated_at'];
+    protected $fillable = ['order', 'for','name', 'key','type', 'description', 'color', 'icon', 'parent_id','model_type','model_id','is_activated','created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
