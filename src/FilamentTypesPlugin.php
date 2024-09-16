@@ -4,12 +4,15 @@ namespace TomatoPHP\FilamentTypes;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Nwidart\Modules\Module;
 use TomatoPHP\FilamentTypes\Resources\TypeResource;
 use Filament\SpatieLaravelTranslatablePlugin;
 
 
 class FilamentTypesPlugin implements Plugin
 {
+    private bool $isActive = false;
+
     public function getId(): string
     {
         return 'filament-types';
@@ -17,14 +20,25 @@ class FilamentTypesPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        $panel
-            ->plugin(
-                SpatieLaravelTranslatablePlugin::make()
-                    ->defaultLocales(['en', 'ar']),
-            )
-            ->resources([
-            TypeResource::class
-        ]);
+        if(class_exists(Module::class)){
+            if(\Nwidart\Modules\Facades\Module::find('FilamentTypes')->isEnabled()){
+                $this->isActive = true;
+            }
+        }
+        else {
+            $this->isActive = true;
+        }
+
+        if($this->isActive) {
+            $panel
+                ->plugin(
+                    SpatieLaravelTranslatablePlugin::make()
+                        ->defaultLocales(['en', 'ar']),
+                )
+                ->resources([
+                    TypeResource::class
+                ]);
+        }
 
     }
 
