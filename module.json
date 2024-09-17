@@ -23,7 +23,7 @@
     "icon": "heroicon-c-tag",
     "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/3x1io-tomato-types.jpg",
     "type": "plugin",
-    "version": "v1.0.22",
+    "version": "v1.0.23",
     "github" : "https://github.com/tomatophp/filament-types",
     "docs" : "https://github.com/tomatophp/filament-types"
 }
