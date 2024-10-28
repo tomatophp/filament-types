@@ -20,14 +20,14 @@ Manage any type on your app in Database with easy to use Resource for FilamentPH
 ```bash
 composer require tomatophp/filament-types
 ```
+
 after install your package please run this command
 
 ```bash
 php artisan filament-types:install
 ```
 
-
-finally reigster the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
+finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
 
 ```php
 ->plugin(\TomatoPHP\FilamentTypes\FilamentTypesPlugin::make())

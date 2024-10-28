@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -13,19 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('types_metas', function (Blueprint $table) {
-            $table->id();
+        if (! Schema::hasTable('types_metas')) {
+            Schema::create('types_metas', function (Blueprint $table) {
+                $table->id();
 
-            //Link To Table
-            $table->unsignedBigInteger('model_id')->nullable();
-            $table->string('model_type')->nullable();
+                //Link To Table
+                $table->unsignedBigInteger('model_id')->nullable();
+                $table->string('model_type')->nullable();
 
-            $table->foreignId('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->string('key')->index();
-            $table->json('value')->nullable();
+                $table->foreignId('type_id')->references('id')->on('types')->onDelete('cascade');
+                $table->string('key')->index();
+                $table->json('value')->nullable();
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**

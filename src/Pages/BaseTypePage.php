@@ -4,13 +4,11 @@ namespace TomatoPHP\FilamentTypes\Pages;
 
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Forms\Form;
 use Filament\Notifications\Notification;
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -20,14 +18,14 @@ use TomatoPHP\FilamentTranslationComponent\Components\Translation;
 use TomatoPHP\FilamentTypes\Components\TypeColumn;
 use TomatoPHP\FilamentTypes\Models\Type;
 
-class BaseTypePage extends Page implements HasTable, HasForms
+class BaseTypePage extends Page implements HasForms, HasTable
 {
-    use InteractsWithTable;
     use InteractsWithForms;
+    use InteractsWithTable;
 
     public array $data = [];
 
-    protected static string $view = "filament-types::pages.base";
+    protected static string $view = 'filament-types::pages.base';
 
     public static function shouldRegisterNavigation(): bool
     {
@@ -47,7 +45,7 @@ class BaseTypePage extends Page implements HasTable, HasForms
                 ->form([
                     Grid::make([
                         'md' => 2,
-                        'sm' => 1
+                        'sm' => 1,
                     ])->schema([
                         Translation::make('name')
                             ->columnSpanFull()
@@ -60,9 +58,9 @@ class BaseTypePage extends Page implements HasTable, HasForms
                             ->label(trans('filament-types::messages.form.icon')),
                         ColorPicker::make('color')
                             ->label(trans('filament-types::messages.form.color')),
-                    ])
+                    ]),
                 ])
-                ->action(function (array $data){
+                ->action(function (array $data) {
                     $data['for'] = $this->getFor();
                     $data['type'] = $this->getType();
                     Type::create($data);
@@ -75,20 +73,20 @@ class BaseTypePage extends Page implements HasTable, HasForms
                 }),
             Action::make('back')
                 ->label(trans('filament-types::messages.back'))
-                ->url(fn() => $this->getBackUrl())
+                ->url(fn () => $this->getBackUrl())
                 ->color('warning')
-                ->icon('heroicon-s-arrow-left')
+                ->icon('heroicon-s-arrow-left'),
         ];
     }
 
     public function getType(): string
     {
-        return "status";
+        return 'status';
     }
 
     public function getFor(): string
     {
-        return "types";
+        return 'types';
     }
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
@@ -97,20 +95,20 @@ class BaseTypePage extends Page implements HasTable, HasForms
 
     public function getTypes(): array
     {
-        return  [];
+        return [];
     }
 
     public function mount(): void
     {
-        foreach ($this->getTypes() as $type){
+        foreach ($this->getTypes() as $type) {
             $exists = Type::query()
                 ->where('for', $this->getFor())
                 ->where('type', $this->getType())
                 ->where('key', $type->key)
                 ->first();
-            if(!$exists){
+            if (! $exists) {
                 $type->for = $this->getFor();
-                $type->type =  $this->getType();
+                $type->type = $this->getType();
                 $exists = Type::create($type->toArray());
             }
         }
@@ -120,7 +118,6 @@ class BaseTypePage extends Page implements HasTable, HasForms
     {
         return trans('filament-types::messages.base.title');
     }
-
 
     public function getCreateAction(): bool
     {
@@ -140,7 +137,7 @@ class BaseTypePage extends Page implements HasTable, HasForms
                 TypeColumn::make('key')
                     ->for($this->getFor())
                     ->type($this->getType())
-                    ->label(trans('filament-types::messages.form.key'))
+                    ->label(trans('filament-types::messages.form.key')),
             ])
             ->actions([
                 \Filament\Tables\Actions\Action::make('edit')
@@ -149,7 +146,7 @@ class BaseTypePage extends Page implements HasTable, HasForms
                     ->form([
                         Grid::make([
                             'md' => 2,
-                            'sm' => 1
+                            'sm' => 1,
                         ])->schema([
                             Translation::make('name')
                                 ->columnSpanFull()
@@ -158,7 +155,7 @@ class BaseTypePage extends Page implements HasTable, HasForms
                                 ->label(trans('filament-types::messages.form.icon')),
                             ColorPicker::make('color')
                                 ->label(trans('filament-types::messages.form.color')),
-                        ])
+                        ]),
                     ])
                     ->extraModalFooterActions([
                         \Filament\Tables\Actions\Action::make('deleteType')
@@ -167,8 +164,8 @@ class BaseTypePage extends Page implements HasTable, HasForms
                             ->label(trans('filament-types::messages.delete'))
                             ->cancelParentActions()
                             ->action(function (array $data, $record) {
-                                foreach ($this->getTypes() as $getType){
-                                    if($getType->key == $record->key){
+                                foreach ($this->getTypes() as $getType) {
+                                    if ($getType->key == $record->key) {
                                         Notification::make()
                                             ->title(trans('filament-types::messages.notification.error.title'))
                                             ->body(trans('filament-types::messages.notification.error.body'))
@@ -185,19 +182,19 @@ class BaseTypePage extends Page implements HasTable, HasForms
                                     ->body(trans('filament-types::messages.notification.delete.body'))
                                     ->success()
                                     ->send();
-                            })
+                            }),
                     ])
-                    ->fillForm(fn($record) => $record->toArray())
+                    ->fillForm(fn ($record) => $record->toArray())
                     ->icon('heroicon-s-pencil-square')
                     ->iconButton()
-                    ->action(function (array $data, Type $type){
+                    ->action(function (array $data, Type $type) {
                         $type->update($data);
                         Notification::make()
                             ->title(trans('filament-types::messages.notification.edit.title'))
                             ->body(trans('filament-types::messages.notification.edit.body'))
                             ->success()
                             ->send();
-                    })
+                    }),
             ]);
     }
 }

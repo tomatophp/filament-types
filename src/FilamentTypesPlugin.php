@@ -4,14 +4,44 @@ namespace TomatoPHP\FilamentTypes;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Nwidart\Modules\Module;
-use TomatoPHP\FilamentTypes\Resources\TypeResource;
 use Filament\SpatieLaravelTranslatablePlugin;
-
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
 
 class FilamentTypesPlugin implements Plugin
 {
-    private bool $isActive = false;
+    protected static array $locals = ['ar', 'en'];
+
+    protected static array $types = [];
+
+    /**
+     * @return $this
+     */
+    public function locals(array $locals): self
+    {
+        self::$locals = $locals;
+
+        return $this;
+    }
+
+    public function getLocals(): array
+    {
+        return self::$locals;
+    }
+
+    /**
+     * @return $this
+     */
+    public function types(array $types): self
+    {
+        self::$types = $types;
+
+        return $this;
+    }
+
+    public function getTypes(): array
+    {
+        return self::$types;
+    }
 
     public function getId(): string
     {
@@ -20,24 +50,13 @@ class FilamentTypesPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        if(class_exists(Module::class) && \Nwidart\Modules\Facades\Module::find('FilamentTypes')?->isEnabled()){
-            $this->isActive = true;
-        }
-        else {
-            $this->isActive = true;
-        }
-
-        if($this->isActive) {
-            $panel
-                ->plugin(
-                    SpatieLaravelTranslatablePlugin::make()
-                        ->defaultLocales(['en', 'ar']),
-                )
-                ->resources([
-                    TypeResource::class
-                ]);
-        }
-
+        $panel->plugin(
+            SpatieLaravelTranslatablePlugin::make()
+                ->defaultLocales($this->getLocals()),
+        )
+            ->resources([
+                TypeResource::class,
+            ]);
     }
 
     public function boot(Panel $panel): void
@@ -45,8 +64,8 @@ class FilamentTypesPlugin implements Plugin
         //
     }
 
-    public static function make(): static
+    public static function make(): FilamentTypesPlugin
     {
-        return new static();
+        return new FilamentTypesPlugin;
     }
 }
