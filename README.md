@@ -1,7 +1,10 @@
 ![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/3x1io-tomato-types.jpg)
 
-# Filament Types
+# Filament Types Manager
 
+[![Dependabot Updates](https://github.com/tomatophp/filament-types/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/tomatophp/filament-types/actions/workflows/dependabot/dependabot-updates)
+[![PHP Code Styling](https://github.com/tomatophp/filament-types/actions/workflows/fix-php-code-styling.yml/badge.svg)](https://github.com/tomatophp/filament-types/actions/workflows/fix-php-code-styling.yml)
+[![Tests](https://github.com/tomatophp/filament-types/actions/workflows/tests.yml/badge.svg)](https://github.com/tomatophp/filament-types/actions/workflows/tests.yml)
 [![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-types/version.svg)](https://packagist.org/packages/tomatophp/filament-types)
 [![License](https://poser.pugx.org/tomatophp/filament-types/license.svg)](https://packagist.org/packages/tomatophp/filament-types)
 [![Downloads](https://poser.pugx.org/tomatophp/filament-types/d/total.svg)](https://packagist.org/packages/tomatophp/filament-types)
