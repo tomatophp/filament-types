@@ -19,6 +19,7 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use TomatoPHP\FilamentIcons\FilamentIconsServiceProvider;
+use TomatoPHP\FilamentTranslationComponent\FilamentTranslationComponentServiceProvider;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\FilamentTypesServiceProvider;
 use TomatoPHP\FilamentTypes\Services\Contracts\Type;
@@ -80,6 +81,7 @@ abstract class TestCase extends BaseTestCase
             WidgetsServiceProvider::class,
             Service::class,
             MediaLibraryServiceProvider::class,
+            FilamentTranslationComponentServiceProvider::class,
             FilamentIconsServiceProvider::class,
             FilamentTypesServiceProvider::class,
             AdminPanelProvider::class,

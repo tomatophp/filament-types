@@ -2,13 +2,13 @@
 
 namespace TomatoPHP\FilamentTypes\Pages;
 
+use Filament\Actions\Action;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
-use Filament\Actions\Action;
 use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
@@ -109,7 +109,12 @@ class BaseTypePage extends Page implements HasForms, HasTable
             if (! $exists) {
                 $type->for = $this->getFor();
                 $type->type = $this->getType();
-                $exists = Type::create($type->toArray());
+                if (! is_array($type->name)) {
+                    $type->name = [
+                        app()->getLocale() => $type->name,
+                    ];
+                }
+                Type::create($type->toArray());
             }
         }
     }
@@ -127,6 +132,7 @@ class BaseTypePage extends Page implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
+            ->deferLoading()
             ->query(
                 Type::query()
                     ->where('for', $this->getFor())

@@ -30,11 +30,11 @@ it('can list types', function () {
     livewire(Pages\ListTypes::class)
         ->loadTable()
         ->assertCanSeeTableRecords($types)
-        ->assertCountTableRecords(10);
+        ->assertCountTableRecords(12);
 });
-//
+
 it('can render type type/for/key column in table', function () {
-    User::factory()->count(10)->create();
+    Type::factory()->count(10)->create();
 
     livewire(Pages\ListTypes::class)
         ->loadTable()

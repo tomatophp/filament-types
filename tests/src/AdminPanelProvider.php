@@ -17,6 +17,8 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use TomatoPHP\FilamentTypes\FilamentTypesPlugin;
+use TomatoPHP\FilamentTypes\Tests\Pages\TypePage;
+use TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -29,6 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->pages([
                 Pages\Dashboard::class,
+                TypePage::class,
+                TypeViewComponentPage::class,
             ])
             ->plugin(
                 SpatieLaravelTranslatablePlugin::make()

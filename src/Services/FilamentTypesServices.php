@@ -3,6 +3,7 @@
 namespace TomatoPHP\FilamentTypes\Services;
 
 use Illuminate\Support\Collection;
+use TomatoPHP\FilamentTypes\Models\Type;
 use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
 
 class FilamentTypesServices
@@ -30,8 +31,29 @@ class FilamentTypesServices
                     ->groupBy(fn ($typeFor) => $typeFor->for) // Group by `label` within each `for` group
                     ->map(function ($labelGroup) {
                         $mergedTypes = $labelGroup->flatMap(fn ($typeFor) => $typeFor->types)
-                            ->map(function ($getType) {
+                            ->map(function ($getType) use ($labelGroup) {
                                 $getType->label = ! $getType->label ? str($getType->type)->title()->toString() : $getType->label;
+
+                                if (is_array($getType->types) && count($getType->types)) {
+                                    foreach ($getType->types as $typeItem) {
+                                        $checkExists = Type::query()
+                                            ->where('key', $typeItem->key)
+                                            ->where('type', $getType->type)
+                                            ->where('for', $labelGroup->first()->for)
+                                            ->first();
+
+                                        if (! $checkExists) {
+                                            Type::query()->create([
+                                                'key' => $typeItem->key,
+                                                'type' => $getType->type,
+                                                'icon' => $typeItem->icon,
+                                                'color' => $typeItem->color,
+                                                'for' => $labelGroup->first()->for,
+                                                'name' => $typeItem->name,
+                                            ]);
+                                        }
+                                    }
+                                }
 
                                 return $getType;
                             })

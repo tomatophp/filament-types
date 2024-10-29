@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <div>
+    <div id="type-{{ $type->key }}-{{ $type->for }}-{{ $type->type }}">
         {{ $type->name ?? config('filament-types.empty_state') }}
     </div>
 </span>
