@@ -3,12 +3,11 @@
 namespace TomatoPHP\FilamentTypes\Facades;
 
 use Illuminate\Support\Facades\Facade;
-
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
 
 /**
- * @method static void register(array|string $type, string $for)
- * @method static \Illuminate\Support\Collection getFor()
- * @method static \Illuminate\Support\Collection getTypes(string $for)
+ * @method static void register(array|TypeFor $types)
+ * @method static \Illuminate\Support\Collection get()
  */
 class FilamentTypes extends Facade
 {
