@@ -8,7 +8,9 @@
         "types",
         "database",
         "resource",
-        "manager"
+        "manager",
+        "filamentphp",
+        "filament-plugin"
     ],
     "license": "MIT",
     "autoload": {
