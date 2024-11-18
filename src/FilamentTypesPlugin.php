@@ -50,7 +50,7 @@ class FilamentTypesPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        if(!$panel->hasPlugin('spatie-laravel-translatable')) {
+        if (! $panel->hasPlugin('spatie-laravel-translatable')) {
             $panel->plugin(
                 SpatieLaravelTranslatablePlugin::make()
                     ->defaultLocales($this->getLocals()),
