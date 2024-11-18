@@ -18,6 +18,12 @@ class TypeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tag';
 
+
+    public static function getTranslatableLocales(): array
+    {
+        return filament('filament-types')->getLocals();
+    }
+
     public static function getNavigationLabel(): string
     {
         return trans('filament-types::messages.title');

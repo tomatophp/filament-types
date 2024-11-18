@@ -18,11 +18,6 @@ class ListTypes extends ManageRecords
 
     protected static string $resource = TypeResource::class;
 
-    public static function getTranslatableLocales(): array
-    {
-        return ['en', 'ar'];
-    }
-
     protected function getHeaderActions(): array
     {
         return TypeResource\Actions\ManagePageActions::make($this);
