@@ -43,6 +43,29 @@ class TypeResource extends Resource
         return trans('filament-types::messages.group');
     }
 
+    /**
+     * Config Item: `panel_navigation`
+     * Returns: bool
+     * 
+     * Accepts: array OR bool
+     * 
+     * Compares against current panel ID based on what is in the array (if provided).
+     */
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configItem = config('filament-types.panel_navigation', TRUE);
+
+        if (is_array($configItem) && !empty($configItem)) {
+            foreach (config('filament-types.panel_navigation', true) as $key => $val) {
+                if (Filament::getCurrentPanel()->getId() === $key) {
+                    return $val;
+                }
+            }
+        } else {
+            return (empty($configItem)) ? FALSE : $configItem;
+        }
+    }
+
     public static function form(Form $form): Form
     {
         return TypeForm::make($form);
