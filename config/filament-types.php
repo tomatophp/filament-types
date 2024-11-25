@@ -16,11 +16,14 @@ return [
     'types_resource' => null,
 
     /**
-     * Show Navigation Menu
-     *
-     * If you need to show the navigation menu for the types
+     * Panel Navigation
+     * Accepts: boolean OR array of panel ID with boolean
+     * If array is empty, assumes to not display navigation item.
+     * 
+     * Panel Example:
+     *  'panel_navigation' => ['admin' => TRUE];
      */
-    'show_navigation' => true,
+    'panel_navigation' => true,
 
     /**
      * Empty State

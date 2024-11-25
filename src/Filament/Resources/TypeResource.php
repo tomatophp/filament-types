@@ -9,6 +9,7 @@ use Filament\Tables\Table;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\TypeForm;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeTable;
 use TomatoPHP\FilamentTypes\Models\Type;
+use Filament\Facades\Filament;
 
 class TypeResource extends Resource
 {
@@ -41,6 +42,31 @@ class TypeResource extends Resource
     public static function getNavigationGroup(): ?string
     {
         return trans('filament-types::messages.group');
+    }
+
+    /**
+     * Config Item: `panel_navigation`
+     * Returns: bool
+     * 
+     * Accepts: array OR bool
+     * 
+     * Compares against current panel ID based on what is in the array (if provided).
+     */
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configItem = config('filament-types.panel_navigation', TRUE);
+
+        if (is_array($configItem) && !empty($configItem)) {
+            foreach (config('filament-types.panel_navigation', true) as $key => $val) {
+                if (Filament::getCurrentPanel()->getId() === $key) {
+                    return $val;
+                } else {
+                    return FALSE;
+                }
+            }
+        } else {
+            return (empty($configItem)) ? FALSE : $configItem;
+        }
     }
 
     public static function form(Form $form): Form
