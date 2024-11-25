@@ -9,6 +9,7 @@ use Filament\Tables\Table;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\TypeForm;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeTable;
 use TomatoPHP\FilamentTypes\Models\Type;
+use Filament\Facades\Filament;
 
 class TypeResource extends Resource
 {
@@ -59,6 +60,8 @@ class TypeResource extends Resource
             foreach (config('filament-types.panel_navigation', true) as $key => $val) {
                 if (Filament::getCurrentPanel()->getId() === $key) {
                     return $val;
+                } else {
+                    return FALSE;
                 }
             }
         } else {
