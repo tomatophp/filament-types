@@ -19,7 +19,7 @@ return [
      * Panel Navigation
      * Accepts: boolean OR array of panel ID with boolean
      * If array is empty, assumes to not display navigation item.
-     * 
+     *
      * Panel Example:
      *  'panel_navigation' => ['admin' => TRUE];
      */
