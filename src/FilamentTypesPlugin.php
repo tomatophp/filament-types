@@ -9,7 +9,7 @@ use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
 
 class FilamentTypesPlugin implements Plugin
 {
-    protected static array $locals = ['ar', 'en'];
+    protected array $locals = ['ar', 'en'];
 
     protected static array $types = [];
 
