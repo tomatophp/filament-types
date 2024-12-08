@@ -16,16 +16,14 @@ class FilamentTypesPlugin implements Plugin
     /**
      * @return $this
      */
-    public function locals(array $locals): self
+    public function locals()
     {
-        self::$locals = $locals;
-
-        return $this;
+        return (!is_null(config('filament-types.locals'))) ? config('filament-types.locals') : $this->locals;
     }
 
     public function getLocals(): array
     {
-        return self::$locals;
+        return $this->locals();
     }
 
     /**
