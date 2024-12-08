@@ -84,6 +84,17 @@ FilamentTypes::register([
 ]);
 ```
 
+## Config Locales
+
+You can change the locals within the `filament-types` config.
+
+- Publish the config file/
+- Modify the `locals` array to include the two character language code that applys to the language you wish to offer. EG:
+
+```
+'locals' = ['en'],
+```
+
 ## Use Type Helper
 
 you can find any type with the helper method to use it anywhere
@@ -112,7 +123,7 @@ TypeColumn::make('type')
     ->searchable(),
 ```
 
-## Auto Caching 
+## Auto Caching
 
 on your `.env` add this
 
@@ -181,7 +192,7 @@ class NotesGroups extends BaseTypePage
 }
 ```
 
-it will be not appear on the navigation menu by default but you can change that by just use this method 
+it will be not appear on the navigation menu by default but you can change that by just use this method
 
 ```php
 public static function shouldRegisterNavigation(): bool
@@ -195,7 +206,7 @@ public static function shouldRegisterNavigation(): bool
 if you like to use a type as a package we create a blade component for you to make it easy to use anywhere on your app like this
 
 ```html
-<x-tomato-type :type="$type" label="Group"/>
+<x-tomato-type :type="$type" label="Group" />
 ```
 
 ## User Types Resource Hooks
@@ -277,7 +288,7 @@ public function boot()
     ManagePageActions::register([
         Filament\Actions\Action::make('action')
     ]);
- 
+
 }
 ```
 
@@ -330,7 +341,6 @@ if you like to check the code by `PHPStan` just use this command
 ```bash
 composer analyse
 ```
-
 
 ## Other Filament Packages
 
