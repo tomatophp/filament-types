@@ -9,23 +9,21 @@ use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
 
 class FilamentTypesPlugin implements Plugin
 {
-    protected static array $locals = ['ar', 'en'];
+    protected array $locals = ['ar', 'en'];
 
     protected static array $types = [];
 
     /**
      * @return $this
      */
-    public function locals(array $locals): self
+    public function locals()
     {
-        self::$locals = $locals;
-
-        return $this;
+        return (!is_null(config('filament-types.locals'))) ? config('filament-types.locals') : $this->locals;
     }
 
     public function getLocals(): array
     {
-        return self::$locals;
+        return $this->locals();
     }
 
     /**
