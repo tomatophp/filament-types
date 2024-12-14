@@ -36,11 +36,10 @@ return [
      * Locals
      *
      * If you need to use locals for the types you can set it here
-     * 
+     *
      * EG: ['en','ar'] will provide English and Arabic options.
-     * 
+     *
      * Default: NULL, provides English and Arabic options.
      */
-
-    'locals' => NULL,
+    'locals' => null,
 ];

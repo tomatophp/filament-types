@@ -18,7 +18,7 @@ class FilamentTypesPlugin implements Plugin
      */
     public function locals()
     {
-        return (!is_null(config('filament-types.locals'))) ? config('filament-types.locals') : $this->locals;
+        return (! is_null(config('filament-types.locals'))) ? config('filament-types.locals') : $this->locals;
     }
 
     public function getLocals(): array
