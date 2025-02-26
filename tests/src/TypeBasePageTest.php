@@ -15,8 +15,8 @@ beforeEach(function () {
 });
 
 it('can render type page', function () {
-    get(TypePage::getUrl())->assertSuccessful();
-});
+get(TypePage::getUrl())->assertSuccessful();
+    });
 
 it('can list selected types', function () {
     Type::query()->where('type', 'groups')->where('for', 'notes')->delete();

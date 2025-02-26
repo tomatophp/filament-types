@@ -20,8 +20,8 @@ beforeEach(function () {
 });
 
 it('can render type resource', function () {
-    get(TypeResource::getUrl())->assertSuccessful();
-});
+get(TypeResource::getUrl())->assertSuccessful();
+    });
 
 it('can list types', function () {
     Type::query()->delete();
