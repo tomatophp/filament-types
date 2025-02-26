@@ -5,8 +5,8 @@ if (! function_exists('type_of')) {
     {
         return \TomatoPHP\FilamentTypes\Models\Type::query()
             ->where('key', $key)
-            ->where('for', $for)
-            ->where('type', $type)
+            ->where('for', 'LIKE', '%' . $for . '%')
+            ->where('type', 'LIKE', '%' . $type . '%')
             ->first();
     }
 }

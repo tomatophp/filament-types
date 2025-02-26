@@ -67,6 +67,8 @@ class TypeResource extends Resource
         } else {
             return (empty($configItem)) ? false : $configItem;
         }
+
+        return false;
     }
 
     public static function form(Form $form): Form

@@ -19,11 +19,11 @@ return new class extends Migration
 
                 $table->foreignId('parent_id')->nullable()->references('id')->on('types')->onDelete('cascade');
 
-                //Morph
+                // Morph
                 $table->string('model_type')->nullable();
                 $table->unsignedBigInteger('model_id')->nullable();
 
-                //Types
+                // Types
                 $table->string('for')->default('posts')->nullable();
                 $table->string('type')->default('category')->nullable();
 
@@ -31,7 +31,7 @@ return new class extends Migration
                 $table->string('key')->unique()->index();
                 $table->text('description')->nullable();
 
-                //Icon & Color
+                // Icon & Color
                 $table->string('color')->nullable();
                 $table->string('icon')->nullable();
 

@@ -12,8 +12,9 @@ use Filament\Notifications\NotificationsServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
-use GeneaLabs\LaravelModelCaching\Providers\Service;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\LivewireServiceProvider;
+use Orchestra\Testbench\Attributes\WithEnv;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
@@ -27,8 +28,10 @@ use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
 use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
 use TomatoPHP\FilamentTypes\Tests\Models\User;
 
+#[WithEnv('DB_CONNECTION', 'testing')]
 abstract class TestCase extends BaseTestCase
 {
+    use RefreshDatabase;
     use WithWorkbench;
 
     protected function setUp(): void
@@ -79,7 +82,6 @@ abstract class TestCase extends BaseTestCase
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            Service::class,
             MediaLibraryServiceProvider::class,
             FilamentTranslationComponentServiceProvider::class,
             FilamentIconsServiceProvider::class,
@@ -96,8 +98,7 @@ abstract class TestCase extends BaseTestCase
     public function getEnvironmentSetUp($app): void
     {
         $app['config']->set('filament-users.model', User::class);
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite.database', __DIR__ . '/../database/database.sqlite');
+        $app['config']->set('database.default', 'testing');
         $app['config']->set('filament-icons.cache', false);
 
         $app['config']->set('view.paths', [

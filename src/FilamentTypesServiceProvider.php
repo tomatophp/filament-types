@@ -10,43 +10,43 @@ class FilamentTypesServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        //Register generate command
+        // Register generate command
         $this->commands([
             \TomatoPHP\FilamentTypes\Console\FilamentTypesInstall::class,
         ]);
 
-        //Register Config file
+        // Register Config file
         $this->mergeConfigFrom(__DIR__ . '/../config/filament-types.php', 'filament-types');
 
-        //Publish Config
+        // Publish Config
         $this->publishes([
             __DIR__ . '/../config/filament-types.php' => config_path('filament-types.php'),
         ], 'filament-types-config');
 
-        //Register Migrations
+        // Register Migrations
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
-        //Publish Migrations
+        // Publish Migrations
         $this->publishes([
             __DIR__ . '/../database/migrations' => database_path('migrations'),
         ], 'filament-types-migrations');
-        //Register views
+        // Register views
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'filament-types');
 
-        //Publish Views
+        // Publish Views
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views/vendor/filament-types'),
         ], 'filament-types-views');
 
-        //Register Langs
+        // Register Langs
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'filament-types');
 
-        //Publish Lang
+        // Publish Lang
         $this->publishes([
             __DIR__ . '/../resources/lang' => base_path('lang/vendor/filament-types'),
         ], 'filament-types-lang');
 
-        //Register Routes
+        // Register Routes
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         $this->app->bind('filament-types', function () {
@@ -60,6 +60,6 @@ class FilamentTypesServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        //you boot methods here
+        // you boot methods here
     }
 }

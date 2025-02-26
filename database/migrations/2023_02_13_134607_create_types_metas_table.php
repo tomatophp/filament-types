@@ -17,7 +17,7 @@ return new class extends Migration
             Schema::create('types_metas', function (Blueprint $table) {
                 $table->id();
 
-                //Link To Table
+                // Link To Table
                 $table->unsignedBigInteger('model_id')->nullable();
                 $table->string('model_type')->nullable();
 
