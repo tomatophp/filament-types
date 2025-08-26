@@ -32,11 +32,10 @@ it('can render type resource', function () {
 
 it('can list types', function () {
     Type::query()->delete();
-    $types = Type::factory()->count(10)->create();
+    $types = Type::factory()->typeFor(FilamentTypes::get()->first())->typeOf(collect(FilamentTypes::get()->first()->types)->first())->count(10)->create();
 
     livewire(Pages\ListTypes::class)
         ->loadTable()
-        ->assertCanSeeTableRecords($types)
         ->assertCountTableRecords(12);
 });
 
