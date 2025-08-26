@@ -60,6 +60,6 @@ class FilamentTypesServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // you boot methods here
+        //
     }
 }

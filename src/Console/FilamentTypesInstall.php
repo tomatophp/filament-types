@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentTypes\Console;
 
 use Illuminate\Console\Command;
 use TomatoPHP\ConsoleHelpers\Traits\RunCommand;
+use TomatoPHP\FilamentIcons\Facades\FilamentIcons;
 
 class FilamentTypesInstall extends Command
 {
@@ -38,6 +39,7 @@ class FilamentTypesInstall extends Command
         $this->info('Publish Vendor Assets');
         $this->artisanCommand(['migrate']);
         $this->artisanCommand(['optimize:clear']);
+        FilamentIcons::getIcons();
         $this->info('Filament Types installed successfully.');
     }
 }

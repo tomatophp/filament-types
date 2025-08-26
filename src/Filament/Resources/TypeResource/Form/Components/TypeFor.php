@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Component
 
 use Filament\Forms;
 use Filament\Forms\Components\Field;
+use Filament\Schemas\Components\Utilities\Set;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 
 class TypeFor extends Component
@@ -14,7 +15,7 @@ class TypeFor extends Component
             ->label(trans('filament-types::messages.form.for'))
             ->options(FilamentTypes::get()->pluck('label', 'for')->toArray())
             ->searchable()
-            ->afterStateUpdated(function (Forms\Set $set) {
+            ->afterStateUpdated(function (Set $set) {
                 $set('type', null);
                 $set('parent_id', null);
             })

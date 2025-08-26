@@ -6,5 +6,5 @@ use Filament\Pages\Page;
 
 class TypeViewComponentPage extends Page
 {
-    protected static string $view = 'filament-types::pages.type-view-component';
+    protected string $view = 'filament-types::pages.type-view-component';
 }

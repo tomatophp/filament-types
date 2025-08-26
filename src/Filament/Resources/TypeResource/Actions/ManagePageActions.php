@@ -2,7 +2,7 @@
 
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions;
 
-use Filament\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 
 final class ManagePageActions
 {

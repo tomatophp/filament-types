@@ -1,4 +1,4 @@
-![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/3x1io-tomato-types.jpg)
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/fadymondy-tomato-types.jpg)
 
 # Filament Types Manager
 

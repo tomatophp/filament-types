@@ -3,12 +3,12 @@
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages;
 
 use Filament\Resources\Pages\ManageRecords;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\Components;
 
 class ListTypes extends ManageRecords
 {
-    use ManageRecords\Concerns\Translatable;
-
     public ?string $activeLocale = null;
 
     public function getTitle(): string
@@ -20,6 +20,11 @@ class ListTypes extends ManageRecords
 
     protected function getHeaderActions(): array
     {
-        return TypeResource\Actions\ManagePageActions::make($this);
+        return array_merge(
+            [
+                Components\CreateAction::make(),
+            ],
+            FilamentTypes::getPageActions(self::class)
+        );
     }
 }

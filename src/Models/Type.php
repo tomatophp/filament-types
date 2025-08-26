@@ -37,6 +37,11 @@ class Type extends Model implements HasMedia
      */
     protected $fillable = ['order', 'for', 'name', 'key', 'type', 'description', 'color', 'icon', 'parent_id', 'model_type', 'model_id', 'is_activated', 'created_at', 'updated_at'];
 
+    protected $casts = [
+        'name' => 'array',
+        'description' => 'array',
+    ];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

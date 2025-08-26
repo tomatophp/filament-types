@@ -2,7 +2,7 @@
 
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\BulkActions;
 
-use Filament\Tables\Actions\BulkAction;
+use Filament\Actions\BulkAction;
 
 abstract class Action
 {

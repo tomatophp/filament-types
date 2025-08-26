@@ -2,7 +2,8 @@
 
 namespace TomatoPHP\FilamentTypes\Tests;
 
-use Filament\Tables\Actions\EditAction;
+use Filament\Actions\EditAction;
+use TomatoPHP\FilamentIcons\Facades\FilamentIcons;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages;
@@ -17,11 +18,17 @@ use function Pest\Livewire\livewire;
 
 beforeEach(function () {
     actingAs(User::factory()->create());
+
+    $this->panel->resources([
+        TypeResource::class,
+    ]);
+
+    FilamentIcons::getIcons();
 });
 
 it('can render type resource', function () {
-get(TypeResource::getUrl())->assertSuccessful();
-    });
+    get(TypeResource::getUrl())->assertSuccessful();
+});
 
 it('can list types', function () {
     Type::query()->delete();
@@ -62,16 +69,22 @@ it('can render type create page', function () {
 });
 
 it('can create new type', function () {
-    $newData = Type::factory()->make();
+    $newData = Type::factory()->typeFor(FilamentTypes::get()->first())->typeOf(collect(FilamentTypes::get()->first()->types)->first())->make();
 
     livewire(Pages\ListTypes::class)
         ->callAction('create', data: [
             'order' => $newData->order,
             'for' => $newData->for,
-            'name' => $newData->name,
+            'name' => [
+                'en' => $newData->name,
+                'ar' => $newData->name,
+            ],
             'key' => $newData->key,
             'type' => $newData->type,
-            'description' => $newData->description,
+            'description' => [
+                'en' => $newData->description,
+                'ar' => $newData->description,
+            ],
             'color' => $newData->color,
             'icon' => 'heroicon-o-user',
         ])
@@ -93,7 +106,7 @@ it('can validate type input', function () {
             'type' => null,
             'description' => null,
             'color' => null,
-            'icon' => null,
+            'icon' => 'heroicon-o-user',
         ])
         ->assertHasActionErrors([
             'for' => 'required',
@@ -153,7 +166,10 @@ it('can save type data', function () {
             'key' => $newData->key,
             'for' => FilamentTypes::get()->first()?->for,
             'type' => collect(FilamentTypes::get()->first()?->types)->first()?->type,
-            'name' => $newData->name,
+            'name' => [
+                'en' => $newData->name,
+                'ar' => $newData->name,
+            ],
         ])
         ->assertHasNoTableActionErrors();
 

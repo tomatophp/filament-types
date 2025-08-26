@@ -3,6 +3,8 @@
 namespace TomatoPHP\FilamentTypes\Tests\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
 use TomatoPHP\FilamentTypes\Tests\Models\Type;
 
 class TypeFactory extends Factory
@@ -21,5 +23,19 @@ class TypeFactory extends Factory
             'color' => $this->faker->hexColor(),
             'icon' => 'heroicon-o-user',
         ];
+    }
+
+    public function typeFor(TypeFor $typeFor): self
+    {
+        return $this->state(function (array $attributes) use ($typeFor) {
+            return ['for' => $typeFor->for];
+        });
+    }
+
+    public function typeOf(TypeOf $type): self
+    {
+        return $this->state(function (array $attributes) use ($type) {
+            return ['type' => $type->type];
+        });
     }
 }

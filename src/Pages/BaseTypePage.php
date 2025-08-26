@@ -2,14 +2,15 @@
 
 namespace TomatoPHP\FilamentTypes\Pages;
 
+use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
+use Filament\Schemas\Components\Grid;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -25,7 +26,7 @@ class BaseTypePage extends Page implements HasForms, HasTable
 
     public array $data = [];
 
-    protected static string $view = 'filament-types::pages.base';
+    protected string $view = 'filament-types::pages.base';
 
     public static function shouldRegisterNavigation(): bool
     {
@@ -42,7 +43,7 @@ class BaseTypePage extends Page implements HasForms, HasTable
         return [
             Action::make('create')
                 ->label(trans('filament-types::messages.create'))
-                ->form([
+                ->schema([
                     Grid::make([
                         'md' => 2,
                         'sm' => 1,
@@ -89,7 +90,7 @@ class BaseTypePage extends Page implements HasForms, HasTable
         return 'types';
     }
 
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-cog';
 
     protected array $types = [];
 
@@ -145,11 +146,11 @@ class BaseTypePage extends Page implements HasForms, HasTable
                     ->type($this->getType())
                     ->label(trans('filament-types::messages.form.key')),
             ])
-            ->actions([
-                \Filament\Tables\Actions\Action::make('edit')
+            ->recordActions([
+                \Filament\Actions\Action::make('edit')
                     ->label(trans('filament-types::messages.edit'))
                     ->tooltip(trans('filament-types::messages.edit'))
-                    ->form([
+                    ->schema([
                         Grid::make([
                             'md' => 2,
                             'sm' => 1,
@@ -164,7 +165,7 @@ class BaseTypePage extends Page implements HasForms, HasTable
                         ]),
                     ])
                     ->extraModalFooterActions([
-                        \Filament\Tables\Actions\Action::make('deleteType')
+                        \Filament\Actions\Action::make('deleteType')
                             ->requiresConfirmation()
                             ->color('danger')
                             ->label(trans('filament-types::messages.delete'))

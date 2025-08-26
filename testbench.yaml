@@ -9,6 +9,7 @@ providers:
   - Filament\Support\SupportServiceProvider
   - Filament\Tables\TablesServiceProvider
   - Filament\Widgets\WidgetsServiceProvider
+  - Filament\Schemas\SchemasServiceProvider
   - RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider
   - Spatie\MediaLibrary\MediaLibraryServiceProvider
   - TomatoPHP\FilamentTranslationComponent\FilamentTranslationComponentServiceProvider

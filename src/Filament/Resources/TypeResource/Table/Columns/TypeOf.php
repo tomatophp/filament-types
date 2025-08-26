@@ -3,6 +3,7 @@
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
 
 use Filament\Tables;
+use TomatoPHP\FilamentTypes\Models\Type;
 
 class TypeOf extends Column
 {
@@ -10,6 +11,7 @@ class TypeOf extends Column
     {
         return Tables\Columns\TextColumn::make('type')
             ->label(trans('filament-types::messages.form.type'))
+            ->getStateUsing(fn (Type $record) => str($record->type)->title()->toString())
             ->sortable();
     }
 }

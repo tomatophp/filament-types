@@ -1,23 +1,23 @@
 <?php
 
 use Filament\Facades\Filament;
-use Filament\SpatieLaravelTranslatablePlugin;
+use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
 use TomatoPHP\FilamentTypes\FilamentTypesPlugin;
 
 it('registers spatie laravel translatable plugin', function () {
-    $panel = Filament::getCurrentPanel();
+    $panel = Filament::getCurrentOrDefaultPanel();
 
     $panel->plugins([
-        SpatieLaravelTranslatablePlugin::make(),
+        SpatieTranslatablePlugin::make(),
     ]);
 
-    expect($panel->getPlugin('spatie-laravel-translatable'))
+    expect($panel->getPlugin('spatie-translatable'))
         ->not()
         ->toThrow(Exception::class);
 });
 
 it('registers plugin', function () {
-    $panel = Filament::getCurrentPanel();
+    $panel = Filament::getCurrentOrDefaultPanel();
 
     $panel->plugins([
         FilamentTypesPlugin::make(),

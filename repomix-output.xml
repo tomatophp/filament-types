@@ -1,0 +1,4728 @@
+This file is a merged representation of a subset of the codebase, containing files not matching ignore patterns, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching these patterns are excluded: **/*.log, tmp/, .js, .html, .blade.php, .css, public/, vendor/, node_modules
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.github/
+  ISSUE_TEMPLATE/
+    bug.yml
+    config.yml
+  workflows/
+    dependabot-auto-merge.yml
+    fix-php-code-styling.yml
+    tests.yml
+  CONTRIBUTING.md
+  dependabot.yml
+  FUNDING.yml
+  SECURITY.md
+config/
+  filament-types.php
+database/
+  migrations/
+    2022_09_11_223298_create_types_table.php
+    2023_02_13_134607_create_types_metas_table.php
+    2023_02_13_143941_create_typables_table.php
+    2023_06_13_143941_drop_unique_key_from_types_table.php
+    2024_09_11_143941_update_types_table.php
+    2024_10_28_143941_add_media_if_not_exists_table.php
+resources/
+  lang/
+    ar/
+      messages.php
+    en/
+      messages.php
+  views/
+    columns/
+      type-column.blade.php
+    components/
+      type.blade.php
+    pages/
+      base.blade.php
+      type-view-component.blade.php
+routes/
+  web.php
+src/
+  Components/
+    Type.php
+    TypeColumn.php
+  Console/
+    FilamentTypesInstall.php
+  Facades/
+    FilamentTypes.php
+  Filament/
+    Resources/
+      TypeResource/
+        Actions/
+          Components/
+            Action.php
+            CreateAction.php
+          Contracts/
+            CanRegister.php
+          ManagePageActions.php
+        Form/
+          Components/
+            Color.php
+            Component.php
+            Description.php
+            Icon.php
+            Image.php
+            IsActive.php
+            Key.php
+            Name.php
+            TypeFor.php
+            TypeOf.php
+            TypeParent.php
+          TypeForm.php
+        InfoList/
+          Entries/
+            Entry.php
+          TypeInfoList.php
+        Pages/
+          ListTypes.php
+        Table/
+          Actions/
+            Action.php
+            DeleteAction.php
+            EditAction.php
+            ViewAction.php
+          BulkActions/
+            Action.php
+            DeleteAction.php
+          Columns/
+            Column.php
+            CreatedAt.php
+            Id.php
+            IsActive.php
+            Key.php
+            TypeFor.php
+            TypeOf.php
+            UpdatedAt.php
+          Filters/
+            Filter.php
+            TypeFor.php
+          HeaderActions/
+            Action.php
+          TypeActions.php
+          TypeBulkActions.php
+          TypeFilters.php
+          TypeHeaderActions.php
+          TypeTable.php
+      TypeResource.php
+  Models/
+    Type.php
+    TypesMeta.php
+  Pages/
+    BaseTypePage.php
+  Services/
+    Contracts/
+      Type.php
+      TypeFor.php
+      TypeOf.php
+    FilamentTypesServices.php
+  FilamentTypesPlugin.php
+  FilamentTypesServiceProvider.php
+  helpers.php
+tests/
+  database/
+    factories/
+      TypeFactory.php
+      UserFactory.php
+  src/
+    Models/
+      Type.php
+      User.php
+    Pages/
+      TypePage.php
+      TypeViewComponentPage.php
+    AdminPanelProvider.php
+    DebugTest.php
+    FilamentTypeServiceTest.php
+    PluginTest.php
+    TestCase.php
+    TypeBasePageTest.php
+    TypeColumnTest.php
+    TypeHelperTest.php
+    TypeResourceTest.php
+    TypeViewComponentTest.php
+  Pest.php
+.gitignore
+.php-cs-fixer.dist.php
+CODE_OF_CONDUCT.md
+composer.json
+fadymondy-tomato-types.md
+LICENSE.md
+module.json
+phpunit.xml
+pint.json
+README.md
+testbench.yaml
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="fadymondy-tomato-types.md">
+---
+name: Types Manager
+slug: fadymondy-tomato-types
+author_slug: fadymondy
+categories: [developer-tool]
+description: Manage any type on your app in Database with easy to use Resource for FilamentPHP
+discord_url:
+docs_url: https://raw.githubusercontent.com/tomatophp/filament-types/master/README.md
+github_repository: tomatophp/filament-types
+has_dark_theme: true
+has_translations: true
+versions: [3]
+publish_date: 2024-04-11
+---
+</file>
+
+<file path=".github/ISSUE_TEMPLATE/bug.yml">
+name: Bug Report
+description: Report an Issue or Bug with the Package
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We're sorry to hear you have a problem. Can you help us solve it by providing the following details.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect to happen?
+      placeholder: I cannot currently do X thing because when I do, it breaks X thing.
+    validations:
+      required: true
+  - type: textarea
+    id: how-to-reproduce
+    attributes:
+      label: How to reproduce the bug
+      description: How did this occur, please add any config values used and provide a set of reliable steps if possible.
+      placeholder: When I do X I see Y.
+    validations:
+      required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: Package Version
+      description: What version of our Package are you running? Please be as specific as possible
+      placeholder: 2.0.0
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP Version
+      description: What version of PHP are you running? Please be as specific as possible
+      placeholder: 8.2.0
+    validations:
+      required: true
+  - type: input
+    id: laravel-version
+    attributes:
+      label: Laravel Version
+      description: What version of Laravel are you running? Please be as specific as possible
+      placeholder: 9.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: operating-systems
+    attributes:
+      label: Which operating systems does with happen with?
+      description: You may select more than one.
+      multiple: true
+      options:
+        - macOS
+        - Windows
+        - Linux
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Use this field to provide any other notes that you feel might be relevant to the issue.
+    validations:
+      required: false
+</file>
+
+<file path=".github/ISSUE_TEMPLATE/config.yml">
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/tomatophp/filament-types/discussions/new?category=q-a
+    about: Ask the community for help
+  - name: Request a feature
+    url: https://github.com/tomatophp/filament-types/discussions/new?category=ideas
+    about: Share ideas for new features
+  - name: Report a security issue
+    url: https://github.com/tomatophp/filament-types/security/policy
+    about: Learn how to notify us for sensitive bugs
+</file>
+
+<file path=".github/workflows/fix-php-code-styling.yml">
+name: 'PHP Code Styling'
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.php'
+
+permissions:
+  contents: write
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+
+      - name: Fix PHP code style issues
+        uses: aglipanci/laravel-pint-action@v2
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Format Code"
+          commit_user_name: 'GitHub Actions'
+</file>
+
+<file path=".github/CONTRIBUTING.md">
+# Contributing
+
+Contributions are **welcome** and will be fully **credited**.
+
+Please read and understand the contribution guide before creating an issue or pull request.
+
+## Etiquette
+
+This project is open source, and as such, the maintainers give their free time to build and maintain the source code
+held within. They make the code freely available in the hope that it will be of use to other developers. It would be
+extremely unfair for them to suffer abuse or anger for their hard work.
+
+Please be considerate towards maintainers when raising issues or presenting pull requests. Let's show the
+world that developers are civilized and selfless people.
+
+It's the duty of the maintainer to ensure that all submissions to the project are of sufficient
+quality to benefit the project. Many developers have different skills, strengths, and weaknesses. Respect the maintainer's decision, and do not be upset or abusive if your submission is not used.
+
+## Viability
+
+When requesting or submitting new features, first consider whether it might be useful to others. Open
+source projects are used by many developers, who may have entirely different needs to your own. Think about
+whether or not your feature is likely to be used by other users of the project.
+
+## Procedure
+
+Before filing an issue:
+
+- Attempt to replicate the problem, to ensure that it wasn't a coincidental incident.
+- Check to make sure your feature suggestion isn't already present within the project.
+- Check the pull requests tab to ensure that the bug doesn't have a fix in progress.
+- Check the pull requests tab to ensure that the feature isn't already in progress.
+
+Before submitting a pull request:
+
+- Check the codebase to ensure that your feature doesn't already exist.
+- Check the pull requests to ensure that another person hasn't already submitted the feature or fix.
+
+## Requirements
+
+If the project maintainer has any additional requirements, you will find them listed here.
+
+- **[PSR-2 Coding Standard](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)** - The easiest way to apply the conventions is to install [PHP Code Sniffer](https://pear.php.net/package/PHP_CodeSniffer).
+
+- **Add tests!** - Your patch won't be accepted if it doesn't have tests.
+
+- **Document any change in behaviour** - Make sure the `README.md` and any other relevant documentation are kept up-to-date.
+
+- **Consider our release cycle** - We try to follow [SemVer v2.0.0](https://semver.org/). Randomly breaking public APIs is not an option.
+
+- **One pull request per feature** - If you want to do more than one thing, send multiple pull requests.
+
+- **Send coherent history** - Make sure each individual commit in your pull request is meaningful. If you had to make multiple intermediate commits while developing, please [squash them](https://www.git-scm.com/book/en/v2/Git-Tools-Rewriting-History#Changing-Multiple-Commit-Messages) before submitting.
+
+**Happy coding**!
+</file>
+
+<file path=".github/dependabot.yml">
+# Please see the documentation for all configuration options:
+# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+</file>
+
+<file path=".github/FUNDING.yml">
+github: [3x1io]
+</file>
+
+<file path=".github/SECURITY.md">
+# Security Policy
+
+If you discover any security related issues, please email info@3x1.io instead of using the issue tracker.
+</file>
+
+<file path="database/migrations/2024_10_28_143941_add_media_if_not_exists_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (! Schema::hasTable('media')) {
+            Schema::create('media', function (Blueprint $table) {
+                $table->id();
+
+                $table->morphs('model');
+                $table->uuid()->nullable()->unique();
+                $table->string('collection_name');
+                $table->string('name');
+                $table->string('file_name');
+                $table->string('mime_type')->nullable();
+                $table->string('disk');
+                $table->string('conversions_disk')->nullable();
+                $table->unsignedBigInteger('size');
+                $table->json('manipulations');
+                $table->json('custom_properties');
+                $table->json('generated_conversions');
+                $table->json('responsive_images');
+                $table->unsignedInteger('order_column')->nullable()->index();
+
+                $table->nullableTimestamps();
+            });
+        }
+    }
+};
+</file>
+
+<file path="resources/views/pages/base.blade.php">
+<x-filament-panels::page>
+    {{ $this->table }}
+</x-filament-panels::page>
+</file>
+
+<file path="resources/views/pages/type-view-component.blade.php">
+@php use TomatoPHP\FilamentTypes\Models\Type; @endphp
+<x-filament-panels::page>
+    @php
+        $type = Type::query()->create([
+            'order' => 1,
+            'for' => 'notes',
+            'name' => 'TODO',
+            'key' => 'todo',
+            'type' => 'groups',
+            'description' => 'TODO',
+            'color' => '#1461e3',
+            'icon' => 'heroicon-o-list-bullet',
+        ])
+    @endphp
+
+    <x-tomato-type :type="$type" label="Group"/>
+</x-filament-panels::page>
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Actions/Components/Action.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\Components;
+
+abstract class Action
+{
+    abstract public static function make(): \Filament\Actions\Action;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Actions/Components/CreateAction.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\Components;
+
+use Filament\Actions;
+use Filament\Notifications\Notification;
+use TomatoPHP\FilamentTypes\Models\Type;
+
+class CreateAction extends Action
+{
+    public static function make(): Actions\Action
+    {
+        return Actions\CreateAction::make()
+            ->label(trans('filament-types::messages.create'))
+            ->using(function (array $data) {
+                $checkExistsType = Type::query()
+                    ->where('key', $data['key'])
+                    ->where('for', $data['for'])
+                    ->where('type', $data['type'])
+                    ->first();
+
+                if ($checkExistsType) {
+                    Notification::make()
+                        ->title(trans('filament-types::messages.exists'))
+                        ->danger()
+                        ->send();
+
+                    return $checkExistsType;
+
+                } else {
+                    $type = Type::create($data);
+
+                    Notification::make()
+                        ->title(trans('filament-types::messages.success'))
+                        ->success()
+                        ->send();
+
+                    return $type;
+                }
+            })
+            ->successNotification(null);
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Actions/Contracts/CanRegister.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\Contracts;
+
+use Filament\Forms\Form;
+use Filament\Pages\Page;
+use Filament\Actions\Action;
+use Filament\Schemas\Schema;
+
+use function Filament\Support\get_model_label;
+use Filament\Support\Concerns\EvaluatesClosures;
+
+trait CanRegister
+{
+    use EvaluatesClosures;
+
+    protected static array $actions = [];
+
+    protected static ?Page $page = null;
+
+    public static function make(?Page $page = null): array
+    {
+        self::$page = $page;
+
+        return (new self)->getActions();
+    }
+
+    public function getActions(): array
+    {
+        return collect($this->getDefaultActions())->merge(self::$actions)->map(function (Action $action) {
+            if (method_exists($action, 'record') && str($action->getName())->contains(['create', 'edit', 'view'])) {
+                $action->record(method_exists(self::$page, 'getRecord') ? self::$page->getRecord() : null)
+                    ->model(method_exists(self::$page, 'getModel') ? self::$page->getModel() : null)
+                    ->modelLabel(method_exists(self::$page, 'getModelLabel') ? get_model_label(self::$page->getModel()) : null)
+                    ->schema(fn (Schema $form) => app(self::$page->getResource())::form($form))
+                    ->url(fn () => isset(app(self::$page->getResource())::getPages()[$action->getName()]) ? app(app(self::$page->getResource())::getPages()[$action->getName()]->getPage())->getUrl() : null);
+            }
+
+            return $action;
+        })->toArray();
+    }
+
+    public static function register(Action | array | \Closure $component): void
+    {
+        if (is_array($component)) {
+            foreach ($component as $item) {
+                if ($item instanceof Action) {
+                    self::$actions[] = $item;
+                }
+            }
+        } elseif ($component instanceof \Closure) {
+            self::$actions[] = (new self)->evaluate($component);
+        } else {
+            self::$actions[] = $component;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Actions/ManagePageActions.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions;
+
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
+
+
+final class ManagePageActions
+{
+    use Contracts\CanRegister;
+
+    public function getDefaultActions(): array
+    {
+        return [
+            Components\CreateAction::make(),
+            LocaleSwitcher::make(),
+        ];
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Color.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+
+class Color extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\ColorPicker::make('color')
+            ->required()
+            ->label(trans('filament-types::messages.form.color'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Component.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms\Components\Field;
+
+abstract class Component
+{
+    abstract public static function make(): Field;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Description.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+use TomatoPHP\FilamentTranslationComponent\Components\Translation;
+
+class Description extends Component
+{
+    public static function make(): Field
+    {
+        return Translation::make('description')
+            ->textarea()
+            ->label(trans('filament-types::messages.form.description'))
+            ->lang(filament('filament-types')->getLocals())
+            ->columnSpanFull();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Icon.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms\Components\Field;
+use TomatoPHP\FilamentIcons\Components\IconPicker;
+
+class Icon extends Component
+{
+    public static function make(): Field
+    {
+        return IconPicker::make('icon')
+            ->required()
+            ->label(trans('filament-types::messages.form.icon'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Image.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+
+class Image extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\SpatieMediaLibraryFileUpload::make('image')
+            ->label(trans('filament-types::messages.form.image'))
+            ->columnSpan(2)
+            ->collection('image')
+            ->image()
+            ->maxFiles(1);
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/IsActive.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+
+class IsActive extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\Toggle::make('is_activated')
+            ->label(trans('filament-types::messages.form.is_activated'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Key.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+
+class Key extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\TextInput::make('key')
+            ->label(trans('filament-types::messages.form.key'))
+            ->required()
+            ->prefixIcon('heroicon-o-key')
+            ->copyable()
+            ->columnSpanFull()
+            ->maxLength(255);
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/Name.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+use TomatoPHP\FilamentTranslationComponent\Components\Translation;
+
+class Name extends Component
+{
+    public static function make(): Field
+    {
+        return Translation::make('name')
+            ->label(trans('filament-types::messages.form.name'))
+            ->columnSpanFull()
+            ->lang(filament('filament-types')->getLocals())
+            ->required();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/TypeFor.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+use Filament\Schemas\Components\Utilities\Set;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+
+class TypeFor extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\Select::make('for')
+            ->label(trans('filament-types::messages.form.for'))
+            ->options(FilamentTypes::get()->pluck('label', 'for')->toArray())
+            ->searchable()
+            ->afterStateUpdated(function (Set $set) {
+                $set('type', null);
+                $set('parent_id', null);
+            })
+            ->live()
+            ->required();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/TypeOf.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+use Filament\Schemas\Components\Utilities\Get;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+
+class TypeOf extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\Select::make('type')
+            ->label(trans('filament-types::messages.form.type'))
+            ->options(function (Get $get) {
+                return $get('for') ? collect(FilamentTypes::get()->where('for', $get('for'))->first()?->types)->pluck('label', 'type')->toArray() : [];
+            })
+            ->searchable()
+            ->required();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/Components/TypeParent.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Components;
+
+use Filament\Forms;
+use Filament\Forms\Components\Field;
+use TomatoPHP\FilamentTypes\Models\Type;
+
+class TypeParent extends Component
+{
+    public static function make(): Field
+    {
+        return Forms\Components\Select::make('parent_id')
+            ->label(trans('filament-types::messages.form.parent_id'))
+            ->columnSpan(2)
+            ->options(Type::whereNull('parent_id')
+                ->get()
+                ->pluck('name', 'id')
+                ->toArray())
+            ->searchable()
+            ->live();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Form/TypeForm.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form;
+
+use Filament\Forms\Components\Field;
+use Filament\Schemas\Schema;
+
+class TypeForm
+{
+    protected static array $schema = [];
+
+    public static function make(Schema $form): Schema
+    {
+        return $form->schema(self::getSchema())->columns(2);
+    }
+
+    public static function getDefaultComponents(): array
+    {
+        return [
+            Components\Image::make(),
+            Components\TypeFor::make(),
+            Components\TypeOf::make(),
+            Components\Key::make(),
+            Components\Name::make(),
+            Components\Description::make(),
+            Components\Icon::make(),
+            Components\Color::make(),
+            Components\IsActive::make(),
+        ];
+    }
+
+    private static function getSchema(): array
+    {
+        return array_merge(self::getDefaultComponents(), self::$schema);
+    }
+
+    public static function register(Field | array $component): void
+    {
+        if (is_array($component)) {
+            foreach ($component as $item) {
+                if ($item instanceof Field) {
+                    self::$schema[] = $item;
+                }
+            }
+
+        } else {
+            self::$schema[] = $component;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/InfoList/Entries/Entry.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\InfoList\Entries;
+
+abstract class Entry
+{
+    abstract public static function make(): \Filament\Infolists\Components\Entry;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/InfoList/TypeInfoList.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\InfoList;
+
+use Filament\Schemas\Schema;
+use Filament\Infolists\Components\Entry;
+
+class TypeInfoList
+{
+    protected static array $schema = [];
+
+    public static function make(Schema $infolist): Schema
+    {
+        return $infolist->schema(self::getSchema());
+    }
+
+    public static function getDefaultComponents(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    private static function getSchema(): array
+    {
+        return array_merge(self::getDefaultComponents(), self::$schema);
+    }
+
+    public static function register(Entry | array $component): void
+    {
+        if (is_array($component)) {
+            foreach ($component as $item) {
+                if ($item instanceof Entry) {
+                    self::$schema[] = $item;
+                }
+            }
+
+        } else {
+            self::$schema[] = $component;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Actions/Action.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Actions;
+
+abstract class Action
+{
+    abstract public static function make(): \Filament\Actions\Action;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Actions/DeleteAction.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Actions;
+
+use Filament\Actions;
+
+class DeleteAction extends Action
+{
+    public static function make(): Actions\Action
+    {
+        return Actions\DeleteAction::make()
+            ->iconButton()
+            ->tooltip(__('filament-actions::delete.single.label'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Actions/EditAction.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Actions;
+
+use Filament\Actions;
+
+class EditAction extends Action
+{
+    public static function make(): Actions\Action
+    {
+        return Actions\EditAction::make()
+            ->iconButton()
+            ->tooltip(__('filament-actions::edit.single.label'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Actions/ViewAction.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Actions;
+
+use Filament\Actions;
+
+class ViewAction extends Action
+{
+    public static function make(): Actions\Action
+    {
+        return Actions\ViewAction::make()
+            ->iconButton()
+            ->tooltip(__('filament-actions::view.single.label'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/BulkActions/Action.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\BulkActions;
+
+use Filament\Actions\BulkAction;
+
+abstract class Action
+{
+    abstract public static function make(): BulkAction;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/BulkActions/DeleteAction.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\BulkActions;
+
+use Filament\Actions;
+
+class DeleteAction extends Action
+{
+    public static function make(): Actions\DeleteBulkAction
+    {
+        return Actions\DeleteBulkAction::make();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/Column.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+abstract class Column
+{
+    abstract public static function make(): \Filament\Tables\Columns\Column;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/CreatedAt.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use Filament\Tables;
+
+class CreatedAt extends Column
+{
+    public static function make(): Tables\Columns\TextColumn
+    {
+        return Tables\Columns\TextColumn::make('created_at')
+            ->dateTime()
+            ->description(fn ($record) => $record->created_at->diffForHumans())
+            ->toggleable(isToggledHiddenByDefault: true)
+            ->sortable();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/Id.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use Filament\Tables;
+
+class ID extends Column
+{
+    public static function make(): Tables\Columns\TextColumn
+    {
+        return Tables\Columns\TextColumn::make('id')
+            ->sortable();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/IsActive.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use Filament\Tables;
+
+class IsActive extends Column
+{
+    public static function make(): Tables\Columns\ToggleColumn
+    {
+        return Tables\Columns\ToggleColumn::make('is_activated')
+            ->label(trans('filament-types::messages.form.is_activated'));
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/Key.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use TomatoPHP\FilamentTypes\Components\TypeColumn;
+
+class Key extends Column
+{
+    public static function make(): TypeColumn
+    {
+        return TypeColumn::make('key')
+            ->for(fn ($record) => $record->for)
+            ->type(fn ($record) => $record->type)
+            ->label(trans('filament-types::messages.form.key'))
+            ->sortable()
+            ->searchable();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/TypeFor.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use Filament\Tables;
+
+class TypeFor extends Column
+{
+    public static function make(): Tables\Columns\TextColumn
+    {
+        return Tables\Columns\TextColumn::make('for')
+            ->label(trans('filament-types::messages.form.for'))
+            ->sortable();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/TypeOf.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use Filament\Tables;
+
+class TypeOf extends Column
+{
+    public static function make(): Tables\Columns\TextColumn
+    {
+        return Tables\Columns\TextColumn::make('type')
+            ->label(trans('filament-types::messages.form.type'))
+            ->sortable();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Columns/UpdatedAt.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
+
+use Filament\Tables;
+
+class UpdatedAt extends Column
+{
+    public static function make(): Tables\Columns\TextColumn
+    {
+        return Tables\Columns\TextColumn::make('updated_at')
+            ->dateTime()
+            ->description(fn ($record) => $record->updated_at->diffForHumans())
+            ->toggleable(isToggledHiddenByDefault: true)
+            ->sortable();
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Filters/Filter.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Filters;
+
+abstract class Filter
+{
+    abstract public static function make(): \Filament\Tables\Filters\BaseFilter;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/Filters/TypeFor.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Filters;
+
+use Filament\Forms;
+use Filament\Tables;
+use TomatoPHP\FilamentTypes\Models\Type;
+use Illuminate\Database\Eloquent\Builder;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+
+class TypeFor extends Filter
+{
+    public static function make(): \Filament\Tables\Filters\BaseFilter
+    {
+        return Tables\Filters\Filter::make('for')
+            ->form([
+                Forms\Components\Select::make('for')
+                    ->label(trans('filament-types::messages.form.for'))
+                    ->options(FilamentTypes::get()->pluck('label', 'for')->toArray())
+                    ->searchable()
+                    ->preload()
+                    ->afterStateUpdated(function (Set $set) {
+                        $set('type', null);
+                        $set('parent_id', null);
+                    })
+                    ->live(),
+                Forms\Components\Select::make('type')
+                    ->label(trans('filament-types::messages.form.type'))
+                    ->options(fn (Get $get) => $get('for') ? collect(FilamentTypes::get()->where('for', $get('for'))->first()?->types)->pluck('label', 'type')->toArray() : [])
+                    ->searchable(),
+                Forms\Components\Select::make('parent_id')
+                    ->label(trans('filament-types::messages.form.parent_id'))
+                    ->options(
+                        fn (Get $get) => Type::whereNull('parent_id')
+                            ->where('for', $get('for'))
+                            ->where('type', $get('type'))
+                            ->get()
+                            ->pluck('name', 'id')
+                            ->toArray()
+                    )
+                    ->searchable()
+                    ->live(),
+            ])
+            ->query(function (Builder $query, array $data): Builder {
+                if (isset($data['for']) && ! empty($data['for'])) {
+                    $query->where('for', $data['for']);
+                }
+                if (isset($data['type']) && ! empty($data['type'])) {
+                    $query->where('type', $data['type']);
+                }
+                if (isset($data['parent_id']) && ! empty($data['parent_id'])) {
+                    $query->where('parent_id', $data['parent_id']);
+                }
+
+                return $query;
+            });
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/HeaderActions/Action.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\HeaderActions;
+
+abstract class Action
+{
+    abstract public static function make(): \Filament\Actions\Action;
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/TypeActions.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
+
+class TypeActions
+{
+    /**
+     * @var array
+     */
+    protected static $actions = [];
+
+    public static function make(): array
+    {
+        return self::getActions();
+    }
+
+    private static function getDefaultActions(): array
+    {
+        return [
+            Actions\ViewAction::make(),
+            Actions\EditAction::make(),
+            Actions\DeleteAction::make(),
+        ];
+    }
+
+    private static function getActions(): array
+    {
+        return array_merge(self::getDefaultActions(), self::$actions);
+    }
+
+    public static function register(\Filament\Tables\Actions\Action | array $action): void
+    {
+        if (is_array($action)) {
+            foreach ($action as $item) {
+                if ($item instanceof \Filament\Tables\Actions\Action) {
+                    self::$actions[] = $item;
+                }
+            }
+        } else {
+            self::$actions[] = $action;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/TypeBulkActions.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
+
+use Filament\Tables\Actions\BulkAction;
+
+class TypeBulkActions
+{
+    /**
+     * @var array
+     */
+    protected static $actions = [];
+
+    public static function make(): array
+    {
+        return self::getActions();
+    }
+
+    private static function getDefaultActions(): array
+    {
+        return [
+            BulkActions\DeleteAction::make(),
+        ];
+    }
+
+    private static function getActions(): array
+    {
+        return array_merge(self::getDefaultActions(), self::$actions);
+    }
+
+    public static function register(BulkAction | array $action): void
+    {
+        if (is_array($action)) {
+            foreach ($action as $item) {
+                if ($item instanceof BulkAction) {
+                    self::$actions[] = $item;
+                }
+            }
+        } else {
+            self::$actions[] = $action;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/TypeFilters.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
+
+class TypeFilters
+{
+    /**
+     * @var array
+     */
+    protected static $filters = [];
+
+    public static function make(): array
+    {
+        return self::getFilters();
+    }
+
+    private static function getDefaultFilters(): array
+    {
+        return [
+            Filters\TypeFor::make(),
+        ];
+    }
+
+    private static function getFilters(): array
+    {
+        return array_merge(self::getDefaultFilters(), self::$filters);
+    }
+
+    public static function register(\Filament\Tables\Filters\BaseFilter | array $action): void
+    {
+        if (is_array($action)) {
+            foreach ($action as $item) {
+                if ($item instanceof \Filament\Tables\Filters\BaseFilter) {
+                    self::$filters[] = $item;
+                }
+            }
+        } else {
+            self::$filters[] = $action;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/TypeHeaderActions.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
+
+class TypeHeaderActions
+{
+    /**
+     * @var array
+     */
+    protected static $actions = [];
+
+    public static function make(): array
+    {
+        return self::getActions();
+    }
+
+    private static function getDefaultActions(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    private static function getActions(): array
+    {
+        return array_merge(self::getDefaultActions(), self::$actions);
+    }
+
+    public static function register(\Filament\Tables\Actions\Action | array $action): void
+    {
+        if (is_array($action)) {
+            foreach ($action as $item) {
+                if ($item instanceof \Filament\Tables\Actions\Action) {
+                    self::$actions[] = $item;
+                }
+            }
+        } else {
+            self::$actions[] = $action;
+        }
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Table/TypeTable.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
+
+use Filament\Tables;
+use Filament\Tables\Table;
+use Filament\Tables\Columns\Column;
+
+class TypeTable
+{
+    protected static array $columns = [];
+
+    public static function make(Table $table): Table
+    {
+        return $table
+            ->deferLoading()
+            ->toolbarActions(TypeBulkActions::make())
+            ->recordActions(TypeActions::make())
+            ->filters(TypeFilters::make())
+            ->headerActions(TypeHeaderActions::make())
+            ->groups([
+                Tables\Grouping\Group::make('for'),
+                Tables\Grouping\Group::make('type'),
+            ])
+            ->deferLoading()
+            ->defaultGroup('for')
+            ->defaultSort('order')
+            ->reorderable('order')
+            ->columns(self::getColumns());
+    }
+
+    public static function getDefaultColumns(): array
+    {
+        return [
+            Columns\TypeFor::make(),
+            Columns\TypeOf::make(),
+            Columns\Key::make(),
+            Columns\IsActive::make(),
+            Columns\CreatedAt::make(),
+            Columns\UpdatedAt::make(),
+        ];
+    }
+
+    private static function getColumns(): array
+    {
+        return array_merge(self::getDefaultColumns(), self::$columns);
+    }
+
+    public static function register(Column | array $column): void
+    {
+        if (is_array($column)) {
+            foreach ($column as $item) {
+                if ($item instanceof Column) {
+                    self::$columns[] = $item;
+                }
+            }
+        } else {
+            self::$columns[] = $column;
+        }
+    }
+}
+</file>
+
+<file path="src/Services/Contracts/TypeFor.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Services\Contracts;
+
+class TypeFor
+{
+    public ?string $label = null;
+
+    public string $for;
+
+    public array $types = [];
+
+    public static function make(string $for): static
+    {
+        return (new self)->for($for);
+    }
+
+    public function label(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function for(string $for): static
+    {
+        $this->for = $for;
+
+        return $this;
+    }
+
+    public function types(array $types): static
+    {
+        $this->types = $types;
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'label' => $this->label ?: str($this->for)->title()->toString(),
+            'for' => $this->for,
+            'types' => $this->types,
+        ];
+    }
+}
+</file>
+
+<file path="src/Services/Contracts/TypeOf.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Services\Contracts;
+
+class TypeOf
+{
+    public ?string $label = null;
+
+    public string $type;
+
+    public array $types = [];
+
+    public static function make(string $type): static
+    {
+        return (new self)->type($type);
+    }
+
+    public function label(string $label): static
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function type(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function register(array $types): static
+    {
+        $this->types = $types;
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'label' => $this->label ?: str($this->type)->title()->toString(),
+            'type' => $this->type,
+            'types' => $this->types,
+        ];
+    }
+}
+</file>
+
+<file path="tests/database/factories/TypeFactory.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests\Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use TomatoPHP\FilamentTypes\Tests\Models\Type;
+
+class TypeFactory extends Factory
+{
+    protected $model = Type::class;
+
+    public function definition(): array
+    {
+        return [
+            'order' => $this->faker->numberBetween(0, 10),
+            'for' => $this->faker->name(),
+            'name' => $this->faker->name(),
+            'key' => $this->faker->name(),
+            'type' => $this->faker->name(),
+            'description' => $this->faker->text(),
+            'color' => $this->faker->hexColor(),
+            'icon' => 'heroicon-o-user',
+        ];
+    }
+}
+</file>
+
+<file path="tests/database/factories/UserFactory.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests\Database\Factories;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use TomatoPHP\FilamentTypes\Tests\Models\User;
+
+class UserFactory extends Factory
+{
+    protected $model = User::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+        ];
+    }
+}
+</file>
+
+<file path="tests/src/Models/User.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests\Models;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use TomatoPHP\FilamentTypes\Tests\Database\Factories\UserFactory;
+
+class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+{
+    use HasFactory;
+    use Notifiable;
+
+    protected $guarded = [];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
+
+    protected static function newFactory(): UserFactory
+    {
+        return UserFactory::new();
+    }
+}
+</file>
+
+<file path="tests/src/Pages/TypePage.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests\Pages;
+
+use Filament\Pages\Dashboard;
+use TomatoPHP\FilamentTypes\Pages\BaseTypePage;
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+
+class TypePage extends BaseTypePage
+{
+    public function getTitle(): string
+    {
+        return 'Notes Groups';
+    }
+
+    public function getType(): string
+    {
+        return 'groups';
+    }
+
+    public function getFor(): string
+    {
+        return 'notes';
+    }
+
+    public function getBackUrl()
+    {
+        return Dashboard::getUrl(); // TODO: Change the autogenerated stub
+    }
+
+    public function getTypes(): array
+    {
+        return [
+            Type::make('todo')
+                ->name('TODO')
+                ->color('#1461e3')
+                ->icon('heroicon-o-list-bullet'),
+            Type::make('ideas')
+                ->name('Ideas')
+                ->color('#13e0da')
+                ->icon('heroicon-o-sparkles'),
+            Type::make('saved')
+                ->name('Saved')
+                ->color('#29a82e')
+                ->icon('heroicon-o-arrow-down-on-square'),
+        ];
+    }
+}
+</file>
+
+<file path="tests/src/Pages/TypeViewComponentPage.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests\Pages;
+
+use Filament\Pages\Page;
+
+class TypeViewComponentPage extends Page
+{
+    protected static string $view = 'filament-types::pages.type-view-component';
+}
+</file>
+
+<file path="tests/src/DebugTest.php">
+<?php
+
+it('will not use debugging functions', function () {
+    expect(['dd', 'dump', 'ray'])->each->not->toBeUsed();
+});
+</file>
+
+<file path="tests/src/FilamentTypeServiceTest.php">
+<?php
+
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
+
+it('can register new type from provider', function () {
+    FilamentTypes::register([
+        TypeFor::make('testingFor')
+            ->label('Testing For')
+            ->types([
+                TypeOf::make('testingType')
+                    ->label('Testing Type')
+                    ->register([
+                        Type::make('testing-key')
+                            ->name('Testing Key')
+                            ->icon('heroicon-o-adjustments-horizontal')
+                            ->color('warning'),
+                    ]),
+            ]),
+    ]);
+
+    expect((bool) FilamentTypes::get()->where('for', 'testingFor')->first())->toBeTrue();
+});
+</file>
+
+<file path="tests/src/PluginTest.php">
+<?php
+
+use Filament\Facades\Filament;
+use TomatoPHP\FilamentTypes\FilamentTypesPlugin;
+use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
+
+it('registers spatie laravel translatable plugin', function () {
+    $panel = Filament::getCurrentOrDefaultPanel();
+
+    $panel->plugins([
+        SpatieTranslatablePlugin::make(),
+    ]);
+
+    expect($panel->getPlugin('spatie-translatable'))
+        ->not()
+        ->toThrow(Exception::class);
+});
+
+it('registers plugin', function () {
+    $panel = Filament::getCurrentOrDefaultPanel();
+
+    $panel->plugins([
+        FilamentTypesPlugin::make(),
+    ]);
+
+    expect($panel->getPlugin('filament-types'))
+        ->not()
+        ->toThrow(Exception::class);
+});
+</file>
+
+<file path="tests/src/TypeColumnTest.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests;
+
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages;
+use TomatoPHP\FilamentTypes\Tests\Models\Type;
+use TomatoPHP\FilamentTypes\Tests\Models\User;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Livewire\livewire;
+
+beforeEach(function () {
+    actingAs(User::factory()->create());
+});
+
+it('can render type column', function () {
+    Type::factory()->count(10)->create();
+
+    livewire(Pages\ListTypes::class)
+        ->loadTable()
+        ->assertCanRenderTableColumn('key');
+});
+</file>
+
+<file path="tests/Pest.php">
+<?php
+
+use TomatoPHP\FilamentTypes\Tests\TestCase;
+
+uses(TestCase::class)->in(__DIR__);
+</file>
+
+<file path=".gitignore">
+/.phpunit.cache
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+/vendor
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+.DS_Store
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.vscode
+/.zed
+</file>
+
+<file path=".php-cs-fixer.dist.php">
+<?php
+
+$finder = Symfony\Component\Finder\Finder::create()
+    ->notPath('bootstrap/*')
+    ->notPath('storage/*')
+    ->notPath('resources/view/mail/*')
+    ->in([
+        __DIR__ . '/src',
+        __DIR__ . '/tests',
+    ])
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
+
+return (new PhpCsFixer\Config())
+    ->setRules([
+        '@PSR2' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'ordered_imports' => ['sort_algorithm' => 'alpha'],
+        'no_unused_imports' => true,
+        'not_operator_with_successor_space' => true,
+        'trailing_comma_in_multiline' => true,
+        'phpdoc_scalar' => true,
+        'unary_operator_spaces' => true,
+        'binary_operator_spaces' => true,
+        'blank_line_before_statement' => [
+            'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
+        ],
+        'phpdoc_single_line_var_spacing' => true,
+        'phpdoc_var_without_name' => true,
+        'method_argument_space' => [
+            'on_multiline' => 'ensure_fully_multiline',
+            'keep_multiple_spaces_after_comma' => true,
+        ]
+    ])
+    ->setFinder($finder);
+</file>
+
+<file path="CODE_OF_CONDUCT.md">
+# Contributor Covenant Code of Conduct
+
+## Our Pledge
+
+We as members, contributors, and leaders pledge to make participation in our
+community a harassment-free experience for everyone, regardless of age, body
+size, visible or invisible disability, ethnicity, sex characteristics, gender
+identity and expression, level of experience, education, socio-economic status,
+nationality, personal appearance, race, religion, or sexual identity
+and orientation.
+
+We pledge to act and interact in ways that contribute to an open, welcoming,
+diverse, inclusive, and healthy community.
+
+## Our Standards
+
+Examples of behavior that contributes to a positive environment for our
+community include:
+
+* Demonstrating empathy and kindness toward other people
+* Being respectful of differing opinions, viewpoints, and experiences
+* Giving and gracefully accepting constructive feedback
+* Accepting responsibility and apologizing to those affected by our mistakes,
+  and learning from the experience
+* Focusing on what is best not just for us as individuals, but for the
+  overall community
+
+Examples of unacceptable behavior include:
+
+* The use of sexualized language or imagery, and sexual attention or
+  advances of any kind
+* Trolling, insulting or derogatory comments, and personal or political attacks
+* Public or private harassment
+* Publishing others' private information, such as a physical or email
+  address, without their explicit permission
+* Other conduct which could reasonably be considered inappropriate in a
+  professional setting
+
+## Enforcement Responsibilities
+
+Community leaders are responsible for clarifying and enforcing our standards of
+acceptable behavior and will take appropriate and fair corrective action in
+response to any behavior that they deem inappropriate, threatening, offensive,
+or harmful.
+
+Community leaders have the right and responsibility to remove, edit, or reject
+comments, commits, code, wiki edits, issues, and other contributions that are
+not aligned to this Code of Conduct, and will communicate reasons for moderation
+decisions when appropriate.
+
+## Scope
+
+This Code of Conduct applies within all community spaces, and also applies when
+an individual is officially representing the community in public spaces.
+Examples of representing our community include using an official e-mail address,
+posting via an official social media account, or acting as an appointed
+representative at an online or offline event.
+
+## Enforcement
+
+Instances of abusive, harassing, or otherwise unacceptable behavior may be
+reported to the community leaders responsible for enforcement at
+.
+All complaints will be reviewed and investigated promptly and fairly.
+
+All community leaders are obligated to respect the privacy and security of the
+reporter of any incident.
+
+## Enforcement Guidelines
+
+Community leaders will follow these Community Impact Guidelines in determining
+the consequences for any action they deem in violation of this Code of Conduct:
+
+### 1. Correction
+
+**Community Impact**: Use of inappropriate language or other behavior deemed
+unprofessional or unwelcome in the community.
+
+**Consequence**: A private, written warning from community leaders, providing
+clarity around the nature of the violation and an explanation of why the
+behavior was inappropriate. A public apology may be requested.
+
+### 2. Warning
+
+**Community Impact**: A violation through a single incident or series
+of actions.
+
+**Consequence**: A warning with consequences for continued behavior. No
+interaction with the people involved, including unsolicited interaction with
+those enforcing the Code of Conduct, for a specified period of time. This
+includes avoiding interactions in community spaces as well as external channels
+like social media. Violating these terms may lead to a temporary or
+permanent ban.
+
+### 3. Temporary Ban
+
+**Community Impact**: A serious violation of community standards, including
+sustained inappropriate behavior.
+
+**Consequence**: A temporary ban from any sort of interaction or public
+communication with the community for a specified period of time. No public or
+private interaction with the people involved, including unsolicited interaction
+with those enforcing the Code of Conduct, is allowed during this period.
+Violating these terms may lead to a permanent ban.
+
+### 4. Permanent Ban
+
+**Community Impact**: Demonstrating a pattern of violation of community
+standards, including sustained inappropriate behavior,  harassment of an
+individual, or aggression toward or disparagement of classes of individuals.
+
+**Consequence**: A permanent ban from any sort of public interaction within
+the community.
+
+## Attribution
+
+This Code of Conduct is adapted from the [Contributor Covenant][homepage],
+version 2.0, available at
+https://www.contributor-covenant.org/version/2/0/code_of_conduct.html.
+
+Community Impact Guidelines were inspired by [Mozilla's code of conduct
+enforcement ladder](https://github.com/mozilla/diversity).
+
+[homepage]: https://www.contributor-covenant.org
+
+For answers to common questions about this code of conduct, see the FAQ at
+https://www.contributor-covenant.org/faq. Translations are available at
+https://www.contributor-covenant.org/translations.
+</file>
+
+<file path="LICENSE.md">
+The MIT License (MIT)
+
+Copyright (c)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+</file>
+
+<file path="pint.json">
+{
+    "preset": "laravel",
+    "rules": {
+        "blank_line_before_statement": true,
+        "concat_space": {
+            "spacing": "one"
+        },
+        "method_argument_space": true,
+        "single_trait_insert_per_statement": true,
+        "types_spaces": {
+            "space": "single"
+        }
+    }
+}
+</file>
+
+<file path="testbench.yaml">
+providers:
+  - BladeUI\Icons\BladeIconsServiceProvider
+  - BladeUI\Heroicons\BladeHeroiconsServiceProvider
+  - Filament\Actions\ActionsServiceProvider
+  - Filament\FilamentServiceProvider
+  - Filament\Forms\FormsServiceProvider
+  - Filament\Infolists\InfolistsServiceProvider
+  - Filament\Notifications\NotificationsServiceProvider
+  - Filament\Support\SupportServiceProvider
+  - Filament\Tables\TablesServiceProvider
+  - Filament\Widgets\WidgetsServiceProvider
+  - Filament\Schemas\SchemasServiceProvider
+  - RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider
+  - Spatie\MediaLibrary\MediaLibraryServiceProvider
+  - TomatoPHP\FilamentTranslationComponent\FilamentTranslationComponentServiceProvider
+  - TomatoPHP\FilamentIcons\FilamentIconsServiceProvider
+  - TomatoPHP\FilamentTypes\FilamentTypesServiceProvider
+  - TomatoPHP\FilamentTypes\Tests\AdminPanelProvider
+workbench:
+  welcome: true
+  install: true
+  start: /
+  guard: testing
+  discovers:
+    web: true
+    api: false
+    commands: false
+    views: true
+</file>
+
+<file path=".github/workflows/tests.yml">
+name: "Tests"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.php'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+    branches:
+      - master
+    paths:
+      - '**.php'
+      - '.github/workflows/tests.yml'
+      - 'phpunit.xml.dist'
+      - 'composer.json'
+      - 'composer.lock'
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+        php: [8.4, 8.3, 8.2]
+        laravel: [12.*, 11.*]
+        stability: [prefer-stable]
+        include:
+          - laravel: 12.*
+            testbench: 10.*
+            carbon: 3.*
+            collision: 8.*
+          - laravel: 11.*
+            testbench: 9.*
+            carbon: 3.*
+            collision: 8.*
+        exclude:
+          - laravel: 11.*
+            php: 8.1
+    name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Cache Dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          coverage: none
+
+      - name: Install Dependencies
+        run: |
+          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
+          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install Dependencies
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" "nunomaduro/collision:${{ matrix.collision }}" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+          composer db
+
+      - name: Execute tests
+        run: vendor/bin/pest
+</file>
+
+<file path="database/migrations/2023_02_13_143941_create_typables_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (! Schema::hasTable('typables')) {
+            Schema::create('typables', function (Blueprint $table) {
+                $table->foreignId('type_id')->references('id')->on('types')->onDelete('cascade');
+
+                $table->unsignedBigInteger('typables_id');
+                $table->string('typables_type');
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('typbables');
+    }
+};
+</file>
+
+<file path="database/migrations/2024_09_11_143941_update_types_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::table('types', function (Blueprint $table) {
+            $table->integer('order')->default(0)->after('id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('types', function (Blueprint $table) {
+            $table->dropColumn('order');
+        });
+    }
+};
+</file>
+
+<file path="routes/web.php">
+<?php
+</file>
+
+<file path="src/Components/Type.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Components;
+
+use Illuminate\View\Component;
+
+class Type extends Component
+{
+    public ?string $r = null;
+
+    public ?string $g = null;
+
+    public ?string $b = null;
+
+    public bool $iconExists = false;
+
+    public function __construct(
+        public \TomatoPHP\FilamentTypes\Models\Type $type,
+        public ?string $label = null,
+    ) {
+        [$this->r, $this->g, $this->b] = sscanf($this->type->color, '#%02x%02x%02x');
+
+        if ($this->type->icon) {
+            try {
+                app(\BladeUI\Icons\Factory::class)->svg($this->type->icon);
+                $this->iconExists = true;
+            } catch (\Exception $e) {
+            }
+        }
+    }
+
+    public function render()
+    {
+        return view('filament-types::components.type');
+    }
+}
+</file>
+
+<file path="src/Console/FilamentTypesInstall.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Console;
+
+use Illuminate\Console\Command;
+use TomatoPHP\ConsoleHelpers\Traits\RunCommand;
+
+class FilamentTypesInstall extends Command
+{
+    use RunCommand;
+
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $name = 'filament-types:install';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'install package and publish assets';
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * Execute the console command.
+     *
+     * @return mixed
+     */
+    public function handle()
+    {
+        $this->info('Publish Vendor Assets');
+        $this->artisanCommand(['migrate']);
+        $this->artisanCommand(['optimize:clear']);
+        $this->info('Filament Types installed successfully.');
+    }
+}
+</file>
+
+<file path="src/Facades/FilamentTypes.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Facades;
+
+use Illuminate\Support\Facades\Facade;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+
+/**
+ * @method static void register(array|TypeFor $types)
+ * @method static \Illuminate\Support\Collection get()
+ */
+class FilamentTypes extends Facade
+{
+    protected static function getFacadeAccessor()
+    {
+        return 'filament-types';
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource/Pages/ListTypes.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages;
+
+use Filament\Resources\Pages\ManageRecords;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\Components;
+
+class ListTypes extends ManageRecords
+{
+
+    public ?string $activeLocale = null;
+
+    public function getTitle(): string
+    {
+        return trans('filament-types::messages.title');
+    }
+
+    protected static string $resource = TypeResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return array_merge(
+            [
+                Components\CreateAction::make(),
+            ],
+            FilamentTypes::getPageActions(self::class)
+        );
+    }
+}
+</file>
+
+<file path="src/Services/Contracts/Type.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Services\Contracts;
+
+class Type
+{
+    public string $key;
+
+    public array | string $name = [];
+
+    public ?string $icon = null;
+
+    public ?string $color = null;
+
+    public static function make(string $key): static
+    {
+        return (new self)->key($key);
+    }
+
+    public function key(string $key): static
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    public function name(array | string $name): static
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function icon(string $icon): static
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function color(string $color): static
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'key' => $this->key,
+            'name' => $this->name,
+            'icon' => $this->icon,
+            'color' => $this->color,
+        ];
+    }
+}
+</file>
+
+<file path="src/Services/FilamentTypesServices.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Services;
+
+use Filament\Actions\Action;
+use Illuminate\Support\Collection;
+use TomatoPHP\FilamentTypes\Models\Type;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages\ListTypes;
+
+class FilamentTypesServices
+{
+    protected array $types = [];
+
+    protected array $pageActions = [];
+
+    public function register(TypeFor | array $types): void
+    {
+        if (is_array($types)) {
+            foreach ($types as $type) {
+                $this->register($type);
+            }
+        } else {
+            $this->types[] = $types;
+        }
+    }
+
+    public function get(): Collection
+    {
+        return collect($this->types)
+            ->merge(filament('filament-types')->getTypes())
+            ->groupBy(fn ($typeFor) => $typeFor->for) // Group by `for` attribute
+            ->map(function ($group) {
+                return $group
+                    ->groupBy(fn ($typeFor) => $typeFor->for) // Group by `label` within each `for` group
+                    ->map(function ($labelGroup) {
+                        $mergedTypes = $labelGroup->flatMap(fn ($typeFor) => $typeFor->types)
+                            ->map(function ($getType) use ($labelGroup) {
+                                $getType->label = ! $getType->label ? str($getType->type)->title()->toString() : $getType->label;
+
+                                if (is_array($getType->types) && count($getType->types)) {
+                                    foreach ($getType->types as $typeItem) {
+                                        $checkExists = Type::query()
+                                            ->where('key', $typeItem->key)
+                                            ->where('type', $getType->type)
+                                            ->where('for', $labelGroup->first()->for)
+                                            ->first();
+
+                                        if (! $checkExists) {
+                                            Type::query()->create([
+                                                'key' => $typeItem->key,
+                                                'type' => $getType->type,
+                                                'icon' => $typeItem->icon,
+                                                'color' => $typeItem->color,
+                                                'for' => $labelGroup->first()->for,
+                                                'name' => $typeItem->name,
+                                            ]);
+                                        }
+                                    }
+                                }
+
+                                return $getType;
+                            })
+                            ->unique('type') // Ensure unique by `type`
+                            ->values(); // Reindex after unique filter
+
+                        $firstItem = $labelGroup->first();
+                        $firstItem->types = $mergedTypes->toArray();
+
+                        return $firstItem;
+                    })
+                    ->values();
+            })
+            ->flatten();
+    }
+
+
+    public function registerPageAction(Action|array $action, ?string $page = ListTypes::class): void
+    {
+        if (is_array($action)) {
+            foreach ($action as $item) {
+                $this->pageActions[$page][] = $item;
+            }
+        } else {
+            $this->pageActions[$page][] = $action;
+        }
+    }
+
+    public function getPageActions(string $page): array
+    {
+        return $this->pageActions[$page] ?? [];
+    }
+}
+</file>
+
+<file path="tests/src/Models/Type.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
+use TomatoPHP\FilamentTypes\Tests\Database\Factories\TypeFactory;
+
+/**
+ * @property int $id
+ * @property int $parent_id
+ * @property string $name
+ * @property string $key
+ * @property string $description
+ * @property string $color
+ * @property string $icon
+ * @property string $model_type
+ * @property int $model_id
+ * @property bool $is_activated
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Type[] $typables
+ */
+class Type extends Model implements HasMedia
+{
+    use HasFactory;
+    use HasTranslations;
+    use InteractsWithMedia;
+
+    public $translatable = [
+        'name',
+        'description',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'order',
+        'for',
+        'name',
+        'key',
+        'type',
+        'description',
+        'color',
+        'icon',
+        'parent_id',
+        'model_type',
+        'model_id',
+        'is_activated',
+        'created_at',
+        'updated_at',
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function typables()
+    {
+        return $this->hasMany('TomatoPHP\FilamentTypes\Tests\Models\Type');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('TomatoPHP\FilamentTypes\Tests\Models\Type', 'parent_id');
+    }
+
+    protected static function newFactory(): TypeFactory
+    {
+        return TypeFactory::new();
+    }
+}
+</file>
+
+<file path="tests/src/AdminPanelProvider.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests;
+
+use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Pages;
+use Filament\Panel;
+use Filament\PanelProvider;
+use Filament\SpatieLaravelTranslatablePlugin;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Illuminate\Session\Middleware\AuthenticateSession;
+use Illuminate\Session\Middleware\StartSession;
+use Illuminate\View\Middleware\ShareErrorsFromSession;
+use TomatoPHP\FilamentTypes\FilamentTypesPlugin;
+use TomatoPHP\FilamentTypes\Tests\Pages\TypePage;
+use TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage;
+
+class AdminPanelProvider extends PanelProvider
+{
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            ->default()
+            ->id('admin')
+            ->path('admin')
+            ->login()
+            ->pages([
+                Pages\Dashboard::class,
+                TypePage::class,
+                TypeViewComponentPage::class,
+            ])
+            ->plugin(
+                SpatieLaravelTranslatablePlugin::make()
+                    ->defaultLocales(['ar', 'en']),
+            )
+            ->plugin(
+                FilamentTypesPlugin::make()
+            )
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
+    }
+}
+</file>
+
+<file path="tests/src/TypeBasePageTest.php">
+<?php
+
+use Filament\Tables\Actions\EditAction;
+use TomatoPHP\FilamentTypes\Tests\Models\Type;
+use TomatoPHP\FilamentTypes\Tests\Models\User;
+use TomatoPHP\FilamentTypes\Tests\Pages\TypePage;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
+
+beforeEach(function () {
+    actingAs(User::factory()->create());
+});
+
+it('can render type page', function () {
+get(TypePage::getUrl())->assertSuccessful();
+    });
+
+it('can list selected types', function () {
+    Type::query()->where('type', 'groups')->where('for', 'notes')->delete();
+    Type::query()->create([
+        'order' => 1,
+        'for' => 'notes',
+        'name' => 'TODO',
+        'key' => 'todo',
+        'type' => 'groups',
+        'description' => 'TODO',
+        'color' => '#1461e3',
+        'icon' => 'heroicon-o-list-bullet',
+    ]);
+    $types = Type::query()->where('type', 'groups')->where('for', 'notes')->get();
+
+    livewire(TypePage::class)
+        ->loadTable()
+        ->assertCanSeeTableRecords($types)
+        ->assertCountTableRecords(1);
+});
+
+it('can render type key column in table', function () {
+    Type::factory()->count(10)->create();
+
+    livewire(TypePage::class)
+        ->loadTable()
+        ->assertCanRenderTableColumn('key');
+});
+
+it('can render type create page', function () {
+    livewire(TypePage::class)
+        ->mountAction('create')
+        ->assertSuccessful();
+});
+
+it('can create new type', function () {
+    $newData = Type::factory()->make();
+
+    livewire(TypePage::class)
+        ->callAction('create', data: [
+            'name' => $newData->name,
+            'key' => $newData->key,
+            'color' => $newData->color,
+            'icon' => 'heroicon-o-user',
+        ])
+        ->assertHasNoActionErrors();
+
+    assertDatabaseHas(Type::class, [
+        'for' => 'notes',
+        'type' => 'groups',
+        'key' => $newData->key,
+    ]);
+});
+
+it('can validate type input', function () {
+    livewire(TypePage::class)
+        ->callAction('create', data: [
+            'name' => null,
+            'key' => null,
+            'color' => null,
+            'icon' => null,
+        ])
+        ->assertHasActionErrors([
+            'key' => 'required',
+        ]);
+});
+
+it('can render type edit page', function () {
+    livewire(TypePage::class, [
+        'record' => Type::factory()->create(),
+    ])
+        ->mountAction('edit')
+        ->assertSuccessful();
+});
+
+it('can retrieve type data', function () {
+    $type = Type::query()->create([
+        'order' => 1,
+        'for' => 'notes',
+        'name' => 'TODO',
+        'key' => 'todo',
+        'type' => 'groups',
+        'description' => 'TODO',
+        'color' => '#1461e3',
+        'icon' => 'heroicon-o-list-bullet',
+    ]);
+
+    livewire(TypePage::class)
+        ->mountTableAction(EditAction::class, $type)
+        ->assertTableActionDataSet([
+            'key' => $type->key,
+            'type' => $type->type,
+            'for' => $type->for,
+        ])
+        ->assertHasNoTableActionErrors();
+});
+
+it('can save type data', function () {
+    $type = Type::query()->create([
+        'order' => 1,
+        'for' => 'notes',
+        'name' => 'TODO',
+        'key' => 'todo',
+        'type' => 'groups',
+        'description' => 'TODO',
+        'color' => '#1461e3',
+        'icon' => 'heroicon-o-list-bullet',
+    ]);
+
+    livewire(TypePage::class)
+        ->callTableAction('edit', $type, data: [
+            'icon' => 'heroicon-o-user',
+        ])
+        ->assertHasNoTableActionErrors();
+
+    expect($type->refresh())->icon->toBe('heroicon-o-user');
+});
+</file>
+
+<file path="tests/src/TypeHelperTest.php">
+<?php
+
+use TomatoPHP\FilamentTypes\Tests\Models\Type;
+
+use function PHPUnit\Framework\assertTrue;
+
+it('can use helper function', function () {
+    $generateType = Type::factory()->create();
+
+    $type = type_of($generateType->key, $generateType->for, $generateType->type);
+
+    assertTrue($type->key == $generateType->key);
+});
+</file>
+
+<file path="tests/src/TypeViewComponentTest.php">
+<?php
+
+use TomatoPHP\FilamentTypes\Tests\Models\User;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
+
+beforeEach(function () {
+    actingAs(User::factory()->create());
+});
+
+it('can render type component page', function () {
+get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl())->assertSuccessful();
+    });
+
+it('can render type component', function () {
+    $response = get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl());
+    $response->assertSee('<div id="type-todo-notes-groups">', false);
+});
+</file>
+
+<file path="phpunit.xml">
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         backupGlobals="false"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.3/phpunit.xsd"
+         cacheDirectory=".phpunit.cache"
+         backupStaticProperties="false"
+>
+    <testsuites>
+        <testsuite name="Tests">
+            <directory suffix=".php">./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </source>
+    <php>
+        <env name="APP_KEY" value="base64:yk+bUVuZa1p86Dqjk9OjVK2R1pm6XHxC6xEKFq8utH0="/>
+        <env name="DB_CONNECTION" value="testing"/>
+    </php>
+</phpunit>
+</file>
+
+<file path=".github/workflows/dependabot-auto-merge.yml">
+name: dependabot-auto-merge
+on: pull_request_target
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2.4.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Auto-merge Dependabot PRs for semver-minor updates
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-minor'}}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Auto-merge Dependabot PRs for semver-patch updates
+        if: ${{steps.metadata.outputs.update-type == 'version-update:semver-patch'}}
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+</file>
+
+<file path="database/migrations/2023_06_13_143941_drop_unique_key_from_types_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (Schema::hasIndex('types', 'types_key_unique')) {
+            Schema::table('types', function (Blueprint $table) {
+                $table->dropUnique('types_key_unique');
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('types', function (Blueprint $table) {
+            $table->unique('key', 'types_key_unique');
+        });
+    }
+};
+</file>
+
+<file path="resources/views/components/type.blade.php">
+<span
+    @if($label)
+        x-tooltip="{
+        content: '{{ $label }}',
+        theme: $store.theme,
+    }"
+    @endif
+    style="{{ implode([
+        "background-color: rgba(".$r.", ".$g.", ".$b.", 0.2);",
+        "color: rgba(".$r.", ".$g.", ".$b.", 1);"
+    ]) }}" class="mx-3 fi-badge flex items-center justify-center gap-x-1 rounded-md text-xs font-medium ring-1 ring-inset px-2 min-w-[theme(spacing.6)] py-1 fi-color-custom bg-custom-50 text-custom-600 ring-custom-600/10 dark:bg-custom-400/10 dark:text-custom-400 dark:ring-custom-400/30 fi-color-primary">
+
+    @if($type->icon && $iconExists)
+        <div>
+            <x-icon :name="$type->icon" class="h-4 w-4" />
+        </div>
+    @endif
+
+    <div id="type-{{ $type->key }}-{{ $type->for }}-{{ $type->type }}">
+        {{ $type->name ?? config('filament-types.empty_state') }}
+    </div>
+</span>
+</file>
+
+<file path="tests/src/TestCase.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests;
+
+use Filament\FilamentServiceProvider;
+use Livewire\LivewireServiceProvider;
+use Filament\Forms\FormsServiceProvider;
+use Filament\Tables\TablesServiceProvider;
+use Orchestra\Testbench\Attributes\WithEnv;
+use BladeUI\Icons\BladeIconsServiceProvider;
+use Filament\Actions\ActionsServiceProvider;
+use Filament\Schemas\SchemasServiceProvider;
+use Filament\Support\SupportServiceProvider;
+use Filament\Widgets\WidgetsServiceProvider;
+use TomatoPHP\FilamentTypes\Tests\Models\User;
+use Orchestra\Testbench\Concerns\WithWorkbench;
+use Filament\Infolists\InfolistsServiceProvider;
+use Orchestra\Testbench\TestCase as BaseTestCase;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
+use Spatie\MediaLibrary\MediaLibraryServiceProvider;
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use Filament\Notifications\NotificationsServiceProvider;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use TomatoPHP\FilamentIcons\FilamentIconsServiceProvider;
+use TomatoPHP\FilamentTypes\FilamentTypesServiceProvider;
+use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
+use TomatoPHP\FilamentTranslationComponent\FilamentTranslationComponentServiceProvider;
+
+#[WithEnv('DB_CONNECTION', 'testing')]
+abstract class TestCase extends BaseTestCase
+{
+    use LazilyRefreshDatabase;
+    use WithWorkbench;
+
+    protected function setUp(): void
+    {
+        parent::setUp(); // TODO: Change the autogenerated stub
+
+        FilamentTypes::register([
+            TypeFor::make('products')
+                ->label('Product')
+                ->types([
+                    TypeOf::make('sizes')
+                        ->label('Sizes')
+                        ->register([
+                            Type::make('xl')
+                                ->name('XL')
+                                ->icon('heroicon-o-adjustments-horizontal')
+                                ->color('warning'),
+                            Type::make('sm')
+                                ->name('SM')
+                                ->icon('heroicon-o-adjustments-horizontal')
+                                ->color('warning'),
+                        ]),
+                ]),
+        ]);
+
+        FilamentTypes::register([
+            TypeFor::make('products')
+                ->label('Product')
+                ->types([
+                    TypeOf::make('colors')
+                        ->label('Colors'),
+                ]),
+        ]);
+    }
+
+    protected function getPackageProviders($app): array
+    {
+        $providers = [
+            ActionsServiceProvider::class,
+            BladeCaptureDirectiveServiceProvider::class,
+            BladeHeroiconsServiceProvider::class,
+            BladeIconsServiceProvider::class,
+            FilamentServiceProvider::class,
+            FormsServiceProvider::class,
+            InfolistsServiceProvider::class,
+            LivewireServiceProvider::class,
+            NotificationsServiceProvider::class,
+            SchemasServiceProvider::class,
+            SupportServiceProvider::class,
+            TablesServiceProvider::class,
+            WidgetsServiceProvider::class,
+            MediaLibraryServiceProvider::class,
+            FilamentTranslationComponentServiceProvider::class,
+            FilamentIconsServiceProvider::class,
+            FilamentTypesServiceProvider::class,
+            AdminPanelProvider::class,
+        ];
+
+        sort($providers);
+
+        return $providers;
+    }
+
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+    }
+
+    public function getEnvironmentSetUp($app): void
+    {
+        $app['config']->set('filament-users.model', User::class);
+        $app['config']->set('database.default', 'testing');
+        $app['config']->set('filament-icons.cache', false);
+
+        $app['config']->set('view.paths', [
+            ...$app['config']->get('view.paths'),
+            __DIR__ . '/../resources/views',
+        ]);
+    }
+}
+</file>
+
+<file path="tests/src/TypeResourceTest.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Tests;
+
+use Filament\Tables\Actions\EditAction;
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages;
+use TomatoPHP\FilamentTypes\Tests\Models\Type;
+use TomatoPHP\FilamentTypes\Tests\Models\User;
+
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertModelMissing;
+use function Pest\Laravel\get;
+use function Pest\Livewire\livewire;
+
+beforeEach(function () {
+    actingAs(User::factory()->create());
+});
+
+it('can render type resource', function () {
+get(TypeResource::getUrl())->assertSuccessful();
+    });
+
+it('can list types', function () {
+    Type::query()->delete();
+    $types = Type::factory()->count(10)->create();
+
+    livewire(Pages\ListTypes::class)
+        ->loadTable()
+        ->assertCanSeeTableRecords($types)
+        ->assertCountTableRecords(12);
+});
+
+it('can render type type/for/key column in table', function () {
+    Type::factory()->count(10)->create();
+
+    livewire(Pages\ListTypes::class)
+        ->loadTable()
+        ->assertCanRenderTableColumn('type')
+        ->assertCanRenderTableColumn('for')
+        ->assertCanRenderTableColumn('key');
+});
+
+it('can render type list page', function () {
+    livewire(Pages\ListTypes::class)->assertSuccessful();
+});
+
+it('can render view type page', function () {
+    livewire(Pages\ListTypes::class, [
+        'record' => User::factory()->create(),
+    ])
+        ->mountAction('view')
+        ->assertSuccessful();
+});
+
+it('can render type create page', function () {
+    livewire(Pages\ListTypes::class)
+        ->mountAction('create')
+        ->assertSuccessful();
+});
+
+it('can create new type', function () {
+    $newData = Type::factory()->make();
+
+    livewire(Pages\ListTypes::class)
+        ->callAction('create', data: [
+            'order' => $newData->order,
+            'for' => $newData->for,
+            'name' => $newData->name,
+            'key' => $newData->key,
+            'type' => $newData->type,
+            'description' => $newData->description,
+            'color' => $newData->color,
+            'icon' => 'heroicon-o-user',
+        ])
+        ->assertHasNoActionErrors();
+
+    assertDatabaseHas(Type::class, [
+        'for' => $newData->for,
+        'key' => $newData->key,
+        'type' => $newData->type,
+    ]);
+});
+
+it('can validate type input', function () {
+    livewire(Pages\ListTypes::class)
+        ->callAction('create', data: [
+            'for' => null,
+            'name' => null,
+            'key' => null,
+            'type' => null,
+            'description' => null,
+            'color' => null,
+            'icon' => null,
+        ])
+        ->assertHasActionErrors([
+            'for' => 'required',
+            'name' => 'required',
+            'key' => 'required',
+            'type' => 'required',
+        ]);
+});
+
+it('can render type edit page', function () {
+    livewire(Pages\ListTypes::class, [
+        'record' => Type::factory()->create(),
+    ])
+        ->mountAction('edit')
+        ->assertSuccessful();
+});
+
+it('can retrieve type data', function () {
+    $type = Type::factory()->create();
+
+    livewire(Pages\ListTypes::class)
+        ->mountTableAction(EditAction::class, $type)
+        ->assertTableActionDataSet([
+            'key' => $type->key,
+            'type' => $type->type,
+            'for' => $type->for,
+        ])
+        ->assertHasNoTableActionErrors();
+});
+
+it('can validate edit type input', function () {
+    $type = Type::factory()->create();
+
+    livewire(Pages\ListTypes::class, [
+        'record' => $type->getRouteKey(),
+    ])
+        ->callTableAction('edit', $type, [
+            'name' => null,
+            'type' => null,
+            'for' => null,
+            'key' => null,
+        ])
+        ->assertHasTableActionErrors([
+            'name' => 'required',
+            'type' => 'required',
+            'for' => 'required',
+            'key' => 'required',
+        ]);
+});
+
+it('can save type data', function () {
+    $type = Type::factory()->create();
+    $newData = Type::factory()->make();
+
+    livewire(Pages\ListTypes::class)
+        ->callTableAction('edit', $type, data: [
+            'key' => $newData->key,
+            'for' => FilamentTypes::get()->first()?->for,
+            'type' => collect(FilamentTypes::get()->first()?->types)->first()?->type,
+            'name' => $newData->name,
+        ])
+        ->assertHasNoTableActionErrors();
+
+    expect($type->refresh())->key->toBe($newData->key);
+});
+
+it('can delete type', function () {
+    $type = Type::factory()->create();
+
+    livewire(Pages\ListTypes::class)
+        ->callTableAction('delete', $type)
+        ->assertHasNoTableActionErrors();
+
+    assertModelMissing($type);
+});
+</file>
+
+<file path="module.json">
+{
+    "name": "FilamentTypes",
+    "alias": "filament-types",
+    "description": {
+        "ar": "قم بإدارة الانواع الخاصة بالطبيق عن طريق قاعدة البيانات",
+        "en": "Manage any type on your app in Database with easy to use Resource for FilamentPHP",
+        "gr": "Manage any type on your app in Database with easy to use Resource for FilamentPHP",
+        "sp": "Manage any type on your app in Database with easy to use Resource for FilamentPHP"
+    },
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "TomatoPHP\\FilamentTypes\\FilamentTypesServiceProvider"
+    ],
+    "files": [],
+    "title": {
+        "ar": "الانواع",
+        "en": "Types Manager",
+        "gr": "Types Manager",
+        "sp": "Types Manager"
+    },
+    "color": "#fca103",
+    "icon": "heroicon-c-tag",
+    "placeholder": "https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/3x1io-tomato-types.jpg",
+    "type": "plugin",
+    "version": "v1.0.23",
+    "github" : "https://github.com/tomatophp/filament-types",
+    "docs" : "https://github.com/tomatophp/filament-types"
+}
+</file>
+
+<file path="database/migrations/2022_09_11_223298_create_types_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (! Schema::hasTable('types')) {
+            Schema::create('types', function (Blueprint $table) {
+                $table->id();
+
+                $table->foreignId('parent_id')->nullable()->references('id')->on('types')->onDelete('cascade');
+
+                // Morph
+                $table->string('model_type')->nullable();
+                $table->unsignedBigInteger('model_id')->nullable();
+
+                // Types
+                $table->string('for')->default('posts')->nullable();
+                $table->string('type')->default('category')->nullable();
+
+                $table->string('name');
+                $table->string('key')->unique()->index();
+                $table->text('description')->nullable();
+
+                // Icon & Color
+                $table->string('color')->nullable();
+                $table->string('icon')->nullable();
+
+                $table->boolean('is_activated')->default(true)->nullable();
+                $table->timestamps();
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('types');
+    }
+};
+</file>
+
+<file path="database/migrations/2023_02_13_134607_create_types_metas_table.php">
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        if (! Schema::hasTable('types_metas')) {
+            Schema::create('types_metas', function (Blueprint $table) {
+                $table->id();
+
+                // Link To Table
+                $table->unsignedBigInteger('model_id')->nullable();
+                $table->string('model_type')->nullable();
+
+                $table->foreignId('type_id')->references('id')->on('types')->onDelete('cascade');
+                $table->string('key')->index();
+                $table->json('value')->nullable();
+
+                $table->timestamps();
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('types_metas');
+    }
+};
+</file>
+
+<file path="src/Models/TypesMeta.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+/**
+ * @property int $id
+ * @property int $type_id
+ * @property int $model_id
+ * @property string $model_type
+ * @property string $key
+ * @property mixed $value
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Type $type
+ */
+class TypesMeta extends Model
+{
+    /**
+     * @var array
+     */
+    protected $fillable = ['type_id', 'model_id', 'model_type', 'key', 'value', 'created_at', 'updated_at'];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function type()
+    {
+        return $this->belongsTo('TomatoPHP\FilamentTypes\Models\Type');
+    }
+}
+</file>
+
+<file path="src/helpers.php">
+<?php
+
+if (! function_exists('type_of')) {
+    function type_of(string $key, string $for, string $type): ?\TomatoPHP\FilamentTypes\Models\Type
+    {
+        return \TomatoPHP\FilamentTypes\Models\Type::query()
+            ->where('key', $key)
+            ->where('for', 'LIKE', '%' . $for . '%')
+            ->where('type', 'LIKE', '%' . $type . '%')
+            ->first();
+    }
+}
+</file>
+
+<file path="src/Models/Type.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Translatable\HasTranslations;
+
+/**
+ * @property int $id
+ * @property int $parent_id
+ * @property string $name
+ * @property string $key
+ * @property string $description
+ * @property string $color
+ * @property string $icon
+ * @property string $model_type
+ * @property int $model_id
+ * @property bool $is_activated
+ * @property string $created_at
+ * @property string $updated_at
+ * @property Type[] $typables
+ */
+class Type extends Model implements HasMedia
+{
+    use HasTranslations;
+    use InteractsWithMedia;
+
+    public $translatable = [
+        'name',
+        'description',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['order', 'for', 'name', 'key', 'type', 'description', 'color', 'icon', 'parent_id', 'model_type', 'model_id', 'is_activated', 'created_at', 'updated_at'];
+
+    protected $casts = [
+        'name' => 'array',
+        'description' => 'array',
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function typables()
+    {
+        return $this->hasMany('TomatoPHP\FilamentTypes\Models\Type');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('TomatoPHP\FilamentTypes\Models\Type', 'parent_id');
+    }
+}
+</file>
+
+<file path="src/Pages/BaseTypePage.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Pages;
+
+use Filament\Actions\Action;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
+use Filament\Pages\Page;
+use Filament\Tables\Concerns\InteractsWithTable;
+use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Table;
+use TomatoPHP\FilamentIcons\Components\IconPicker;
+use TomatoPHP\FilamentTranslationComponent\Components\Translation;
+use TomatoPHP\FilamentTypes\Components\TypeColumn;
+use TomatoPHP\FilamentTypes\Models\Type;
+
+class BaseTypePage extends Page implements HasForms, HasTable
+{
+    use InteractsWithForms;
+    use InteractsWithTable;
+
+    public array $data = [];
+
+    protected static string $view = 'filament-types::pages.base';
+
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
+
+    public function getBackUrl()
+    {
+        return url()->previous();
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('create')
+                ->label(trans('filament-types::messages.create'))
+                ->form([
+                    Grid::make([
+                        'md' => 2,
+                        'sm' => 1,
+                    ])->schema([
+                        Translation::make('name')
+                            ->columnSpanFull()
+                            ->label(trans('filament-types::messages.form.name')),
+                        TextInput::make('key')
+                            ->columnSpanFull()
+                            ->required()
+                            ->label(trans('filament-types::messages.form.key')),
+                        IconPicker::make('icon')
+                            ->label(trans('filament-types::messages.form.icon')),
+                        ColorPicker::make('color')
+                            ->label(trans('filament-types::messages.form.color')),
+                    ]),
+                ])
+                ->action(function (array $data) {
+                    $data['for'] = $this->getFor();
+                    $data['type'] = $this->getType();
+                    Type::create($data);
+
+                    Notification::make()
+                        ->title(trans('filament-types::messages.notification.create.title'))
+                        ->body(trans('filament-types::messages.notification.create.title'))
+                        ->success()
+                        ->send();
+                }),
+            Action::make('back')
+                ->label(trans('filament-types::messages.back'))
+                ->url(fn () => $this->getBackUrl())
+                ->color('warning')
+                ->icon('heroicon-s-arrow-left'),
+        ];
+    }
+
+    public function getType(): string
+    {
+        return 'status';
+    }
+
+    public function getFor(): string
+    {
+        return 'types';
+    }
+
+    protected static ?string $navigationIcon = 'heroicon-o-cog';
+
+    protected array $types = [];
+
+    public function getTypes(): array
+    {
+        return [];
+    }
+
+    public function mount(): void
+    {
+        foreach ($this->getTypes() as $type) {
+            $exists = Type::query()
+                ->where('for', $this->getFor())
+                ->where('type', $this->getType())
+                ->where('key', $type->key)
+                ->first();
+            if (! $exists) {
+                $type->for = $this->getFor();
+                $type->type = $this->getType();
+                if (! is_array($type->name)) {
+                    $type->name = [
+                        app()->getLocale() => $type->name,
+                    ];
+                }
+                Type::create($type->toArray());
+            }
+        }
+    }
+
+    public function getTitle(): string
+    {
+        return trans('filament-types::messages.base.title');
+    }
+
+    public function getCreateAction(): bool
+    {
+        return true;
+    }
+
+    public function table(Table $table): Table
+    {
+        return $table
+            ->deferLoading()
+            ->query(
+                Type::query()
+                    ->where('for', $this->getFor())
+                    ->where('type', $this->getType())
+            )
+            ->paginated(false)
+            ->columns([
+                TypeColumn::make('key')
+                    ->for($this->getFor())
+                    ->type($this->getType())
+                    ->label(trans('filament-types::messages.form.key')),
+            ])
+            ->actions([
+                \Filament\Tables\Actions\Action::make('edit')
+                    ->label(trans('filament-types::messages.edit'))
+                    ->tooltip(trans('filament-types::messages.edit'))
+                    ->form([
+                        Grid::make([
+                            'md' => 2,
+                            'sm' => 1,
+                        ])->schema([
+                            Translation::make('name')
+                                ->columnSpanFull()
+                                ->label(trans('filament-types::messages.form.name')),
+                            IconPicker::make('icon')
+                                ->label(trans('filament-types::messages.form.icon')),
+                            ColorPicker::make('color')
+                                ->label(trans('filament-types::messages.form.color')),
+                        ]),
+                    ])
+                    ->extraModalFooterActions([
+                        \Filament\Tables\Actions\Action::make('deleteType')
+                            ->requiresConfirmation()
+                            ->color('danger')
+                            ->label(trans('filament-types::messages.delete'))
+                            ->cancelParentActions()
+                            ->action(function (array $data, $record) {
+                                foreach ($this->getTypes() as $getType) {
+                                    if ($getType->key == $record->key) {
+                                        Notification::make()
+                                            ->title(trans('filament-types::messages.notification.error.title'))
+                                            ->body(trans('filament-types::messages.notification.error.body'))
+                                            ->danger()
+                                            ->send();
+
+                                        return;
+                                    }
+                                }
+
+                                $record->delete();
+                                Notification::make()
+                                    ->title(trans('filament-types::messages.notification.delete.title'))
+                                    ->body(trans('filament-types::messages.notification.delete.body'))
+                                    ->success()
+                                    ->send();
+                            }),
+                    ])
+                    ->fillForm(fn ($record) => $record->toArray())
+                    ->icon('heroicon-s-pencil-square')
+                    ->iconButton()
+                    ->action(function (array $data, Type $type) {
+                        $type->update($data);
+                        Notification::make()
+                            ->title(trans('filament-types::messages.notification.edit.title'))
+                            ->body(trans('filament-types::messages.notification.edit.body'))
+                            ->success()
+                            ->send();
+                    }),
+            ]);
+    }
+}
+</file>
+
+<file path="src/Components/TypeColumn.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Components;
+
+use Filament\Tables\Columns\TextColumn;
+
+class TypeColumn extends TextColumn
+{
+    public string | \Closure | null $for = null;
+
+    public string | \Closure | null $type = null;
+
+    public bool | \Closure | null $allowDescription = false;
+
+    protected string $view = 'filament-types::columns.type-column';
+
+    public function getFor(): ?string
+    {
+        return (string) $this->evaluate($this->for);
+    }
+
+    public function getType(): ?string
+    {
+        return (string) $this->evaluate($this->type);
+    }
+
+    public function for(string | \Closure $for): static
+    {
+        $this->for = $for;
+
+        return $this;
+    }
+
+    public function type(string | \Closure $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function allowDescription(bool | \Closure $allowDescription = true): static
+    {
+        $this->allowDescription = $allowDescription;
+
+        return $this;
+    }
+
+    public function getAllowDescription(): bool
+    {
+        return (bool) $this->evaluate($this->allowDescription);
+    }
+}
+</file>
+
+<file path="src/FilamentTypesServiceProvider.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes;
+
+use Illuminate\Support\ServiceProvider;
+
+require_once __DIR__ . '/helpers.php';
+
+class FilamentTypesServiceProvider extends ServiceProvider
+{
+    public function register(): void
+    {
+        // Register generate command
+        $this->commands([
+            \TomatoPHP\FilamentTypes\Console\FilamentTypesInstall::class,
+        ]);
+
+        // Register Config file
+        $this->mergeConfigFrom(__DIR__ . '/../config/filament-types.php', 'filament-types');
+
+        // Publish Config
+        $this->publishes([
+            __DIR__ . '/../config/filament-types.php' => config_path('filament-types.php'),
+        ], 'filament-types-config');
+
+        // Register Migrations
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        // Publish Migrations
+        $this->publishes([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ], 'filament-types-migrations');
+        // Register views
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'filament-types');
+
+        // Publish Views
+        $this->publishes([
+            __DIR__ . '/../resources/views' => resource_path('views/vendor/filament-types'),
+        ], 'filament-types-views');
+
+        // Register Langs
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'filament-types');
+
+        // Publish Lang
+        $this->publishes([
+            __DIR__ . '/../resources/lang' => base_path('lang/vendor/filament-types'),
+        ], 'filament-types-lang');
+
+        // Register Routes
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        $this->app->bind('filament-types', function () {
+            return new Services\FilamentTypesServices;
+        });
+
+        $this->loadViewComponentsAs('tomato', [
+            Components\Type::class,
+        ]);
+    }
+
+    public function boot(): void
+    {
+        // you boot methods here
+    }
+}
+</file>
+
+<file path="src/Filament/Resources/TypeResource.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes\Filament\Resources;
+
+use BackedEnum;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use Filament\Schemas\Schema;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
+use TomatoPHP\FilamentTypes\Models\Type;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\TypeForm;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeTable;
+
+class TypeResource extends Resource
+{
+
+    protected static ?string $model = Type::class;
+
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-tag';
+
+    public static function getTranslatableLocales(): array
+    {
+        return filament('filament-types')->getLocals();
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('filament-types::messages.title');
+    }
+
+    public static function getLabel(): ?string
+    {
+        return trans('filament-types::messages.single');
+    }
+
+    public static function getPluralLabel(): ?string
+    {
+        return trans('filament-types::messages.title');
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return trans('filament-types::messages.group');
+    }
+
+    /**
+     * Config Item: `panel_navigation`
+     * Returns: bool
+     *
+     * Accepts: array OR bool
+     *
+     * Compares against current panel ID based on what is in the array (if provided).
+     */
+    public static function shouldRegisterNavigation(): bool
+    {
+        $configItem = config('filament-types.panel_navigation', true);
+
+        if (is_array($configItem) && ! empty($configItem)) {
+            foreach (config('filament-types.panel_navigation', true) as $key => $val) {
+                if (Filament::getCurrentPanel()->getId() === $key) {
+                    return $val;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return (empty($configItem)) ? false : $configItem;
+        }
+
+        return false;
+    }
+
+    public static function form(Schema $schema): Schema
+    {
+        return TypeForm::make($schema);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return TypeTable::make($table);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => \TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages\ListTypes::route('/'),
+        ];
+    }
+}
+</file>
+
+<file path="resources/lang/ar/messages.php">
+<?php
+
+return [
+    'title' => 'الانواع',
+    'single' => 'نوع',
+    'exists' => 'عذرا هذا النوع موجود بالفعل',
+    'success' => 'تم إنشاء النوع بنجاح',
+    'group' => 'الإعدادات',
+    'create' => 'إنشاء نوع',
+    'edit' => 'تعديل نوع',
+    'delete' => 'حذف نوع',
+    'notification' => [
+        'edit' => [
+            'title' => 'تم تحديث النوع',
+            'body' => 'تم تحديث النوع بنجاح',
+        ],
+        'error' => [
+            'title' => 'خطأ',
+            'body' => 'لا يمكنك حذف هذا النوع',
+        ],
+        'delete' => [
+            'title' => 'تم حذف النوع',
+            'body' => 'تم حذف النوع بنجاح',
+        ],
+        'create' => [
+            'title' => 'تم إنشاء النوع',
+            'body' => 'تم إنشاء النوع بنجاح',
+        ],
+    ],
+    'back' => 'رجوع',
+    'language' => 'اللغة',
+    'value' => 'القيمة',
+    'empty' => 'غير محدد',
+    'form' => [
+        'image' => 'صورة',
+        'parent_id' => 'الاب',
+        'type' => 'النوع',
+        'for' => 'ل',
+        'name' => 'الاسم',
+        'key' => 'المفتاح',
+        'description' => 'الوصف',
+        'color' => 'اللون',
+        'icon' => 'الايقونة',
+        'is_activated' => 'مفعل؟',
+    ],
+    'base' => [
+        'title' => 'الانواع',
+    ],
+];
+</file>
+
+<file path="resources/lang/en/messages.php">
+<?php
+
+return [
+    'title' => 'Types',
+    'single' => 'Type',
+    'exists' => 'Sorry This Type is already exists',
+    'success' => 'Type Created Successfully',
+    'group' => 'Settings',
+    'create' => 'Create Type',
+    'edit' => 'Edit Type',
+    'delete' => 'Delete Type',
+    'notification' => [
+        'edit' => [
+            'title' => 'Type Updated',
+            'body' => 'Type Updated Successfully',
+        ],
+        'error' => [
+            'title' => 'Error',
+            'body' => "You can't delete this type",
+        ],
+        'delete' => [
+            'title' => 'Type Deleted',
+            'body' => 'Type Deleted Successfully',
+        ],
+        'create' => [
+            'title' => 'Type Created',
+            'body' => 'Type Created Successfully',
+        ],
+    ],
+    'back' => 'Back',
+    'language' => 'Language',
+    'value' => 'Value',
+    'empty' => 'Not Selected',
+    'form' => [
+        'image' => 'Image',
+        'parent_id' => 'Parent',
+        'type' => 'Type',
+        'for' => 'For',
+        'name' => 'Name',
+        'key' => 'Key',
+        'description' => 'Description',
+        'color' => 'Color',
+        'icon' => 'Icon',
+        'is_activated' => 'Activated?',
+    ],
+    'base' => [
+        'title' => 'Types',
+    ],
+];
+</file>
+
+<file path="config/filament-types.php">
+<?php
+
+return [
+    /**
+     * Type API Middelware
+     *
+     * Set the middleware for the API of Types it can be empty if you need it public
+     */
+    'middleware' => ['auth:sanctum'],
+
+    /**
+     * Types API Resource
+     *
+     * If you need to use a resource for the API of Types you can set it here
+     */
+    'types_resource' => null,
+
+    /**
+     * Panel Navigation
+     * Accepts: boolean OR array of panel ID with boolean
+     * If array is empty, assumes to not display navigation item.
+     *
+     * Panel Example:
+     *  'panel_navigation' => ['admin' => TRUE];
+     */
+    'panel_navigation' => true,
+
+    /**
+     * Empty State
+     *
+     * If type Column is Empty Put This Message
+     */
+    'empty_state' => null,
+
+    /**
+     * Locals
+     *
+     * If you need to use locals for the types you can set it here
+     *
+     * EG: ['en','ar'] will provide English and Arabic options.
+     *
+     * Default: NULL, provides English and Arabic options.
+     */
+    'locals' => null,
+];
+</file>
+
+<file path="src/FilamentTypesPlugin.php">
+<?php
+
+namespace TomatoPHP\FilamentTypes;
+
+use Filament\Contracts\Plugin;
+use Filament\Panel;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource;
+use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
+
+
+class FilamentTypesPlugin implements Plugin
+{
+    protected array $locals = ['ar', 'en'];
+
+    protected static array $types = [];
+
+    /**
+     * @return $this
+     */
+    public function locals()
+    {
+        return (! is_null(config('filament-types.locals'))) ? config('filament-types.locals') : $this->locals;
+    }
+
+    public function getLocals(): array
+    {
+        return $this->locals();
+    }
+
+    /**
+     * @return $this
+     */
+    public function types(array $types): self
+    {
+        self::$types = $types;
+
+        return $this;
+    }
+
+    public function getTypes(): array
+    {
+        return self::$types;
+    }
+
+    public function getId(): string
+    {
+        return 'filament-types';
+    }
+
+    public function register(Panel $panel): void
+    {
+        $panel->plugin(SpatieTranslatablePlugin::make()->defaultLocales($this->getLocals()));
+
+        $panel->resources([
+            TypeResource::class,
+        ]);
+
+    }
+
+    public function boot(Panel $panel): void
+    {
+        //
+    }
+
+    public static function make(): FilamentTypesPlugin
+    {
+        return new FilamentTypesPlugin;
+    }
+}
+</file>
+
+<file path="resources/views/columns/type-column.blade.php">
+@php
+
+    if($getType() && $getFor()){
+        $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $getState())
+            ->where('for', $getFor())
+            ->where('type', $getType())
+            ->first();
+    }
+    else {
+      $type = \TomatoPHP\FilamentTypes\Models\Type::where('key', $getState())->first();
+    }
+
+    $description = null;
+
+    if($type){
+        $value = $type->name;
+        $hex = $type->color;
+        $icon = $type->icon;
+        $description = $type->description;
+        list($r, $g, $b) = sscanf($hex, "#%02x%02x%02x");
+        $colorRGB= array($r, $g, $b);
+    }
+    else {
+        $value = $getState();
+        $colorRGB = [0,0,0];
+        $icon = null;
+    }
+
+    $iconExists = \TomatoPHP\FilamentIcons\Facades\FilamentIcons::getIcon($icon);
+@endphp
+@if($value || config('filament-types.empty_state'))
+
+<span @if($description && $getAllowDescription()) x-tooltip="{content: '{{$description}}', theme: $store.theme }" @endif style="{{ implode([
+        "background-color: rgba(".$colorRGB[0].", ".$colorRGB[1].", ".$colorRGB[2].", 0.2);",
+        "color: rgba(".$colorRGB[0].", ".$colorRGB[1].", ".$colorRGB[2].", 1); display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 8px; font-size: 12px; font-weight: 500;"
+    ]) }}">
+
+    @if($icon && $iconExists)
+        <div style="display: flex; align-items: center; justify-content: center; width: 20px; height: 20px;">
+            <x-filament-icon :icon="$icon" style="height: 20px; width: 20px;"/>
+        </div>
+    @endif
+
+    <div>
+        {{ $value ?? config('filament-types.empty_state') }}
+    </div>
+</span>
+@endif
+</file>
+
+<file path="composer.json">
+{
+    "name": "tomatophp/filament-types",
+    "type": "library",
+    "description": "Manage any type on your app in Database with easy to use Resource for FilamentPHP",
+    "keywords": [
+        "php",
+        "laravel",
+        "types",
+        "database",
+        "resource",
+        "manager",
+        "filamentphp",
+        "filament-plugin"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "TomatoPHP\\FilamentTypes\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "TomatoPHP\\FilamentTypes\\Tests\\": "tests/src",
+            "TomatoPHP\\FilamentTypes\\Tests\\Database\\Factories\\": "tests/database/factories"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TomatoPHP\\FilamentTypes\\FilamentTypesServiceProvider"
+            ]
+        }
+    },
+    "scripts": {
+        "testbench": "vendor/bin/testbench package:discover --ansi",
+        "db": "vendor/bin/testbench package:create-sqlite-db && vendor/bin/testbench migrate",
+        "analyse": "vendor/bin/phpstan analyse src tests",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "authors": [
+        {
+            "name": "Fady Mondy",
+            "email": "info@3x1.io"
+        }
+    ],
+    "require": {
+        "php": "^8.2|^8.3|^8.4",
+        "tomatophp/console-helpers": "^1.1",
+        "filament/filament": "^4.0",
+        "filament/spatie-laravel-media-library-plugin": "^4.0",
+        "tomatophp/filament-icons": "^4.0.0",
+        "tomatophp/filament-translation-component": "^4.0.0"
+    },
+    "require-dev": {
+        "larastan/larastan": "^2.9||^3.0",
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "orchestra/testbench": "^10.0.0||^9.0.0",
+        "pestphp/pest": "^3.0",
+        "pestphp/pest-plugin-arch": "^3.0",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "pestphp/pest-plugin-livewire": "^3.0",
+        "pestphp/pest-plugin-type-coverage": "^3.5",
+        "phpstan/extension-installer": "^1.3||^2.0",
+        "phpstan/phpstan-deprecation-rules": "^1.1||^2.0",
+        "phpstan/phpstan-phpunit": "^1.3||^2.0"
+    },
+    "version": "4.0.0"
+}
+</file>
+
+<file path="README.md">
+![Screenshot](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/fadymondy-tomato-types.jpg)
+
+# Filament Types Manager
+
+[![Dependabot Updates](https://github.com/tomatophp/filament-types/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/tomatophp/filament-types/actions/workflows/dependabot/dependabot-updates)
+[![PHP Code Styling](https://github.com/tomatophp/filament-types/actions/workflows/fix-php-code-styling.yml/badge.svg)](https://github.com/tomatophp/filament-types/actions/workflows/fix-php-code-styling.yml)
+[![Tests](https://github.com/tomatophp/filament-types/actions/workflows/tests.yml/badge.svg)](https://github.com/tomatophp/filament-types/actions/workflows/tests.yml)
+[![Latest Stable Version](https://poser.pugx.org/tomatophp/filament-types/version.svg)](https://packagist.org/packages/tomatophp/filament-types)
+[![License](https://poser.pugx.org/tomatophp/filament-types/license.svg)](https://packagist.org/packages/tomatophp/filament-types)
+[![Downloads](https://poser.pugx.org/tomatophp/filament-types/d/total.svg)](https://packagist.org/packages/tomatophp/filament-types)
+
+Manage any type on your app in Database with easy to use Resource for FilamentPHP
+
+## Screenshots
+
+![Types](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types.png)
+![Filters](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/filters.png)
+![Type Col](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/type-col.png)
+![Form](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/form.png)
+
+## Installation
+
+```bash
+composer require tomatophp/filament-types
+```
+
+after install your package please run this command
+
+```bash
+php artisan filament-types:install
+```
+
+finally register the plugin on `/app/Providers/Filament/AdminPanelProvider.php`
+
+```php
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
+
+->plugin(\TomatoPHP\FilamentTypes\FilamentTypesPlugin::make())
+    ->types([
+        TypeFor::make('posts')
+            ->label('Posts')
+            ->types([
+                TypeOf::make('categories')
+                    ->label('Categories')
+                    ->register([
+                        Type::make('news')
+                            ->name('News')
+                            ->icon('heroicon-o-newspaper')
+                            ->color('#fefefe')
+                    ])
+            ])
+    ])
+```
+
+## Register Type using provider
+
+you can register a type from your provider using our Facade
+
+```php
+use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
+use TomatoPHP\FilamentTypes\Services\Contracts\TypeOf;
+
+FilamentTypes::register([
+    TypeFor::make('products')
+        ->label('Product')
+        ->types([
+            TypeOf::make('sizes')
+                ->label('Sizes')
+                ->register([
+                    Type::make('xl')
+                        ->name('XL')
+                        ->icon('heroicon-o-adjustments-horizontal')
+                        ->color('warning'),
+                    Type::make('sm')
+                        ->name('SM')
+                        ->icon('heroicon-o-adjustments-horizontal')
+                        ->color('warning')
+                ])
+        ]),
+]);
+```
+
+## Config Locales
+
+You can change the locals within the `filament-types` config.
+
+- Publish the config file/
+- Modify the `locals` array to include the two character language code that applys to the language you wish to offer. EG:
+
+```
+'locals' = ['en'],
+```
+
+## Use Type Helper
+
+you can find any type with the helper method to use it anywhere
+
+```php
+type_of(
+    key: 'pending',
+    for: 'notes',
+    type: 'groups'
+);
+```
+
+it will return type model for you.
+
+## Use Type Column
+
+you can use type column in your table like this
+
+```php
+use TomatoPHP\FilamentTypes\Components\TypeColumn;
+
+TypeColumn::make('type')
+    ->for('users')
+    ->type('status')
+    ->allowDescription()
+    ->searchable(),
+```
+
+## Auto Caching
+
+on your `.env` add this
+
+```.env
+CACHE_STORE=array
+MODEL_CACHE_STORE=array
+```
+
+supported cache stores are
+
+```php
++ Redis
++ MemCached
++ APC
++ Array
+```
+
+## Use Type Base Page
+
+you can create a page for selected type by just extand base type page
+
+```php
+use TomatoPHP\FilamentTypes\Pages\BaseTypePage;
+
+use TomatoPHP\FilamentTypes\Services\Contracts\Type;
+
+class NotesGroups extends BaseTypePage
+{
+     public function getTitle(): string
+    {
+        return "Notes Groups";
+    }
+
+    public function getType(): string
+    {
+        return "groups";
+    }
+
+    public function getFor(): string
+    {
+        return "notes";
+    }
+
+    public function getBackUrl()
+    {
+        return ManageNotes::getUrl(); // TODO: Change the autogenerated stub
+    }
+
+    public function getTypes(): array
+    {
+        return [
+            Type::make('todo')
+                ->name("TODO")
+                ->color('#1461e3')
+                ->icon('heroicon-o-list-bullet'),
+            Type::make('ideas')
+                ->name("Ideas")
+                ->color('#13e0da')
+                ->icon('heroicon-o-sparkles'),
+            Type::make('saved')
+                ->name("Saved")
+                ->color('#29a82e')
+                ->icon('heroicon-o-arrow-down-on-square'),
+        ];
+    }
+}
+```
+
+it will be not appear on the navigation menu by default but you can change that by just use this method
+
+```php
+public static function shouldRegisterNavigation(): bool
+{
+    return true;
+}
+```
+
+## Use Type Component
+
+if you like to use a type as a package we create a blade component for you to make it easy to use anywhere on your app like this
+
+```html
+<x-tomato-type :type="$type" label="Group" />
+```
+
+## User Types Resource Hooks
+
+we have add a lot of hooks to make it easy to attach actions, columns, filters, etc
+
+### Table Columns
+
+```php
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeTable;
+
+public function boot()
+{
+    TypeTable::register([
+        \Filament\Tables\Columns\TextColumn::make('something')
+    ]);
+}
+```
+
+### Table Actions
+
+```php
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeActions;
+
+public function boot()
+{
+    TypeActions::register([
+        \Filament\Tables\Actions\ReplicateAction::make()
+    ]);
+}
+```
+
+### Table Filters
+
+```php
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeFilters;
+
+public function boot()
+{
+    TypeFilters::register([
+        \Filament\Tables\Filters\SelectFilter::make('something')
+    ]);
+}
+```
+
+### Table Bulk Actions
+
+```php
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeBulkActions;
+
+public function boot()
+{
+    TypeBulkActions::register([
+        \Filament\Tables\BulkActions\DeleteAction::make()
+    ]);
+}
+```
+
+### From Components
+
+```php
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\TypeForm;
+
+public function boot()
+{
+    TypeForm::register([
+        \Filament\Forms\Components\TextInput::make('something')
+    ]);
+}
+```
+
+### Page Actions
+
+```php
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\ManagePageActions;
+
+public function boot()
+{
+    ManagePageActions::register([
+        Filament\Actions\Action::make('action')
+    ]);
+
+}
+```
+
+## Publish Assets
+
+you can publish config file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-types-config"
+```
+
+you can publish views file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-types-views"
+```
+
+you can publish languages file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-types-lang"
+```
+
+you can publish migrations file by use this command
+
+```bash
+php artisan vendor:publish --tag="filament-types-migrations"
+```
+
+## Testing
+
+if you like to run `PEST` testing just use this command
+
+```bash
+composer test
+```
+
+## Code Style
+
+if you like to fix the code style just use this command
+
+```bash
+composer format
+```
+
+## PHPStan
+
+if you like to check the code by `PHPStan` just use this command
+
+```bash
+composer analyse
+```
+
+## Other Filament Packages
+
+Checkout our [Awesome TomatoPHP](https://github.com/tomatophp/awesome)
+</file>
+
+</files>

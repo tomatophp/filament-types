@@ -14,8 +14,8 @@ class TypeTable
     {
         return $table
             ->deferLoading()
-            ->bulkActions(TypeBulkActions::make())
-            ->actions(TypeActions::make())
+            ->toolbarActions(TypeBulkActions::make())
+            ->recordActions(TypeActions::make())
             ->filters(TypeFilters::make())
             ->headerActions(TypeHeaderActions::make())
             ->groups([
@@ -23,7 +23,6 @@ class TypeTable
                 Tables\Grouping\Group::make('type'),
             ])
             ->deferLoading()
-            ->defaultGroup('for')
             ->defaultSort('order')
             ->reorderable('order')
             ->columns(self::getColumns());

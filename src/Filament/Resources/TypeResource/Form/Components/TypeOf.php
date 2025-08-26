@@ -4,6 +4,7 @@ namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\Component
 
 use Filament\Forms;
 use Filament\Forms\Components\Field;
+use Filament\Schemas\Components\Utilities\Get;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 
 class TypeOf extends Component
@@ -12,7 +13,7 @@ class TypeOf extends Component
     {
         return Forms\Components\Select::make('type')
             ->label(trans('filament-types::messages.form.type'))
-            ->options(function (Forms\Get $get) {
+            ->options(function (Get $get) {
                 return $get('for') ? collect(FilamentTypes::get()->where('for', $get('for'))->first()?->types)->pluck('label', 'type')->toArray() : [];
             })
             ->searchable()

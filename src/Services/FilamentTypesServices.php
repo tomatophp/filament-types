@@ -2,13 +2,17 @@
 
 namespace TomatoPHP\FilamentTypes\Services;
 
+use Filament\Actions\Action;
 use Illuminate\Support\Collection;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages\ListTypes;
 use TomatoPHP\FilamentTypes\Models\Type;
 use TomatoPHP\FilamentTypes\Services\Contracts\TypeFor;
 
 class FilamentTypesServices
 {
     protected array $types = [];
+
+    protected array $pageActions = [];
 
     public function register(TypeFor | array $types): void
     {
@@ -68,5 +72,21 @@ class FilamentTypesServices
                     ->values();
             })
             ->flatten();
+    }
+
+    public function registerPageAction(Action | array $action, ?string $page = ListTypes::class): void
+    {
+        if (is_array($action)) {
+            foreach ($action as $item) {
+                $this->pageActions[$page][] = $item;
+            }
+        } else {
+            $this->pageActions[$page][] = $action;
+        }
+    }
+
+    public function getPageActions(string $page): array
+    {
+        return $this->pageActions[$page] ?? [];
     }
 }

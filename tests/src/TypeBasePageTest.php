@@ -1,6 +1,6 @@
 <?php
 
-use Filament\Tables\Actions\EditAction;
+use Filament\Actions\EditAction;
 use TomatoPHP\FilamentTypes\Tests\Models\Type;
 use TomatoPHP\FilamentTypes\Tests\Models\User;
 use TomatoPHP\FilamentTypes\Tests\Pages\TypePage;
@@ -15,8 +15,8 @@ beforeEach(function () {
 });
 
 it('can render type page', function () {
-get(TypePage::getUrl())->assertSuccessful();
-    });
+    get(TypePage::getUrl())->assertSuccessful();
+});
 
 it('can list selected types', function () {
     Type::query()->where('type', 'groups')->where('for', 'notes')->delete();
@@ -57,7 +57,10 @@ it('can create new type', function () {
 
     livewire(TypePage::class)
         ->callAction('create', data: [
-            'name' => $newData->name,
+            'name' => [
+                'en' => $newData->name,
+                'ar' => $newData->name,
+            ],
             'key' => $newData->key,
             'color' => $newData->color,
             'icon' => 'heroicon-o-user',
@@ -74,10 +77,13 @@ it('can create new type', function () {
 it('can validate type input', function () {
     livewire(TypePage::class)
         ->callAction('create', data: [
-            'name' => null,
+            'name' => [
+                'en' => null,
+                'ar' => null,
+            ],
             'key' => null,
             'color' => null,
-            'icon' => null,
+            'icon' => 'heroicon-o-user',
         ])
         ->assertHasActionErrors([
             'key' => 'required',

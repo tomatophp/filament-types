@@ -12,6 +12,9 @@ class Key extends Component
         return Forms\Components\TextInput::make('key')
             ->label(trans('filament-types::messages.form.key'))
             ->required()
+            ->prefixIcon('heroicon-o-key')
+            ->copyable()
+            ->columnSpanFull()
             ->maxLength(255);
     }
 }

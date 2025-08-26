@@ -3,6 +3,8 @@
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Filters;
 
 use Filament\Forms;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
@@ -19,19 +21,19 @@ class TypeFor extends Filter
                     ->options(FilamentTypes::get()->pluck('label', 'for')->toArray())
                     ->searchable()
                     ->preload()
-                    ->afterStateUpdated(function (Forms\Set $set) {
+                    ->afterStateUpdated(function (Set $set) {
                         $set('type', null);
                         $set('parent_id', null);
                     })
                     ->live(),
                 Forms\Components\Select::make('type')
                     ->label(trans('filament-types::messages.form.type'))
-                    ->options(fn (Forms\Get $get) => $get('for') ? collect(FilamentTypes::get()->where('for', $get('for'))->first()?->types)->pluck('label', 'type')->toArray() : [])
+                    ->options(fn (Get $get) => $get('for') ? collect(FilamentTypes::get()->where('for', $get('for'))->first()?->types)->pluck('label', 'type')->toArray() : [])
                     ->searchable(),
                 Forms\Components\Select::make('parent_id')
                     ->label(trans('filament-types::messages.form.parent_id'))
                     ->options(
-                        fn (Forms\Get $get) => Type::whereNull('parent_id')
+                        fn (Get $get) => Type::whereNull('parent_id')
                             ->where('for', $get('for'))
                             ->where('type', $get('type'))
                             ->get()

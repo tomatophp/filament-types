@@ -2,10 +2,10 @@
 
 namespace TomatoPHP\FilamentTypes\Filament\Resources;
 
+use BackedEnum;
 use Filament\Facades\Filament;
-use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\TypeForm;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeTable;
@@ -13,11 +13,9 @@ use TomatoPHP\FilamentTypes\Models\Type;
 
 class TypeResource extends Resource
 {
-    use Translatable;
-
     protected static ?string $model = Type::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-tag';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-tag';
 
     public static function getTranslatableLocales(): array
     {
@@ -71,9 +69,9 @@ class TypeResource extends Resource
         return false;
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return TypeForm::make($form);
+        return TypeForm::make($schema);
     }
 
     public static function table(Table $table): Table

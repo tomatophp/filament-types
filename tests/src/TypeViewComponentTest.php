@@ -10,8 +10,8 @@ beforeEach(function () {
 });
 
 it('can render type component page', function () {
-get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl())->assertSuccessful();
-    });
+    get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl())->assertSuccessful();
+});
 
 it('can render type component', function () {
     $response = get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl());

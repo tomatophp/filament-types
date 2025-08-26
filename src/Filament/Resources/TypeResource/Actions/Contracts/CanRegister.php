@@ -2,9 +2,9 @@
 
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Actions\Contracts;
 
-use Filament\Actions\StaticAction;
-use Filament\Forms\Form;
+use Filament\Actions\Action;
 use Filament\Pages\Page;
+use Filament\Schemas\Schema;
 use Filament\Support\Concerns\EvaluatesClosures;
 
 use function Filament\Support\get_model_label;
@@ -26,12 +26,12 @@ trait CanRegister
 
     public function getActions(): array
     {
-        return collect($this->getDefaultActions())->merge(self::$actions)->map(function (StaticAction $action) {
+        return collect($this->getDefaultActions())->merge(self::$actions)->map(function (Action $action) {
             if (method_exists($action, 'record') && str($action->getName())->contains(['create', 'edit', 'view'])) {
                 $action->record(method_exists(self::$page, 'getRecord') ? self::$page->getRecord() : null)
                     ->model(method_exists(self::$page, 'getModel') ? self::$page->getModel() : null)
                     ->modelLabel(method_exists(self::$page, 'getModelLabel') ? get_model_label(self::$page->getModel()) : null)
-                    ->form(fn (Form $form) => app(self::$page->getResource())::form($form))
+                    ->schema(fn (Schema $form) => app(self::$page->getResource())::form($form))
                     ->url(fn () => isset(app(self::$page->getResource())::getPages()[$action->getName()]) ? app(app(self::$page->getResource())::getPages()[$action->getName()]->getPage())->getUrl() : null);
             }
 
@@ -39,11 +39,11 @@ trait CanRegister
         })->toArray();
     }
 
-    public static function register(StaticAction | array | \Closure $component): void
+    public static function register(Action | array | \Closure $component): void
     {
         if (is_array($component)) {
             foreach ($component as $item) {
-                if ($item instanceof StaticAction) {
+                if ($item instanceof Action) {
                     self::$actions[] = $item;
                 }
             }
