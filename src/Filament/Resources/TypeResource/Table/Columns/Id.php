@@ -4,7 +4,7 @@ namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\Columns;
 
 use Filament\Tables;
 
-class ID extends Column
+class Id extends Column
 {
     public static function make(): Tables\Columns\TextColumn
     {
