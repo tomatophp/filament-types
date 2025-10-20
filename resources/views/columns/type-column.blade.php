@@ -26,7 +26,7 @@
         $icon = null;
     }
 
-    $iconExists = \TomatoPHP\FilamentIcons\Facades\FilamentIcons::getIcon($icon);
+    $iconExists = $icon ? \TomatoPHP\FilamentIcons\Facades\FilamentIcons::getIcon($icon) : null;
 @endphp
 @if($value || config('filament-types.empty_state'))
 
