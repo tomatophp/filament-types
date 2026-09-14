@@ -8,6 +8,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Form\TypeForm;
+use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages\ListTypes;
 use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeTable;
 use TomatoPHP\FilamentTypes\Models\Type;
 
@@ -89,7 +90,7 @@ class TypeResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => \TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Pages\ListTypes::route('/'),
+            'index' => ListTypes::route('/'),
         ];
     }
 }

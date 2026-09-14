@@ -6,16 +6,17 @@ use Filament\Forms;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Tables;
+use Filament\Tables\Filters\BaseFilter;
 use Illuminate\Database\Eloquent\Builder;
 use TomatoPHP\FilamentTypes\Facades\FilamentTypes;
 use TomatoPHP\FilamentTypes\Models\Type;
 
 class TypeFor extends Filter
 {
-    public static function make(): \Filament\Tables\Filters\BaseFilter
+    public static function make(): BaseFilter
     {
         return Tables\Filters\Filter::make('for')
-            ->form([
+            ->schema([
                 Forms\Components\Select::make('for')
                     ->label(trans('filament-types::messages.form.for'))
                     ->options(FilamentTypes::get()->pluck('label', 'for')->toArray())

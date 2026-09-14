@@ -147,7 +147,7 @@ class BaseTypePage extends Page implements HasSchemas, HasTable
                     ->label(trans('filament-types::messages.form.key')),
             ])
             ->recordActions([
-                \Filament\Actions\Action::make('edit')
+                Action::make('edit')
                     ->label(trans('filament-types::messages.edit'))
                     ->tooltip(trans('filament-types::messages.edit'))
                     ->schema([
@@ -165,7 +165,7 @@ class BaseTypePage extends Page implements HasSchemas, HasTable
                         ]),
                     ])
                     ->extraModalFooterActions([
-                        \Filament\Actions\Action::make('deleteType')
+                        Action::make('deleteType')
                             ->requiresConfirmation()
                             ->color('danger')
                             ->label(trans('filament-types::messages.delete'))

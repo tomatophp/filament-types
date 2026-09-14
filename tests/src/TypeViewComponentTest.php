@@ -1,6 +1,7 @@
 <?php
 
 use TomatoPHP\FilamentTypes\Tests\Models\User;
+use TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage;
 
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
@@ -10,10 +11,10 @@ beforeEach(function () {
 });
 
 it('can render type component page', function () {
-    get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl())->assertSuccessful();
+    get(TypeViewComponentPage::getUrl())->assertSuccessful();
 });
 
 it('can render type component', function () {
-    $response = get(\TomatoPHP\FilamentTypes\Tests\Pages\TypeViewComponentPage::getUrl());
+    $response = get(TypeViewComponentPage::getUrl());
     $response->assertSee('<div id="type-todo-notes-groups">', false);
 });

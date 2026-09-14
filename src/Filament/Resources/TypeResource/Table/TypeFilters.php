@@ -2,6 +2,8 @@
 
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
 
+use Filament\Tables\Filters\BaseFilter;
+
 class TypeFilters
 {
     /**
@@ -26,11 +28,11 @@ class TypeFilters
         return array_merge(self::getDefaultFilters(), self::$filters);
     }
 
-    public static function register(\Filament\Tables\Filters\BaseFilter | array $action): void
+    public static function register(BaseFilter | array $action): void
     {
         if (is_array($action)) {
             foreach ($action as $item) {
-                if ($item instanceof \Filament\Tables\Filters\BaseFilter) {
+                if ($item instanceof BaseFilter) {
                     self::$filters[] = $item;
                 }
             }

@@ -2,7 +2,7 @@
 
 namespace TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table;
 
-use Filament\Tables\Actions\BulkAction;
+use Filament\Actions\BulkAction;
 
 class TypeBulkActions
 {

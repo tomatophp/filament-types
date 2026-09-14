@@ -3,6 +3,7 @@
 namespace TomatoPHP\FilamentTypes;
 
 use Illuminate\Support\ServiceProvider;
+use TomatoPHP\FilamentTypes\Console\FilamentTypesInstall;
 
 require_once __DIR__ . '/helpers.php';
 
@@ -12,7 +13,7 @@ class FilamentTypesServiceProvider extends ServiceProvider
     {
         // Register generate command
         $this->commands([
-            \TomatoPHP\FilamentTypes\Console\FilamentTypesInstall::class,
+            FilamentTypesInstall::class,
         ]);
 
         // Register Config file

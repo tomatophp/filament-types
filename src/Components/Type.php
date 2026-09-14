@@ -2,6 +2,7 @@
 
 namespace TomatoPHP\FilamentTypes\Components;
 
+use BladeUI\Icons\Factory;
 use Illuminate\View\Component;
 
 class Type extends Component
@@ -22,7 +23,7 @@ class Type extends Component
 
         if ($this->type->icon) {
             try {
-                app(\BladeUI\Icons\Factory::class)->svg($this->type->icon);
+                app(Factory::class)->svg($this->type->icon);
                 $this->iconExists = true;
             } catch (\Exception $e) {
             }

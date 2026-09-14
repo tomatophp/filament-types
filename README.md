@@ -13,15 +13,23 @@ Manage any type on your app in Database with easy to use Resource for FilamentPH
 
 ## Screenshots
 
-![Types](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types.png)
-![Filters](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/filters.png)
-![Type Col](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/type-col.png)
-![Form](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/form.png)
+![Types](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types-list-light.png)
+![Types Dark](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types-list-dark.png)
+![Create Type](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types-create-light.png)
+![Create Type Dark](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types-create-dark.png)
+![Type Column](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/type-col.png)
+
+## Compatibility
+
+| Package version | Filament | Laravel    | PHP  |
+|-----------------|----------|------------|------|
+| 5.x             | 5.x      | 12.x, 13.x | 8.2+ |
+| 4.x             | 4.x      | 11.x, 12.x | 8.2+ |
 
 ## Installation
 
 ```bash
-composer require tomatophp/filament-types
+composer require tomatophp/filament-types:^5.0
 ```
 
 after install your package please run this command
@@ -234,7 +242,7 @@ use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeActions;
 public function boot()
 {
     TypeActions::register([
-        \Filament\Tables\Actions\ReplicateAction::make()
+        \Filament\Actions\ReplicateAction::make()
     ]);
 }
 ```
@@ -260,7 +268,7 @@ use TomatoPHP\FilamentTypes\Filament\Resources\TypeResource\Table\TypeBulkAction
 public function boot()
 {
     TypeBulkActions::register([
-        \Filament\Tables\BulkActions\DeleteAction::make()
+        \Filament\Actions\BulkAction::make('archive')
     ]);
 }
 ```
