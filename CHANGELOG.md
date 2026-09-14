@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.0.1
+
+- `BaseTypePage` seeds the types returned by `getTypes()` under the page's `for` / `type`. They were saved with the column defaults, so the page never listed them and every visit created duplicates.
+
 ## v5.0.0
 
 - Support Filament v5 and Laravel 12 / 13 (Livewire 4, PHP 8.2+).

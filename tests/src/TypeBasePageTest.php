@@ -32,10 +32,11 @@ it('can list selected types', function () {
     ]);
     $types = Type::query()->where('type', 'groups')->where('for', 'notes')->get();
 
+    // The page also seeds its own missing types (ideas, saved) next to the existing todo.
     livewire(TypePage::class)
         ->loadTable()
         ->assertCanSeeTableRecords($types)
-        ->assertCountTableRecords(1);
+        ->assertCountTableRecords(3);
 });
 
 it('can render type key column in table', function () {

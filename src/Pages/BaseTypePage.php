@@ -108,14 +108,13 @@ class BaseTypePage extends Page implements HasSchemas, HasTable
                 ->where('key', $type->key)
                 ->first();
             if (! $exists) {
-                $type->for = $this->getFor();
-                $type->type = $this->getType();
-                if (! is_array($type->name)) {
-                    $type->name = [
-                        app()->getLocale() => $type->name,
-                    ];
-                }
-                Type::create($type->toArray());
+                // The type contract only carries key / name / icon / color; the page owns for and type.
+                Type::query()->create([
+                    ...$type->toArray(),
+                    'name' => is_array($type->name) ? $type->name : [app()->getLocale() => $type->name],
+                    'for' => $this->getFor(),
+                    'type' => $this->getType(),
+                ]);
             }
         }
     }
