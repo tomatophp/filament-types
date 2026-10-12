@@ -2,6 +2,12 @@
     "name": "tomatophp/filament-types",
     "type": "library",
     "description": "Manage any type on your app in Database with easy to use Resource for FilamentPHP",
+    "homepage": "https://tomatophp.com/en/plugins/filament-types",
+    "support": {
+        "issues": "https://github.com/tomatophp/filament-types/issues",
+        "source": "https://github.com/tomatophp/filament-types",
+        "docs": "https://tomatophp.com/en/plugins/filament-types"
+    },
     "keywords": [
         "php",
         "laravel",
