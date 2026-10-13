@@ -11,6 +11,8 @@
 
 Manage any type on your app in Database with easy to use Resource for FilamentPHP
 
+⭐ **If this package saves you time, star it** and browse 60+ more Filament plugins at [tomatophp.com/en/plugins](https://tomatophp.com/en/plugins).
+
 ## Screenshots
 
 ![Types](https://raw.githubusercontent.com/tomatophp/filament-types/master/arts/types-list-light.png)
@@ -353,3 +355,12 @@ composer analyse
 ## Other Filament Packages
 
 Checkout our [Awesome TomatoPHP](https://github.com/tomatophp/awesome)
+
+## More open source from the same author
+
+- [TomatoPHP](https://tomatophp.com): 60+ open-source FilamentPHP plugins for Laravel
+- [Laravilt](https://laravilt.com): Laravel admin panels rendered with Inertia on Vue 3 or React 19
+- [ToGO](https://to-go.dev): the Laravel-style workflow for Go + React apps, with a plugin marketplace
+- [Zekra](https://zekra.dev): long-term memory for AI agents over MCP
+
+Built by [Fady Mondy](https://fadymondy.com).
